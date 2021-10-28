@@ -1,3 +1,3 @@
 export * from './ImageInput';
-export * from './Image'
+export * from './Image';
 

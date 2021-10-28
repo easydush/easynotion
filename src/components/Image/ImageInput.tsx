@@ -6,11 +6,11 @@ interface ImageInputProps {
   onLoad: any;
 }
 
-export const ImageInput = ({onLoad}: ImageInputProps ) => {
- // TODO: add spinner and validator
+export const ImageInput = ({ onLoad }: ImageInputProps) => {
+  // TODO: add spinner and validator
   return (
     <div className='wrapper'>
-      <LinkInput onLoad={onLoad}/>
+      <LinkInput onLoad={onLoad} />
     </div>
   );
 };

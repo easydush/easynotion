@@ -1,2 +1,2 @@
 export { Video } from './Video';
-export  {VideoInput } from './VideoInput'
+export { VideoInput } from './VideoInput';

@@ -5,8 +5,8 @@ interface ImageProps {
   alt: string;
 }
 
-export const Image = ({src, alt}: ImageProps) => {
+export const Image = ({ src, alt }: ImageProps) => {
   return (
-    <img src={src} alt={alt}/>
+    <img src={src} alt={alt} />
   );
 };

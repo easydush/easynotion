@@ -1,43 +1,38 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement } from 'react';
 
-import './index.css'
+import './index.css';
 
 // интерфейс для пропсов
 interface ModalProps {
-  visible: boolean
-  title: string
-  content: ReactElement | string
-  footer?: ReactElement | string
-  onClose: () => void
+  visible: boolean;
+  title: string;
+  content: ReactElement | string;
+  footer?: ReactElement | string;
+  onClose: () => void;
 }
 
 export const Modal = ({
-                 visible = false,
-                 title = '',
-                 content = '',
-                 footer = '',
-                 onClose,
-               }: ModalProps) => {
-  // создаем обработчик нажатия клавиши Esc
+                        visible = false,
+                        title = '',
+                        content = '',
+                        footer = '',
+                        onClose,
+                      }: ModalProps) => {
   const onKeydown = ({ key }: KeyboardEvent) => {
     switch (key) {
       case 'Escape':
-        onClose()
-        break
+        onClose();
+        break;
     }
-  }
+  };
 
-  // c помощью useEffect цепляем обработчик к нажатию клавиш
-  // https://ru.reactjs.org/docs/hooks-effect.html
   React.useEffect(() => {
-    document.addEventListener('keydown', onKeydown)
-    return () => document.removeEventListener('keydown', onKeydown)
-  })
+    document.addEventListener('keydown', onKeydown);
+    return () => document.removeEventListener('keydown', onKeydown);
+  });
 
-  // если компонент невидим, то не отображаем его
-  if (!visible) return null
+  if (!visible) return null;
 
-  // или возвращаем верстку модального окна
   return (
     <div className='modal' onClick={onClose}>
       <div className='modal-dialog' onClick={e => e.stopPropagation()}>
@@ -53,5 +48,5 @@ export const Modal = ({
         {footer && <div className='modal-footer'>{footer}</div>}
       </div>
     </div>
-  )
-}
+  );
+};
