@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { observer } from 'mobx-react';
+import { HashRouter as Router } from 'react-router-dom';
+import { userStore } from './store';
+import { Log, authTools } from './tools';
+import { rootComp } from './scenes/Root';
 
-function App() {
+import './assets/scss/App.scss';
+
+Log.logger = console;
+
+authTools.authorizeLocal();
+
+const AppFn = () => {
+  const { isLogged } = userStore;
+
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {rootComp({ isLogged })}
+    </Router>
   );
-}
+};
 
-export default App;
+export default observer(AppFn);
