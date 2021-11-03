@@ -3,8 +3,13 @@ import styles from './Layout.module.scss';
 
 const LayoutFn: FC = ({ children }) => {
   return (
-    <div id='MainBodyWrapper' className={styles.container}>
-      {children}
+    <div className={styles.container}>
+      <div id='menu' className={styles.menu}>
+       menu
+      </div>
+      <div id='content' className={styles.content}>
+        {children}
+      </div>
     </div>
   );
 };

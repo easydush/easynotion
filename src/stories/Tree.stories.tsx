@@ -1,6 +1,10 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Tree } from '../components/Tree';
+import {
+  StaticTreeDataProvider,
+  UncontrolledTreeEnvironment,
+} from '../components/Tree';
 
 export default {
   title: 'Example/Tree',
@@ -25,25 +29,8 @@ const readTemplate = (template: any, data: any = { items: {} }) => {
   return data;
 };
 
-const shortTreeTemplate = {
-  root: {
-    container: {
-      item0: null,
-      item1: null,
-      item2: null,
-      item3: {
-        inner0: null,
-        inner1: null,
-        inner2: null,
-        inner3: null,
-      },
-      item4: null,
-      item5: null,
-    },
-  },
-};
 
-const longTreeTemplate = {
+const longTree = readTemplate({
   root: {
     Fruit: {
       Apple: null,
@@ -93,14 +80,23 @@ const longTreeTemplate = {
       Juice: null,
     },
   },
-};
+});
 
 const Template: ComponentStory<typeof Tree> = (args) => {
-  return <Tree {...args} />;
+  return <UncontrolledTreeEnvironment<string>
+    canDragAndDrop={true}
+    canDropOnItemWithChildren={true}
+    canReorderItems={true}
+    dataProvider={new StaticTreeDataProvider(longTree.items, (item, data) => ({ ...item, data }))}
+    getItemTitle={item => item.data}
+    viewState={{
+      ['tree-1']: {},
+    }}
+  >
+    <Tree treeId='tree-1' rootItem='root' treeLabel='Tree Example' />
+  </UncontrolledTreeEnvironment>;
 };
 
-export const Short = Template.bind({shortTreeTemplate});
-Short.args = {};
-
-export const Long = Template.bind({longTreeTemplate});
+export const Long = Template.bind({});
 Long.args = {};
+

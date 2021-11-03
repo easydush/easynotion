@@ -6,7 +6,7 @@ import {
   TreeEnvironmentContextProps,
   TreeEnvironmentRef,
 } from '../types';
-import { createDefaultRenderers } from '../renderers/createDefaultRenderers';
+import { createDefaultRenderers } from '../renderers';
 import { scrollIntoView } from '../tree/scrollIntoView';
 import { InteractionManagerProvider } from './InteractionManagerProvider';
 import { DragAndDropProvider } from './DragAndDropProvider';
@@ -105,5 +105,5 @@ export const ControlledTreeEnvironment = React.forwardRef<TreeEnvironmentRef, Co
         </InteractionManagerProvider>
       </TreeEnvironmentContext.Provider>
     );
-  }
+  },
 ) as <T = any>(p: ControlledTreeEnvironmentProps<T> & { ref?: React.Ref<TreeEnvironmentRef<T>> }) => React.ReactElement;
