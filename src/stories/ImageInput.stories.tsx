@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { ImageInput, Image } from '../components/Image';
-import '../components/Header/header.css';
+import { ImageInput, Image } from 'components';
+import 'components/Header/header.css';
 
 export default {
   title: 'Example/ImageInput',

@@ -70,7 +70,6 @@ export interface TreeRenderProps<T = any> {
     depth: number;
     children: React.ReactNode | null;
     title: React.ReactNode;
-    arrow: React.ReactNode;
     context: TreeItemRenderContext;
     info: TreeInformation;
   }) => React.ReactElement | null;
@@ -82,11 +81,6 @@ export interface TreeRenderProps<T = any> {
     info: TreeInformation;
   }) => React.ReactElement | null | string;
 
-  renderItemArrow?: (props: {
-    item: TreeItem<T>;
-    context: TreeItemRenderContext;
-    info: TreeInformation;
-  }) => React.ReactElement | null;
 
   renderRenameInput?: (props: {
     item: TreeItem<T>;

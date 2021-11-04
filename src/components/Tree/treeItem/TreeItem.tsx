@@ -50,17 +50,11 @@ export const TreeItem = (props: { itemIndex: TreeItemIndex; depth: number }): JS
       })
     );
 
-  const arrowComponent = renderers.renderItemArrow({
-    info: treeInformation,
-    context: renderContext,
-    item: environment.items[props.itemIndex],
-  });
 
   return (renderers.renderItem({
     item: environment.items[props.itemIndex],
     depth: props.depth,
     title: titleComponent,
-    arrow: arrowComponent,
     context: renderContext,
     info: treeInformation,
     children,

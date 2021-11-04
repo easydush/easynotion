@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Modal } from '../components/Modal';
+import { Modal } from 'components';
 
 
 export default {

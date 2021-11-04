@@ -4,7 +4,7 @@ import {
   Dashboard,
 } from './index';
 import { URLWatcher } from '../tools';
-import { Layout } from '../components/Layout/Layout';
+import { Layout } from 'components';
 
 const Main = () => {
 

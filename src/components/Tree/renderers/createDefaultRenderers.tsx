@@ -11,7 +11,7 @@ export const createDefaultRenderers = (renderers: TreeRenderProps): AllTreeRende
       } else {
         const startIndex = title.toLowerCase().indexOf(info.search!.toLowerCase());
         return (
-          <React.Fragment>
+          <>
             {startIndex > 0 && <span>{title.slice(0, startIndex)}</span>}
             <span className='rct-tree-item-search-highlight'>
               {title.slice(startIndex, startIndex + info.search!.length)}
@@ -19,25 +19,11 @@ export const createDefaultRenderers = (renderers: TreeRenderProps): AllTreeRende
             {startIndex + info.search!.length < title.length && (
               <span>{title.slice(startIndex + info.search!.length, title.length)}</span>
             )}
-          </React.Fragment>
+          </>
         );
       }
     },
-    renderItemArrow: ({ item, context }) => {
-      // Icons from https://blueprintjs.com/docs/#icons
-      return (
-        <div
-          className={cx(item.hasChildren && 'rct-tree-item-arrow-hasChildren', 'rct-tree-item-arrow')}
-          {...context.arrowProps}
-        >
-          {item.hasChildren ?
-            '>' :
-            '\\/'
-          }
-        </div>
-      );
-    },
-    renderItem: ({ item, depth, children, title, context, arrow }) => {
+    renderItem: ({ item, depth, children, title, context }) => {
       const InteractiveComponent = context.isRenaming ? 'div' : 'button';
       // TODO have only root li component create all the classes
       return (
@@ -66,7 +52,6 @@ export const createDefaultRenderers = (renderers: TreeRenderProps): AllTreeRende
               context.isSearchMatching && 'rct-tree-item-title-container-search-match',
             )}
           >
-            {arrow}
             <InteractiveComponent
               {...(context.interactiveElementProps as any)}
               className={cx(
@@ -169,7 +154,6 @@ export const createDefaultRenderers = (renderers: TreeRenderProps): AllTreeRende
 
   (newRenderers.renderItem as any).displayName = 'RenderItem';
   (newRenderers.renderItemTitle as any).displayName = 'RenderItemTitle';
-  (newRenderers.renderItemArrow as any).displayName = 'RenderItemArrow';
   (newRenderers.renderRenameInput as any).displayName = 'RenderRenameInput';
   (newRenderers.renderDraggingItem as any).displayName = 'RenderDraggingItem';
   (newRenderers.renderDraggingItemTitle as any).displayName = 'RenderDraggingItemTitle';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { TextInput } from '../components/TextInput';
-import '../components/Header/header.css';
+import { TextInput } from 'components';
+import 'components/Header/header.css';
 
 export default {
   title: 'Example/TextInput',

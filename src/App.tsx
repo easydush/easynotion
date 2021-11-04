@@ -1,9 +1,9 @@
 import React from 'react';
 import { HashRouter as Router } from 'react-router-dom';
-import { Log } from './tools';
-import { rootComp } from './scenes/Root';
+import { Log } from 'tools';
+import { rootComp } from 'scenes/Root';
 
-import './assets/scss/App.scss';
+import 'assets/scss/App.scss';
 
 Log.logger = console;
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Tree } from '../components/Tree';
 import {
   StaticTreeDataProvider,
   UncontrolledTreeEnvironment,
-} from '../components/Tree';
+  Tree,
+} from 'components';
 
 export default {
   title: 'Example/Tree',
