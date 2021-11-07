@@ -5,6 +5,5 @@ export * from './Button';
 export * from './Image';
 export * from './LinkInput';
 export * from './Modal';
-export * from './Page';
 export * from './TextInput';
 export * from './Video';
