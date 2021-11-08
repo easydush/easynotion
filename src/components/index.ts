@@ -7,3 +7,4 @@ export * from './LinkInput';
 export * from './Modal';
 export * from './TextInput';
 export * from './Video';
+export * from './Editor';

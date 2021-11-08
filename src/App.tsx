@@ -3,7 +3,7 @@ import { HashRouter as Router } from 'react-router-dom';
 import { Log } from 'tools';
 import { rootComp } from 'scenes/Root';
 
-import 'assets/scss/App.scss';
+//import 'assets/scss/App.scss';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store from 'store/store';
