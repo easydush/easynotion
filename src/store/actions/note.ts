@@ -11,6 +11,6 @@ export const create = (data: Note) => {
 export const remove = (id: number) => {
   return {
     type: DELETE,
-    payload: null,
+    payload: id,
   };
 };

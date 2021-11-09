@@ -4,6 +4,7 @@ import { NotesTree } from './components';
 import { Header } from '../Header';
 import { Button } from '../Button';
 
+
 const LayoutFn: FC = ({ children }) => {
   const onCreate = () => {
   };
@@ -14,7 +15,7 @@ const LayoutFn: FC = ({ children }) => {
         <NotesTree />
       </div>
       <div id='content' className={styles.content}>
-        <Header />
+        <Header title={'header'}/>
         {children}
       </div>
     </div>
