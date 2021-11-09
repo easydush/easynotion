@@ -1,9 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import {
-  StaticTreeDataProvider,
-  UncontrolledTreeEnvironment,
-  Tree,
+  TreeMenu as Tree,
 } from 'components';
 
 export default {
@@ -83,18 +81,7 @@ const longTree = readTemplate({
 });
 
 const Template: ComponentStory<typeof Tree> = (args) => {
-  return <UncontrolledTreeEnvironment<string>
-    canDragAndDrop={true}
-    canDropOnItemWithChildren={true}
-    canReorderItems={true}
-    dataProvider={new StaticTreeDataProvider(longTree.items, (item, data) => ({ ...item, data }))}
-    getItemTitle={item => item.data}
-    viewState={{
-      ['tree-1']: {},
-    }}
-  >
-    <Tree treeId='tree-1' rootItem='root' treeLabel='Tree Example' />
-  </UncontrolledTreeEnvironment>;
+  return (<div><Tree tree={longTree} label='Tree Example' /></div>);
 };
 
 export const Long = Template.bind({});

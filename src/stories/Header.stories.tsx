@@ -5,14 +5,25 @@ import { Header } from 'components';
 export default {
   title: 'Example/Header',
   component: Header,
+  argTypes: {
+    title: {
+      name: 'title',
+      type: { name: 'string', required: false },
+      defaultValue: 'Hello',
+      description: 'demo description',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'Hello' },
+      },
+      control: {
+        type: 'text'
+      }
+    }
+  },
 } as ComponentMeta<typeof Header>;
 
 const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
 
-export const LoggedIn = Template.bind({});
-LoggedIn.args = {
-  user: {},
+export const Basic = Template.bind({});
+Basic.args = {
 };
-
-export const LoggedOut = Template.bind({});
-LoggedOut.args = {};

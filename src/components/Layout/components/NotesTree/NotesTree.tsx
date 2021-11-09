@@ -1,8 +1,8 @@
 import React from 'react';
-import { readTemplate, StaticTreeDataProvider, Tree, UncontrolledTreeEnvironment } from '../../../Tree';
+import { TreeMenu } from '../../../Tree';
 
 
-const longTree = readTemplate({
+const longTree = {
   root: {
     Fruit: {
       Apple: null,
@@ -52,21 +52,10 @@ const longTree = readTemplate({
       Juice: null,
     },
   },
-});
+};
 
 export const NotesTree = () => {
-  return <UncontrolledTreeEnvironment<string>
-    canDragAndDrop={true}
-    canDropOnItemWithChildren={true}
-    canReorderItems={true}
-    dataProvider={new StaticTreeDataProvider(longTree.items, (item, data) => ({ ...item, data }))}
-    getItemTitle={item => item.data}
-    viewState={{
-      ['tree-1']: {},
-    }}
-  >
-    <Tree treeId='tree-1' rootItem='root' treeLabel='Tree Example' />
-  </UncontrolledTreeEnvironment>;
+  return <TreeMenu tree={longTree} label={'Menu'} />;
 };
 
 

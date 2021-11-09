@@ -10,7 +10,7 @@ export default {
 
 const Template: ComponentStory<typeof ImageInput> = (args) => {
   const [source, setSource] = useState('https://pbs.twimg.com/media/BpOzsNxIIAADeqp.jpg');
-  console.log(source);
+
   return (
     <div>
       <ImageInput onLoad={setSource} />;
