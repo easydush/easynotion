@@ -6,7 +6,7 @@ const initialState = {
   notes: [],
 };
 
-export default (state = initialState, action: DefaultActionParams) => {
+export const noteReducer =  (state = initialState, action: DefaultActionParams) => {
   switch (action.type) {
 
     case CREATE:

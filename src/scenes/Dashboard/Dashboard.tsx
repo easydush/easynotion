@@ -5,12 +5,12 @@ import { create } from 'store/actions/note';
 import { Note } from '../../types';
 
 interface NoteState {
-  note: {
-    notes: Note[]
-  },
+
+  notes: Note[];
 }
+
 export const Dashboard = () => {
-  const notes = useSelector<NoteState, Note[]>((state) => state.note.notes || []);
+  const notes = useSelector<NoteState, Note[]>((state) => state.notes || []);
   console.log(useSelector(state => state));
   const noteItems = notes.map((note: Note) => {
     return <div>{note.title}</div>;
@@ -31,7 +31,7 @@ export const Dashboard = () => {
         <input
           type='text'
           name='userInput'
-          onChange={(e) =>setText(e.target.value)}
+          onChange={(e) => setText(e.target.value)}
         />
         <button type='submit'>Add</button>
       </form>

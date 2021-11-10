@@ -6,17 +6,15 @@ import { rootComp } from 'scenes/Root';
 //import 'assets/scss/App.scss';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import store from 'store/store';
-import persistStore from 'store/persistStore';
+import { persistor, store } from './store/store';
 
 Log.logger = console;
 
 
 const AppFn = () => {
-
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistStore}>
+      <PersistGate loading={null} persistor={persistor}>
         <Router>
           {rootComp()}
         </Router>

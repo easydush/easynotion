@@ -1,16 +1,23 @@
-import { createStore, applyMiddleware } from 'redux';
-import { persistReducer } from 'redux-persist';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { persistReducer, persistStore } from 'redux-persist';
 import LocalStorage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import rootReducer from './reducers';
+import { noteReducer } from './reducers';
+import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 
-const persistConfig = {
-  key: 'root',
+export const persistConfig = {
+  key: 'note',
   storage: LocalStorage,
-  blacklist: ['navigation']
+  stateReconciler: hardSet,
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+// @ts-ignore
+const persistedReducer = persistReducer(persistConfig, noteReducer);
 
-export default createStore(persistedReducer, applyMiddleware(thunk, logger));
+export const store = createStore(
+  persistedReducer,
+  applyMiddleware( logger),
+);
+// @ts-ignore
+export let persistor = persistStore(store);
