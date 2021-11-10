@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@redux-offline/redux-offline": "^2.6.0",
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -88,6 +89,7 @@
     "jwt-decode": "^3.1.2",
     "prettier": "^2.4.1",
     "react-router-dom": "^5.3.0",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "redux-offline": "^2.0.0"
   }
 }
