@@ -10,3 +10,7 @@ export interface Note {
   title: string;
   description?: string;
 }
+
+export interface NoteState {
+  notes: Note[];
+}

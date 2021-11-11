@@ -7,6 +7,7 @@ const initialState = {
 };
 
 export const noteReducer =  (state = initialState, action: DefaultActionParams) => {
+
   switch (action.type) {
 
     case CREATE:

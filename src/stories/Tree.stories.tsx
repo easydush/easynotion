@@ -24,6 +24,7 @@ const readTemplate = (template: any, data: any = { items: {} }) => {
       readTemplate(value, data);
     }
   }
+  console.log(data);
   return data;
 };
 

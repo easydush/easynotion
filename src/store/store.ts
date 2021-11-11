@@ -1,7 +1,6 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { persistReducer, persistStore } from 'redux-persist';
 import LocalStorage from 'redux-persist/lib/storage';
-import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { noteReducer } from './reducers';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
@@ -17,7 +16,8 @@ const persistedReducer = persistReducer(persistConfig, noteReducer);
 
 export const store = createStore(
   persistedReducer,
-  applyMiddleware( logger),
+  applyMiddleware(logger),
 );
+
 // @ts-ignore
 export let persistor = persistStore(store);
