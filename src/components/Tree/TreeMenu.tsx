@@ -1,18 +1,20 @@
-import { UncontrolledTreeEnvironment, Tree, StaticTreeDataProvider } from 'react-complex-tree';
+import TreeMenu, { defaultChildren } from 'react-simple-tree-menu';
 
-import "react-complex-tree/lib/style.css";
+import 'react-simple-tree-menu/dist/main.css';
 
 export interface TreeProps {
   tree: any;
   label: string;
 }
 
-export const TreeMenu = ({ tree, label }: TreeProps) => {
-  return <UncontrolledTreeEnvironment
-    dataProvider={new StaticTreeDataProvider(tree.items, (item, data) => ({ ...item, data }))}
-    getItemTitle={item => item.data}
-    viewState={{}}
-  >
-    <Tree treeId='tree-1' rootItem='root' treeLabel={label} />
-  </UncontrolledTreeEnvironment>;
+export const Menu = ({ tree, label }: TreeProps) => {
+  // TODO: nagivation
+  return <TreeMenu data={tree}>
+    {({ search, items, resetOpenNodes }) => (
+      <div>
+        <button onClick={()=>{}} />
+        {defaultChildren({search, items})}
+      </div>
+    )}
+  </TreeMenu>
 };

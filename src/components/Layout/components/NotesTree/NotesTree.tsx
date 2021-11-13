@@ -1,5 +1,5 @@
 import React from 'react';
-import { TreeMenu } from '../../../Tree';
+import { Menu } from '../../../Tree';
 import { useSelector } from 'react-redux';
 import { Note, NoteState } from '../../../../types';
 import { readTemplate } from '../../../../tools';
@@ -11,7 +11,7 @@ export const NotesTree = () => {
   const tree = readTemplate(notes);
 
 
-  return <TreeMenu tree={tree} label={'Menu'} />;
+  return <Menu tree={tree} label={'Menu'} />;
 };
 
 
