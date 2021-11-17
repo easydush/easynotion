@@ -15,7 +15,7 @@ const LayoutFn: FC = ({ children }) => {
         <NotesTree />
       </div>
       <div id='content' className={styles.content}>
-        <Header title={'header'}/>
+        <Header />
         {children}
       </div>
     </div>

@@ -24,7 +24,7 @@ const readTemplate = (template: any, data: any = { items: {} }) => {
       readTemplate(value, data);
     }
   }
-  console.log(data);
+
   return data;
 };
 
@@ -82,7 +82,7 @@ const longTree = readTemplate({
 });
 
 const Template: ComponentStory<typeof Tree> = (args) => {
-  return (<div><Tree tree={longTree} label='Tree Example' /></div>);
+  return (<div><Tree tree={longTree} /></div>);
 };
 
 export const Long = Template.bind({});
