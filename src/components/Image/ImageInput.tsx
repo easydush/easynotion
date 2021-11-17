@@ -9,8 +9,6 @@ interface ImageInputProps {
 export const ImageInput = ({ onLoad }: ImageInputProps) => {
   // TODO: add spinner and validator
   return (
-    <div className='wrapper'>
       <LinkInput onLoad={onLoad} />
-    </div>
   );
 };

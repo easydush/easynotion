@@ -12,8 +12,6 @@ interface VideoInputProps {
 export const VideoInput = ({ onLoad }: VideoInputProps) => {
 // TODO: add spinner and validator
   return (
-    <div className='wrapper'>
       <LinkInput onLoad={onLoad} />
-    </div>
   );
 };

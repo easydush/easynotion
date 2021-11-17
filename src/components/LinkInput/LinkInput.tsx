@@ -10,8 +10,6 @@ export const LinkInput = ({ onLoad }: LinkInputProps) => {
     onLoad(event.target.value);
   };
   return (
-    <div className='wrapper'>
       <input type='url' onChange={onChange} />
-    </div>
   );
 };
