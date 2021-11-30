@@ -3,14 +3,12 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import {
   Dashboard,
 } from './index';
-import { URLWatcher } from '../tools';
 import { Layout } from 'components';
 
 const Main = () => {
 
   return (
     <>
-      <URLWatcher />
       <Layout>
         <Switch>
           <Route path='/' component={Dashboard} key='dashboard' />
@@ -21,8 +19,6 @@ const Main = () => {
   );
 };
 
-interface RootProps {
-}
 
 export const rootComp = () => {
 

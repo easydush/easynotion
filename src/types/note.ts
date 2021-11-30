@@ -5,10 +5,23 @@ export type MediaType =
   | 'IMAGE'
   | 'TABLE'
 
+export interface Section {
+  id: string;
+  title: string;
+}
+
 export interface Note {
   id: string;
   title: string;
-  description?: string;
+  sectionId: string;
+}
+
+export interface Block {
+  id: string;
+  noteId: Note['id'];
+  order: number;
+  type: MediaType;
+  content: string;
 }
 
 export interface NoteState {

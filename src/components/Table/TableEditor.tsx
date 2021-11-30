@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
-export const TextEditor = () => {
+export const TableEditor = () => {
   const editorRef = useRef({});
   const [content, setContent] = useState<string>();
 
@@ -12,15 +12,14 @@ export const TextEditor = () => {
         onChange={(evt, editor) => setContent(editor.getContent())}
         init={{
           height: 500,
-          menubar: false,
+          menubar: 'table',
           plugins: [
-            'advlist autolink lists link image charmap print preview anchor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media paste code help wordcount',
+            'table',
           ],
-          toolbar: 'formatselect | bold italic backcolor | alignleft ' +
-            'aligncenter alignright alignjustify | bullist numlist outdent ' +
-            'indent | removeformat | help',
+          toolbar: 'bold italic backcolor | table tabledelete | tableprops ' +
+            'tablerowprops tablecellprops | tableinsertrowbefore ' +
+            'tableinsertrowafter tabledeleterow | tableinsertcolbefore ' +
+            'tableinsertcolafter tabledeletecol',
           content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
         }}
       />

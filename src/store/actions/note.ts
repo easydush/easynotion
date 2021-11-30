@@ -8,6 +8,13 @@ export const create = (data: Note) => {
   };
 };
 
+export const update = (data: Note) => {
+  return {
+    type: UPDATE,
+    payload: data,
+  };
+};
+
 export const remove = (id: number) => {
   return {
     type: DELETE,

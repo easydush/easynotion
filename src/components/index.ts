@@ -8,3 +8,4 @@ export * from './NoteLink';
 export * from './Modal';
 export * from './Video';
 export * from './Editor';
+export * from './Table';
