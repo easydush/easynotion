@@ -5,7 +5,7 @@ interface LinkInputProps {
   onLoad: any;
 }
 
-export const LinkInput = ({ onLoad }: LinkInputProps) => {
+export const Link = ({ onLoad }: LinkInputProps) => {
   const onChange = (event: any) => {
     onLoad(event.target.value);
   };

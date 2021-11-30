@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LinkInput } from '../LinkInput/LinkInput';
+import { Link } from 'components/Link';
 
 interface ImageInputProps {
   onLoad: any;
@@ -9,6 +9,6 @@ interface ImageInputProps {
 export const ImageInput = ({ onLoad }: ImageInputProps) => {
   // TODO: add spinner and validator
   return (
-      <LinkInput onLoad={onLoad} />
+      <Link onLoad={onLoad} />
   );
 };

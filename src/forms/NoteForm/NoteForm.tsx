@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { create } from '../../store/actions/note';
 import cuid from 'cuid';
-import { ImageInput, LinkInput, VideoInput } from '../../components';
+import { ImageInput, NoteLink, VideoInput } from '../../components';
 import { Editor } from '@tinymce/tinymce-react';
 
 type NoteFormProps = {
@@ -29,7 +29,7 @@ export const NoteForm = ({}: NoteFormProps) => {
     <div>Add video link:</div>
     <VideoInput onLoad={()=>{}} />
     <div>Add link:</div>
-    <LinkInput onLoad={()=>{}} />
+    <NoteLink />
     <div>Add text:</div>
     <Editor />
     <button type='submit'>Add</button>

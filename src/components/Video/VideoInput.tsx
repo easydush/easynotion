@@ -2,7 +2,7 @@ import React from 'react';
 
 
 import '../Header/header.css';
-import { LinkInput } from '../LinkInput/LinkInput';
+import { Link} from 'components/Link';
 
 interface VideoInputProps {
   onLoad: any;
@@ -12,6 +12,6 @@ interface VideoInputProps {
 export const VideoInput = ({ onLoad }: VideoInputProps) => {
 // TODO: add spinner and validator
   return (
-      <LinkInput onLoad={onLoad} />
+      <Link onLoad={onLoad} />
   );
 };

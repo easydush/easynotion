@@ -1,8 +1,8 @@
 import React from 'react';
-import { Menu } from '../../../Tree';
+import { Menu } from 'components/Tree';
 import { useSelector } from 'react-redux';
-import { Note, NoteState } from '../../../../types';
-import { readTemplate } from '../../../../tools';
+import { Note, NoteState } from 'types';
+import { readTemplate } from 'tools';
 
 
 export const NotesTree = () => {
