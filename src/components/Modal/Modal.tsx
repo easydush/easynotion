@@ -6,7 +6,7 @@ import './index.css';
 interface ModalProps {
   visible: boolean;
   title: string;
-  content: ReactElement | string;
+  children:ReactElement;
   footer?: ReactElement | string;
   onClose: () => void;
 }
@@ -14,9 +14,9 @@ interface ModalProps {
 export const Modal = ({
                         visible = false,
                         title = '',
-                        content = '',
                         footer = '',
                         onClose,
+                        children
                       }: ModalProps) => {
   const onKeydown = ({ key }: KeyboardEvent) => {
     switch (key) {
@@ -43,7 +43,7 @@ export const Modal = ({
           </span>
         </div>
         <div className='modal-body'>
-          <div className='modal-content'>{content}</div>
+          <div className='modal-content'>{children}</div>
         </div>
         {footer && <div className='modal-footer'>{footer}</div>}
       </div>

@@ -1,9 +1,8 @@
 import React from 'react';
-
-import './header.css';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Note, NoteState } from '../../types';
+import { Note, NoteState } from 'types';
+import './header.css';
 
 interface HeaderProps {
   title?: string;
@@ -12,7 +11,7 @@ interface HeaderProps {
 export const Header = ({ title }: HeaderProps) => {
   const location = useLocation();
   const noteId = location.pathname.split('/')[2];
-  const note = useSelector<NoteState, Note[]>((state) => state.notes.filter((note) => note.id === noteId))[0];
+  const note = useSelector<NoteState, Note[]>((state) => state.notes.filter((note) => note.id === noteId || note.uri === noteId))[0];
 
   if (!title && noteId && note) {
     title = note?.title;

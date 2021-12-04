@@ -12,7 +12,9 @@ const Template: ComponentStory<typeof Modal> = (args) => {
   const [isVisible, switchVisible] = useState(true);
 
   return (
-    <Modal visible={isVisible} content={<div>Content</div>} title={'Modal'} onClose={() => switchVisible(false)} />
+    <Modal visible={isVisible} title={'Modal'} onClose={() => switchVisible(false)}>
+      <div>Content</div>
+    </Modal>
   );
 };
 

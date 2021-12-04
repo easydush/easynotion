@@ -6,12 +6,12 @@ import { Button } from '../Button';
 
 
 const LayoutFn: FC = ({ children }) => {
-  const onCreate = () => {
-  };
+  // const onCreate = () => {
+  // };
   return (
     <div className={styles.container}>
       <div id='menu' className={styles.menu}>
-        <Button size='small' onClick={onCreate} label='Create new' />
+        {/*<Button size='small' onClick={onCreate} label='Create new' />*/}
         <NotesTree />
       </div>
       <div id='content' className={styles.content}>

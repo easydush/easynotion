@@ -1,6 +1,6 @@
 import React from 'react';
-import { Menu } from 'components/Tree';
 import { useSelector } from 'react-redux';
+import { Menu } from 'components/Tree';
 import { Note, NoteState } from 'types';
 import { readTemplate } from 'tools';
 
