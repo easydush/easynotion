@@ -25,6 +25,5 @@ export interface Block {
   content: string;
 }
 
-export interface NoteState {
-  notes: Note[];
-}
+export const CREATE_NOTE = 'createNote';
+export const EDIT_NOTE = 'editNote';

@@ -1,4 +1,4 @@
-import { CREATE, UPDATE, DELETE } from '../types/note';
+import { CREATE, UPDATE, DELETE } from '../types/block';
 import { Block } from 'types';
 
 export const create = (data: Block) => {
@@ -15,7 +15,7 @@ export const update = (data: Block) => {
   };
 };
 
-export const remove = (id: number) => {
+export const remove = (id: Block['id']) => {
   return {
     type: DELETE,
     payload: id,

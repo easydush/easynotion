@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { persistReducer, persistStore } from 'redux-persist';
 import LocalStorage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
-import { noteReducer } from './reducers';
+import { rootReducer } from './reducers';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 
 export const persistConfig = {
@@ -12,7 +12,7 @@ export const persistConfig = {
 };
 
 // @ts-ignore
-const persistedReducer = persistReducer(persistConfig, noteReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = createStore(
   persistedReducer,

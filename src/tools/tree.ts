@@ -1,8 +1,11 @@
 import { Note } from 'types';
 
+export const getNoteUrl = (value: Note) => {
+  return value.uri !== '' && value.uri ? value.uri : value.id;
+};
+
 export const readTemplate = (items: Note[]) => {
   return items.map((value => {
-    const url = value.uri !== '' && value.uri ? value.uri :value.id
-    return { key: url, label: value.title };
+    return { key: getNoteUrl(value), label: value.title };
   }));
 };

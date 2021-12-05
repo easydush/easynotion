@@ -15,7 +15,7 @@ export const update = (data: Note) => {
   };
 };
 
-export const remove = (id: number) => {
+export const remove = (id: Note['id']) => {
   return {
     type: DELETE,
     payload: id,

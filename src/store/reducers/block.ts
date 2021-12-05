@@ -1,4 +1,4 @@
-import { CREATE, UPDATE, DELETE } from '../types/note';
+import { CREATE, UPDATE, DELETE } from '../types/block';
 import { DefaultActionParams } from '../types';
 import { Block } from 'types';
 
