@@ -1,15 +1,13 @@
 import React from 'react';
+import { VoidWithArgsFn } from '../../types';
 
 
 interface LinkInputProps {
-  onLoad: any;
+  onChange: VoidWithArgsFn;
 }
 
-export const Link = ({ onLoad }: LinkInputProps) => {
-  const onChange = (event: any) => {
-    onLoad(event.target.value);
-  };
+export const Link = ({ onChange }: LinkInputProps) => {
   return (
-      <input type='url' onChange={onChange} />
+    <input type='url' onChange={onChange} />
   );
 };

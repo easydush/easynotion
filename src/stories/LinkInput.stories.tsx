@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof ImageInput> = (args) => {
 
   return (
     <div>
-      <ImageInput onLoad={setSource} />;
+      <ImageInput onChange={setSource} />;
       <Image src={source} alt={'image'} />
     </div>
   );

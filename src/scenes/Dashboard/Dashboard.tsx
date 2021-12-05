@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { CREATE_NOTE, EDIT_NOTE, Note, RootState } from 'types';
-import { NoteEdit } from 'scenes';
+import { NoteEdit, NoteView } from './scenes';
 import { deactivateAll } from '../../store/actions/ui';
 
 
@@ -19,6 +19,7 @@ export const Dashboard = () => {
   };
 
   return <div>
+    <NoteView noteId={note.id} />
     <NoteEdit visible={isActive} onClose={handleClose} initialData={note} />
   </div>;
 };

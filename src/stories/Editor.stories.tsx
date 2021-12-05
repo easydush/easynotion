@@ -8,7 +8,7 @@ export default {
   component: Editor,
 } as ComponentMeta<typeof Editor>;
 
-const Template: ComponentStory<typeof Editor> = (args) => <Editor />;
+const Template: ComponentStory<typeof Editor> = (args) => <Editor onChange={()=>{}}/>;
 
 export const Basic = Template.bind({});
 Basic.args = {};

@@ -1,14 +1,15 @@
 import React from 'react';
 
 import { Link } from 'components/Link';
+import { VoidWithArgsFn } from '../../types';
 
 interface ImageInputProps {
-  onLoad: any;
+  onChange: VoidWithArgsFn;
 }
 
-export const ImageInput = ({ onLoad }: ImageInputProps) => {
+export const ImageInput = ({ onChange }: ImageInputProps) => {
   // TODO: add spinner and validator
   return (
-      <Link onLoad={onLoad} />
+      <Link onChange={onChange} />
   );
 };

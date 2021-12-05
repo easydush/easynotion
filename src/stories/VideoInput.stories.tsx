@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof VideoInput> = (args) => {
   const [source, setSource] = useState('');
   return (
     <div>
-      <VideoInput onLoad={setSource} />
+      <VideoInput onChange={setSource} />
       <Video src={source} />
     </div>
   );

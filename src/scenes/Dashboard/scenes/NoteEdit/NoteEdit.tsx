@@ -4,8 +4,8 @@ import { Modal } from 'components';
 import { NoteForm } from 'forms/NoteForm';
 import { getNoteUrl } from 'tools';
 import { useDispatch, useSelector } from 'react-redux';
-import { create, update } from '../../store/actions/note';
-import { deactivateAll } from '../../store/actions/ui';
+import { create, update } from '../../../../store/actions/note';
+import { deactivateAll } from '../../../../store/actions/ui';
 
 type NoteProps = {
   visible: boolean,
