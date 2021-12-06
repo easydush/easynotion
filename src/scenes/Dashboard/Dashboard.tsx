@@ -19,7 +19,7 @@ export const Dashboard = () => {
   };
 
   return <div>
-    <NoteView noteId={note.id} />
+    {note?.id &&<NoteView noteId={note.id} />}
     <NoteEdit visible={isActive} onClose={handleClose} initialData={note} />
   </div>;
 };
