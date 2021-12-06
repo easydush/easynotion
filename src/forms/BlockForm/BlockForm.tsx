@@ -1,22 +1,18 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { MediaType, Note } from 'types';
-import { Switcher } from './components/Switcher';
-import { create } from 'store/actions/block';
-import cuid from 'cuid';
+import { MediaType, VoidWithArgsFn } from 'types';
+import { Switcher } from './components';
 
-type BlockForm = {
+type BlockFormProps = {
   type: MediaType;
-  noteId: Note['id']
+  onFinish: VoidWithArgsFn;
 }
-export const BlockForm = ({ type, noteId }: BlockForm) => {
+export const BlockForm = ({ type, onFinish }: BlockFormProps) => {
   const [content, setContent] = useState('');
-  const dispatch = useDispatch();
 
   function handleFormSubmit(e: any) {
     e.preventDefault();
     // TODO: replace order
-    dispatch(create({ id: cuid(), noteId: noteId, type: type, content: content, order: 0 }));
+    onFinish(content)
   }
 
   return <form onSubmit={handleFormSubmit}>

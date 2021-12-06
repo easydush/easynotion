@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Select from 'react-select';
 import { convertString2SelectOption } from 'components/NoteLink/tools';
 import { VoidWithArgsFn } from 'types';

@@ -1,10 +1,12 @@
-import {  useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BlockView } from './components';
 import { Block, MediaType, Note, RootState } from 'types';
 import { BlockForm } from 'forms/BlockForm';
 import { TypeSwitcher } from './components/TypeSwitcher/TypeSwitcher';
 import { Button } from 'components';
+import { create } from 'store/actions/block';
+import cuid from 'cuid';
 
 type NoteProps = {
   noteId: Note['id'];
@@ -21,7 +23,8 @@ export const NoteView = ({ noteId }: NoteProps) => {
   const handleClick = () => setActive(true);
 
 
-  const handleFinish = (note: Note) => {
+  const handleFinish = (content: string) => {
+    dispatch(create({ id: cuid(), noteId: noteId, type: type as MediaType, content: content, order: 0 }));
   };
 
 
@@ -30,7 +33,7 @@ export const NoteView = ({ noteId }: NoteProps) => {
     {isActiveCreate &&
     (<>
       <TypeSwitcher onChange={setType} defaultValue={type} />
-      <BlockForm type={type as MediaType} noteId={noteId} />
+      <BlockForm type={type as MediaType} onFinish={handleFinish}/>
     </>)
     }
     {blocks.map((block) => <BlockView block={block} />)}
