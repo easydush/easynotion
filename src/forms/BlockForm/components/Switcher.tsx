@@ -8,7 +8,7 @@ type SwitcherProps = {
 
 export const Switcher = ({ type, onChange }: SwitcherProps) => {
   const handleChange = (event: any) => {
-    onChange(event.target.value ?? event);
+    onChange(event?.target?.value ?? event);
   };
 
   switch (type) {
