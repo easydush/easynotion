@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Note, RootState, VoidWithArgsFn } from '../../types';
 import { convert2SelectOption } from './tools';
 import Select from 'react-select';
+import { NoteLinkButton } from '../NoteLinkButton';
 
 
 interface NoteInputProps {
@@ -16,12 +17,12 @@ export const NoteLink = ({ onChange }: NoteInputProps) => {
 
   const handleChange = (option: any) => {
     setSelectedOption(option);
-    onChange(selectedOption);
+    onChange(()=><NoteLinkButton noteId={option?.value as Note['id']}/>);
   };
 
   return (
     <Select
-      defaultValue={null}
+      defaultValue={selectedOption}
       onChange={handleChange}
       options={options}
     />

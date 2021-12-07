@@ -10,12 +10,14 @@ export interface TreeProps {
 
 export const Menu = ({ tree }: TreeProps) => {
   const history = useHistory();
+
   const handleMenuItemClick = useCallback(
     ({ key }) => {
       history.push(`/note/${key}`);
     },
     [history],
   );
+
   return <TreeMenu data={tree}
                    onClickItem={handleMenuItemClick}>
     {({ search, items }) => (

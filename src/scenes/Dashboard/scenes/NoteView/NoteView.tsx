@@ -25,6 +25,7 @@ export const NoteView = ({ noteId }: NoteProps) => {
 
   const handleFinish = (content: string) => {
     dispatch(create({ id: cuid(), noteId: noteId, type: type as MediaType, content: content, order: 0 }));
+    setActive(false);
   };
 
 
@@ -33,7 +34,7 @@ export const NoteView = ({ noteId }: NoteProps) => {
     {isActiveCreate &&
     (<>
       <TypeSwitcher onChange={setType} defaultValue={type} />
-      <BlockForm type={type as MediaType} onFinish={handleFinish}/>
+      <BlockForm type={type as MediaType} onFinish={handleFinish} />
     </>)
     }
     {blocks.map((block) => <BlockView block={block} />)}

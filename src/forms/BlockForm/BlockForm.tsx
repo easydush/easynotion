@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { MediaType, VoidWithArgsFn } from 'types';
+import { MediaType, Block, VoidWithArgsFn } from 'types';
 import { Switcher } from './components';
 
 type BlockFormProps = {
   type: MediaType;
   onFinish: VoidWithArgsFn;
+  initialData?: Block;
 }
-export const BlockForm = ({ type, onFinish }: BlockFormProps) => {
-  const [content, setContent] = useState('');
+export const BlockForm = ({ type, onFinish, initialData }: BlockFormProps) => {
+  const [content, setContent] = useState(initialData?.content ?? '');
 
   function handleFormSubmit(e: any) {
     e.preventDefault();
