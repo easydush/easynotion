@@ -13,12 +13,12 @@ export const BlockForm = ({ type, onFinish, initialData }: BlockFormProps) => {
   function handleFormSubmit(e: any) {
     e.preventDefault();
     // TODO: replace order
-    onFinish(content)
+    onFinish(content);
   }
 
   return <form onSubmit={handleFormSubmit}>
-    <Switcher type={type} onChange={setContent} />
-    <button type='submit'>Add</button>
+    <Switcher type={type} onChange={setContent} initialContent={content} />
+    <button type='submit'>{initialData?.id ? 'Save' : 'Add'}</button>
   </form>;
 };
 

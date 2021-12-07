@@ -4,10 +4,11 @@ import { VoidWithArgsFn } from '../../types';
 
 type EditorProps = {
   onChange: VoidWithArgsFn;
+  initialContent: any;
 }
-export const TableEditor = ({ onChange }: EditorProps) => {
+export const TableEditor = ({ onChange, initialContent }: EditorProps) => {
   const editorRef = useRef({});
-  const [content, setContent] = useState<string>();
+  const [content, setContent] = useState<string>(initialContent);
 
   const handleChange = (evt: any, editor: any) => {
     setContent(editor.getContent());

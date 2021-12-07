@@ -8,6 +8,7 @@ import { NoteLinkButton } from '../NoteLinkButton';
 
 interface NoteInputProps {
   onChange: VoidWithArgsFn;
+  initialContent?: any;
 }
 
 export const NoteLink = ({ onChange }: NoteInputProps) => {

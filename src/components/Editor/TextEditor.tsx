@@ -4,11 +4,12 @@ import { VoidWithArgsFn } from '../../types';
 
 type EditorProps = {
   onChange: VoidWithArgsFn;
+  initialContent?: any;
 }
 
-export const TextEditor = ({ onChange }: EditorProps) => {
+export const TextEditor = ({ onChange, initialContent }: EditorProps) => {
   const editorRef = useRef({});
-  const [content, setContent] = useState<string>();
+  const [content, setContent] = useState<string>(initialContent);
 
   const handleChange = (evt: any, editor: any) => {
     setContent(editor.getContent());
@@ -18,7 +19,7 @@ export const TextEditor = ({ onChange }: EditorProps) => {
   return (
     <Editor
       onInit={(evt, editor) => editorRef.current = editor}
-      initialValue='<p>This is the initial content of the editor.</p>'
+      initialValue={content}
       onChange={handleChange}
       init={{
         height: 500,

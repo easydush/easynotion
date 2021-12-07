@@ -7,12 +7,13 @@ import { VoidWithArgsFn } from '../../types';
 
 interface VideoInputProps {
   onChange: VoidWithArgsFn;
+  initialContent?: any;
 }
 
 
-export const VideoInput = ({ onChange }: VideoInputProps) => {
+export const VideoInput = ({ onChange, initialContent }: VideoInputProps) => {
 // TODO: add spinner and validator
   return (
-      <Link onChange={onChange} />
+      <Link onChange={onChange} initialContent={initialContent}/>
   );
 };

@@ -4,10 +4,11 @@ import { VoidWithArgsFn } from '../../types';
 
 interface LinkInputProps {
   onChange: VoidWithArgsFn;
+  initialContent?: any;
 }
 
-export const Link = ({ onChange }: LinkInputProps) => {
+export const Link = ({ onChange, initialContent }: LinkInputProps) => {
   return (
-    <input type='url' onChange={onChange} />
+    <input type='url' onChange={onChange} value={initialContent} />
   );
 };
