@@ -13,7 +13,7 @@ export interface Section {
 export interface Note {
   id: string;
   title: string;
-  sectionId: string;
+  sectionId: Section['id'];
   uri?: string;
 }
 
@@ -27,3 +27,4 @@ export interface Block {
 
 export const CREATE_NOTE = 'createNote';
 export const EDIT_NOTE = 'editNote';
+export const CREATE_SECTION = 'createNote';

@@ -19,7 +19,7 @@ export const Menu = ({ tree }: TreeProps) => {
   );
 
   return <TreeMenu data={tree}
-                   onClickItem={handleMenuItemClick}>
+                   onClickItem={handleMenuItemClick} hasSearch={tree.length > 0}>
     {({ search, items }) => (
       <div>
         {defaultChildren({ search, items })}
