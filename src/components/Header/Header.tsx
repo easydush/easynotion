@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'components';
 import { EDIT_NOTE, Note, RootState } from 'types';
 import { activate } from 'store/actions/ui';
+import { remove } from 'store/actions/note';
 
 import './header.css';
 
@@ -17,8 +18,13 @@ export const Header = ({ title }: HeaderProps) => {
   const note = useSelector<RootState, Note[]>((state) => state.note.notes.filter((note) => note.id === noteId || note.uri === noteId))[0];
 
   const dispatch = useDispatch();
-  const handleClick = () => {
+
+  const handleCreate = () => {
     dispatch(activate(EDIT_NOTE));
+  };
+
+  const handleDelete = () => {
+    dispatch(remove(note.id));
   };
 
   if (!title && noteId && note) {
@@ -29,7 +35,8 @@ export const Header = ({ title }: HeaderProps) => {
     {!!title ? (
         <div className='wrapper'>
           <h1>{title}</h1>
-          <Button size='small' onClick={handleClick} label='Edit' />
+          <Button size='small' onClick={handleCreate} label='Edit' />
+          <Button label={'Delete'} onClick={handleDelete} />
         </div>) :
       <h1>Create note to start</h1>
     }

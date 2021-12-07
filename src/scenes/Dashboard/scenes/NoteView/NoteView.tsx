@@ -20,7 +20,7 @@ export const NoteView = ({ noteId }: NoteProps) => {
   const [type, setType] = useState('TEXT');
   const [isActiveCreate, setActive] = useState(false);
 
-  const handleClick = () => setActive(true);
+  const handleAddBlock = () => setActive(true);
 
 
   const handleFinish = (content: string) => {
@@ -30,7 +30,7 @@ export const NoteView = ({ noteId }: NoteProps) => {
 
 
   return <>
-    <Button label={'Add new block'} onClick={handleClick} />
+    <Button label={'Add new block'} onClick={handleAddBlock} />
     {isActiveCreate &&
     (<>
       <TypeSwitcher onChange={setType} defaultValue={type} />
