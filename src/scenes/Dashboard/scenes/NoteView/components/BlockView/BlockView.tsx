@@ -7,11 +7,5 @@ type BlockProps = {
 }
 
 export const BlockView = ({block}: BlockProps) => {
-
-
-  return <div className={styles.block}>
-    <div>
-      {block.content}
-    </div>
-  </div>
+  return <div className={styles.block} dangerouslySetInnerHTML={{__html: block.content}} />
 };
