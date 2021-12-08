@@ -13,7 +13,7 @@ export const NoteForm = ({ onFinish, initialData, sectionId }: NoteFormProps) =>
 
   function handleFormSubmit(e: any) {
     e.preventDefault();
-    onFinish({ title, uri: uri?.replace(/[^a-zA-Z0-9]/g,'_'), id: initialData?.id ?? cuid(), sectionId: sectionId });
+    onFinish({ title, uri: uri?.replace(/[^a-zA-Z0-9]/g,'_').replace(/_{2,}/g,'_'), id: initialData?.id ?? cuid(), sectionId: sectionId });
   }
 
   return <form onSubmit={handleFormSubmit}>
