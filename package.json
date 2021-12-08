@@ -2,7 +2,7 @@
   "name": "notion",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://easydush.github.io/easynotion/",
+  "homepage": "https://easydush.github.io/easynotion",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.11.4",
@@ -47,7 +47,7 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -b master -d build"
   },
   "eslintConfig": {
     "extends": [
