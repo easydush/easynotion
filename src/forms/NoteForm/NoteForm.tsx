@@ -7,7 +7,7 @@ type NoteFormProps = {
   initialData?: Note;
   sectionId?: string;
 }
-export const NoteForm = ({ onFinish, initialData, sectionId = 'default' }: NoteFormProps) => {
+export const NoteForm = ({ onFinish, initialData, sectionId = '0' }: NoteFormProps) => {
   const [title, setTitle] = useState(initialData?.title ?? '');
   const [uri, setUri] = useState(initialData?.uri);
 
@@ -15,8 +15,6 @@ export const NoteForm = ({ onFinish, initialData, sectionId = 'default' }: NoteF
     e.preventDefault();
     // TODO: replace section id
     onFinish({ title, uri, id: initialData?.id ?? cuid(), sectionId: sectionId });
-    setTitle('')
-    setUri('')
   }
 
   return <form onSubmit={handleFormSubmit}>

@@ -3,7 +3,7 @@ import { DefaultActionParams } from '../types';
 import { Section } from 'types';
 
 const initialState = {
-  sections: [],
+  sections: [{id: '0', title: 'other'}],
 };
 
 export const sectionReducer =  (state = initialState, action: DefaultActionParams) => {

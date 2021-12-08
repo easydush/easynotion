@@ -14,7 +14,7 @@ type NoteProps = {
   sectionId?: string;
 }
 
-export const NoteEdit = ({ visible, onClose, initialData, sectionId = 'default' }: NoteProps) => {
+export const NoteEdit = ({ visible, onClose, initialData, sectionId = '0' }: NoteProps) => {
   const isEditFlow = useSelector<RootState, string[]>((state) => state.ui.flows.filter((flow) => flow === EDIT_NOTE)).length > 0;
 
   const isEdit = !!initialData?.id && isEditFlow;
@@ -34,6 +34,6 @@ export const NoteEdit = ({ visible, onClose, initialData, sectionId = 'default' 
   };
 
   return <Modal visible={visible} title={isEdit ? 'Edit note' : 'Create new note'} onClose={onClose}>
-    <NoteForm initialData={isEdit ? initialData : undefined} onFinish={handleFinish} />
+    <NoteForm initialData={isEdit ? initialData : undefined} onFinish={handleFinish} sectionId={sectionId} />
   </Modal>;
 };

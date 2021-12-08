@@ -1,6 +1,6 @@
 import { Note, RootState } from 'types';
 import { Button } from '../Button';
-import { readTemplate } from '../../tools';
+import { readNotesTemplate } from '../../tools';
 import { useHistory } from 'react-router-dom';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
@@ -17,7 +17,7 @@ type NoteLinkProps = {
 export const NoteLinkButton = ({noteId}: NoteLinkProps) => {
   const note = useSelector<RootState, Note[]>((state) => state.note.notes.filter((item) => item.id === noteId))[0];
   const history = useHistory();
-  const item: LinkItem = readTemplate([note])[0];
+  const item: LinkItem = readNotesTemplate([note])[0];
 
   const handleClick = useCallback(
     () => {
