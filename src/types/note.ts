@@ -27,4 +27,4 @@ export interface Block {
 
 export const CREATE_NOTE = 'createNote';
 export const EDIT_NOTE = 'editNote';
-export const CREATE_SECTION = 'createNote';
+export const CREATE_SECTION = 'createSection';
