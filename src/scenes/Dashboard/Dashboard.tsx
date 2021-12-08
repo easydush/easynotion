@@ -11,7 +11,7 @@ export const Dashboard = () => {
   const location = useLocation();
   const path = location.pathname
 
-  let sectionId: Section['id'] = '';
+  let sectionId: Section['id'] = '0';
   let noteId: Note['id'] = '';
 
   const checkSection = /section\/(.+)/i.exec(path);
@@ -42,7 +42,7 @@ export const Dashboard = () => {
 
   return <div>
     {note?.id &&<NoteView noteId={note.id} />}
-    {section?.id && <SectionView /> }
+    {section?.id && <SectionView sectionId={sectionId} /> }
     <SectionCreate visible={isSectionFlowActive} onClose={handleClose} />
     <NoteEdit visible={isNoteFlowActive} onClose={handleClose} initialData={note} sectionId={sectionId} />
   </div>;

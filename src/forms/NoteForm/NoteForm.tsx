@@ -5,9 +5,9 @@ import cuid from 'cuid';
 type NoteFormProps = {
   onFinish: VoidWithArgsFn;
   initialData?: Note;
-  sectionId?: string;
+  sectionId: string;
 }
-export const NoteForm = ({ onFinish, initialData, sectionId = '0' }: NoteFormProps) => {
+export const NoteForm = ({ onFinish, initialData, sectionId }: NoteFormProps) => {
   const [title, setTitle] = useState(initialData?.title ?? '');
   const [uri, setUri] = useState(initialData?.uri);
 

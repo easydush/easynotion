@@ -11,17 +11,16 @@ type NoteProps = {
   visible: boolean,
   onClose: VoidFn;
   initialData?: Note;
-  sectionId?: string;
+  sectionId: string;
 }
 
-export const NoteEdit = ({ visible, onClose, initialData, sectionId = '0' }: NoteProps) => {
+export const NoteEdit = ({ visible, onClose, initialData, sectionId }: NoteProps) => {
   const isEditFlow = useSelector<RootState, string[]>((state) => state.ui.flows.filter((flow) => flow === EDIT_NOTE)).length > 0;
 
   const isEdit = !!initialData?.id && isEditFlow;
   const history = useHistory();
 
   const dispatch = useDispatch();
-
 
   const handleFinish = (note: Note) => {
     if (isEdit) {
