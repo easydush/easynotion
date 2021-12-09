@@ -1,12 +1,11 @@
-import Select from 'react-select';
 import { convertString2SelectOption } from 'components/NoteLink/tools';
 import { VoidWithArgsFn } from 'types';
+import { Button } from 'components';
 
 const TYPES = ['VIDEO', 'LINK', 'TEXT', 'IMAGE', 'TABLE'];
 
 interface TypeInputProps {
   onChange: VoidWithArgsFn;
-  defaultValue: string;
 }
 
 type Option = {
@@ -14,13 +13,12 @@ type Option = {
   label: string;
 }
 
-export const TypeSwitcher = ({ onChange, defaultValue }: TypeInputProps) => {
+export const TypeSwitcher = ({ onChange }: TypeInputProps) => {
   const options = convertString2SelectOption(TYPES);
-  const initial = { value: defaultValue, label: String(defaultValue).toLowerCase() };
 
   const handleChange = (option: any) => {
     onChange((option as Option).value);
   };
 
-  return <Select defaultValue={initial} onChange={handleChange} options={options} />;
+  return <div>{options.map(option=><Button label={option.label} onClick={()=>handleChange(option)}/>)}</div>
 };

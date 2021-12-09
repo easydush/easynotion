@@ -88,10 +88,10 @@ export const NoteView = ({ noteId }: NoteProps) => {
 
 
   return <>
-    <Button label={'Add new block'} onClick={handleAdd} />
+    {!isActiveBlockForm && <Button label={'Add new block'} onClick={handleAdd} />}
     {isActiveBlockForm &&
     (<>
-      <TypeSwitcher onChange={setType} defaultValue={type} />
+      <TypeSwitcher onChange={setType} />
       <BlockForm type={type as MediaType} onFinish={handleFinish} initialData={currentBlock} />
     </>)
     }
