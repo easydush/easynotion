@@ -31,8 +31,8 @@ export const Header = ({ title }: HeaderProps) => {
     noteId = String(checkNote[1]);
   }
 
-  const section  = useSelector<RootState, Section[]>((state) => state.section.sections.filter((section) => section.id === sectionId))[0];
-  const note = useSelector<RootState, Note[]>((state) => state.note.notes.filter((note) => note.id === noteId || note.uri === noteId))[0];
+  const section  = useSelector<RootState, Section | undefined>((state) => state.section.sections.find((section) => section.id === sectionId));
+  const note = useSelector<RootState, Note | undefined>((state) => state.note.notes.find((note) => note.id === noteId || note.uri === noteId));
 
   const dispatch = useDispatch();
 
@@ -41,7 +41,7 @@ export const Header = ({ title }: HeaderProps) => {
   };
 
   const handleDelete = () => {
-    dispatch(remove(note.id));
+    if (note) dispatch(remove(note.id));
   };
 
   if (!title && (note || section)) {

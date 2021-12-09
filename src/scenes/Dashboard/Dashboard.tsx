@@ -42,7 +42,7 @@ export const Dashboard = () => {
 
   return <div>
     {note?.id &&<NoteView noteId={note.id} />}
-    {section?.id && <SectionView sectionId={sectionId} /> }
+    {section?.id && !note?.id && <SectionView sectionId={sectionId} /> }
     <SectionCreate visible={isSectionFlowActive} onClose={handleClose} />
     <NoteEdit visible={isNoteFlowActive} onClose={handleClose} initialData={note} sectionId={sectionId} />
   </div>;
