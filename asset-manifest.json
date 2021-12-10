@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/easynotion/static/css/main.199f4fa3.chunk.css",
-    "main.js": "/easynotion/static/js/main.28000cc0.chunk.js",
-    "main.js.map": "/easynotion/static/js/main.28000cc0.chunk.js.map",
+    "main.js": "/easynotion/static/js/main.ff7247fe.chunk.js",
+    "main.js.map": "/easynotion/static/js/main.ff7247fe.chunk.js.map",
     "runtime-main.js": "/easynotion/static/js/runtime-main.4bcaf238.js",
     "runtime-main.js.map": "/easynotion/static/js/runtime-main.4bcaf238.js.map",
     "static/css/2.38886431.chunk.css": "/easynotion/static/css/2.38886431.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.38886431.chunk.css",
     "static/js/2.7822adfa.chunk.js",
     "static/css/main.199f4fa3.chunk.css",
-    "static/js/main.28000cc0.chunk.js"
+    "static/js/main.ff7247fe.chunk.js"
   ]
 }
