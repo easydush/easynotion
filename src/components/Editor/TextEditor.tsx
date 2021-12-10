@@ -18,6 +18,7 @@ export const TextEditor = ({ onChange, initialContent }: EditorProps) => {
 
   return (
     <Editor
+      apiKey={process.env.REACT_APP_TINY_KEY}
       onInit={(evt, editor) => editorRef.current = editor}
       initialValue={content}
       onChange={handleChange}

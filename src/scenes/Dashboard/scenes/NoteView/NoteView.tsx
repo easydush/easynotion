@@ -7,7 +7,7 @@ import { TypeSwitcher } from './components/TypeSwitcher/TypeSwitcher';
 import { Button } from 'components';
 import { create, remove, update } from 'store/actions/block';
 import cuid from 'cuid';
-import { compareBlocks } from '../../../../tools/blocks';
+import { compareBlocks } from 'tools/blocks';
 
 type NoteProps = {
   noteId: Note['id'];
