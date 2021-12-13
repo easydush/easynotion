@@ -13,10 +13,7 @@ export const Menu = ({ tree }: TreeProps) => {
 
   const handleMenuItemClick = useCallback(
     ({ key, label, ...props }) => {
-      const { isSection, path } = props;
-
-      if (isSection) history.push(`/section/${key}`);
-      else history.push(`/note/${path}`);
+     history.push(`/note/${key}`);
 
     },
     [history],

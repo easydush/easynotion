@@ -5,15 +5,20 @@ import cuid from 'cuid';
 type NoteFormProps = {
   onFinish: VoidWithArgsFn;
   initialData?: Note;
-  sectionId: string;
+  parentId?: string;
 }
-export const NoteForm = ({ onFinish, initialData, sectionId }: NoteFormProps) => {
+export const NoteForm = ({ onFinish, initialData, parentId }: NoteFormProps) => {
   const [title, setTitle] = useState(initialData?.title ?? '');
   const [uri, setUri] = useState(initialData?.uri);
 
   function handleFormSubmit(e: any) {
     e.preventDefault();
-    onFinish({ title, uri: uri?.replace(/[^a-zA-Z0-9]/g,'_').replace(/_{2,}/g,'_'), id: initialData?.id ?? cuid(), sectionId: sectionId });
+    onFinish({
+      title,
+      uri: uri?.replace(/[^a-zA-Z0-9]/g, '_').replace(/_{2,}/g, '_'),
+      id: initialData?.id ?? cuid(),
+      parentId: parentId,
+    });
   }
 
   return <form onSubmit={handleFormSubmit}>

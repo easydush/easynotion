@@ -1,18 +1,18 @@
-import { Note, Section } from 'types';
+import { Note } from 'types';
 
 export const getNoteUrl = (value: Note) => {
   return value.uri !== '' && value.uri ? value.uri : value.id;
 };
 
-export const readSectionsTemplate = (sections: Section[], items: Note[]) => {
-  return sections.map(section => {
+export const readNotesWithChildrenTemplate = (items: Note[]) => {
+  return items.map(parent => {
     return {
-      key: section.id,
-      label: section.title,
+      key: getNoteUrl(parent),
+      label: parent.title,
       isSection: true,
-      nodes: items.filter(note => note.sectionId === section.id).map((note) => {
-        return { key: getNoteUrl(note), label: note.title, path:  getNoteUrl(note)};
-      }),
+      nodes: [items.filter(note => note.parentId === parent.id).map((note) => {
+        readNotesWithChildrenTemplate([note]);
+      })],
     };
   });
 };

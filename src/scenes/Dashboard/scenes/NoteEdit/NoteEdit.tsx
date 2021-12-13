@@ -4,18 +4,20 @@ import { Modal } from 'components';
 import { NoteForm } from 'forms/NoteForm';
 import { getNoteUrl } from 'tools';
 import { useDispatch, useSelector } from 'react-redux';
-import { create, update } from '../../../../store/actions/note';
-import { deactivateAll } from '../../../../store/actions/ui';
+import { create, update } from 'store/actions/note';
+import { deactivateAll } from 'store/actions/ui';
 
 type NoteProps = {
   visible: boolean,
   onClose: VoidFn;
   initialData?: Note;
-  sectionId: string;
+  parentId?: string;
 }
 
-export const NoteEdit = ({ visible, onClose, initialData, sectionId }: NoteProps) => {
-  const isEditFlow = useSelector<RootState, string[]>((state) => state.ui.flows.filter((flow) => flow === EDIT_NOTE)).length > 0;
+export const NoteEdit = ({ visible, onClose, initialData, parentId }: NoteProps) => {
+  const isEditFlow = useSelector<RootState, string[]>
+  ((state) => state.ui.flows.filter((flow) => flow === EDIT_NOTE)
+  ).length > 0;
 
   const isEdit = !!initialData?.id && isEditFlow;
   const history = useHistory();
@@ -33,6 +35,6 @@ export const NoteEdit = ({ visible, onClose, initialData, sectionId }: NoteProps
   };
 
   return <Modal visible={visible} title={isEdit ? 'Edit note' : 'Create new note'} onClose={onClose}>
-    <NoteForm initialData={isEdit ? initialData : undefined} onFinish={handleFinish} sectionId={sectionId} />
+    <NoteForm initialData={isEdit ? initialData : undefined} onFinish={handleFinish} parentId={parentId} />
   </Modal>;
 };

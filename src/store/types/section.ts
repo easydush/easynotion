@@ -1,2 +1,0 @@
-export const CREATE_SECTION = 'CREATE_SECTION';
-export const DELETE_SECTION = 'DELETE_SECTION';

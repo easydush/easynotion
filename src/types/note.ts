@@ -5,15 +5,10 @@ export type MediaType =
   | 'IMAGE'
   | 'TABLE'
 
-export interface Section {
-  id: string;
-  title: string;
-}
-
 export interface Note {
   id: string;
   title: string;
-  sectionId: Section['id'];
+  parentId: Note['id'];
   uri?: string;
 }
 
@@ -27,4 +22,3 @@ export interface Block {
 
 export const CREATE_NOTE = 'createNote';
 export const EDIT_NOTE = 'editNote';
-export const CREATE_SECTION = 'createSection';
