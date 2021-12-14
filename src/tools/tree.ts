@@ -4,15 +4,20 @@ export const getNoteUrl = (value: Note) => {
   return value.uri !== '' && value.uri ? value.uri : value.id;
 };
 
-export const readNotesWithChildrenTemplate = (items: Note[]) => {
-  return items.map(parent => {
+const findChildren = (parentId: Note['id'], items: Note[]): Note[] => {
+  return items.filter(item => item.parentId === parentId);
+};
+
+export const readNotesWithChildrenTemplate = (all: Note[], items: Note[], isRoot: boolean = true): any => {
+  let roots = items;
+  if (isRoot) roots = roots.filter(item => !item.parentId);
+
+  return roots.map(parent => {
     return {
       key: getNoteUrl(parent),
+      path: `/note/${getNoteUrl(parent)}`,
       label: parent.title,
-      isSection: true,
-      nodes: [items.filter(note => note.parentId === parent.id).map((note) => {
-        readNotesWithChildrenTemplate([note]);
-      })],
+      nodes: readNotesWithChildrenTemplate(all, findChildren(parent.id, all), false),
     };
   });
 };

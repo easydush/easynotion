@@ -26,6 +26,10 @@ export const Header = ({ title }: HeaderProps) => {
 
   const note = useSelector<RootState, Note | undefined>((state) => state.note.notes.find((note) => note.id === noteId || note.uri === noteId));
 
+  if (!title && note) {
+    title = note?.title;
+  }
+
   const dispatch = useDispatch();
 
   const handleCreate = () => {

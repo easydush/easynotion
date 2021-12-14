@@ -31,6 +31,6 @@ export const Dashboard = () => {
 
   return <div>
     {note?.id && <NoteView noteId={note.id} />}
-    <NoteEdit visible={isNoteFlowActive} onClose={handleClose} initialData={note} parentId={note.id} />
+    <NoteEdit visible={isNoteFlowActive} onClose={handleClose} initialData={note} parentId={note?.id} />
   </div>;
 };
