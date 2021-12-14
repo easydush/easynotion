@@ -10,7 +10,7 @@ type NoteFormProps = {
 export const NoteForm = ({ onFinish, initialData, parentId }: NoteFormProps) => {
   const [title, setTitle] = useState(initialData?.title ?? '');
   const [uri, setUri] = useState(initialData?.uri);
-
+  console.log(parentId);
   function handleFormSubmit(e: any) {
     e.preventDefault();
     onFinish({

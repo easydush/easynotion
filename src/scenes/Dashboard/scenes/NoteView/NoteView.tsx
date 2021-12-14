@@ -92,7 +92,7 @@ export const NoteView = ({ noteId }: NoteProps) => {
     {isActiveBlockForm &&
     (<>
       <TypeSwitcher onChange={setType} />
-      <BlockForm type={type as MediaType} onFinish={handleFinish} initialData={currentBlock} />
+      {type !== 'LINK' && <BlockForm type={type as Exclude<MediaType, 'LINK'>} onFinish={handleFinish} initialData={currentBlock} />}
     </>)
     }
     {blocks.sort(compareBlocks).map((block) =>

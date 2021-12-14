@@ -3,7 +3,7 @@ import { MediaType, Block, VoidWithArgsFn } from 'types';
 import { Switcher } from './components';
 
 type BlockFormProps = {
-  type: MediaType;
+  type: Exclude<MediaType, 'LINK'>;
   onFinish: VoidWithArgsFn;
   initialData?: Block;
 }

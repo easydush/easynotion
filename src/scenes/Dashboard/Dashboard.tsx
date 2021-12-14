@@ -19,18 +19,8 @@ export const Dashboard = () => {
 
   const note = useSelector<RootState, Note[]>((state) => state.note.notes.filter((note) => note.id === noteId || note.uri === noteId))[0];
 
-  const flows = useSelector<RootState, string[]>((state) => state.ui.flows);
-
-  const isNoteFlowActive = flows.includes(CREATE_NOTE || EDIT_NOTE);
-
-  const dispatch = useDispatch();
-
-  const handleClose = () => {
-    dispatch(deactivateAll());
-  };
-
   return <div>
     {note?.id && <NoteView noteId={note.id} />}
-    <NoteEdit visible={isNoteFlowActive} onClose={handleClose} initialData={note} parentId={note?.id} />
+    <NoteEdit initialData={note} parentId={note?.id} />
   </div>;
 };

@@ -1,8 +1,8 @@
-import { MediaType, VoidWithArgsFn } from 'types';
-import { ImageInput, NoteLink, TableEditor, TextEditor, VideoInput } from 'components';
+import { MediaType,  VoidWithArgsFn } from 'types';
+import { ImageInput,  TableEditor, TextEditor, VideoInput } from 'components';
 
 type SwitcherProps = {
-  type: MediaType;
+  type: Exclude<MediaType, 'LINK'>;
   onChange: VoidWithArgsFn;
   initialContent?: any;
 }
@@ -15,8 +15,6 @@ export const Switcher = ({ type, onChange, initialContent }: SwitcherProps) => {
   switch (type) {
     case 'IMAGE':
       return <ImageInput onChange={handleChange} initialContent={initialContent} />;
-    case 'LINK':
-      return <NoteLink onChange={handleChange} initialContent={initialContent}/>;
     case 'TEXT':
       return <TextEditor onChange={handleChange} initialContent={initialContent}/>;
     case 'TABLE':
