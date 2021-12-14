@@ -1,25 +1,19 @@
 {
   "files": {
-    "main.css": "/easynotion/static/css/main.199f4fa3.chunk.css",
-    "main.js": "/easynotion/static/js/main.5b6f899c.chunk.js",
-    "main.js.map": "/easynotion/static/js/main.5b6f899c.chunk.js.map",
+    "main.css": "/easynotion/static/css/main.c1bd1da6.chunk.css",
+    "main.js": "/easynotion/static/js/main.e52e1f44.chunk.js",
     "runtime-main.js": "/easynotion/static/js/runtime-main.4bcaf238.js",
-    "runtime-main.js.map": "/easynotion/static/js/runtime-main.4bcaf238.js.map",
-    "static/css/2.38886431.chunk.css": "/easynotion/static/css/2.38886431.chunk.css",
-    "static/js/2.7822adfa.chunk.js": "/easynotion/static/js/2.7822adfa.chunk.js",
-    "static/js/2.7822adfa.chunk.js.map": "/easynotion/static/js/2.7822adfa.chunk.js.map",
+    "static/css/2.f28cc0bd.chunk.css": "/easynotion/static/css/2.f28cc0bd.chunk.css",
+    "static/js/2.13e1b7ab.chunk.js": "/easynotion/static/js/2.13e1b7ab.chunk.js",
     "static/js/3.7eba1b6a.chunk.js": "/easynotion/static/js/3.7eba1b6a.chunk.js",
-    "static/js/3.7eba1b6a.chunk.js.map": "/easynotion/static/js/3.7eba1b6a.chunk.js.map",
     "index.html": "/easynotion/index.html",
-    "static/css/2.38886431.chunk.css.map": "/easynotion/static/css/2.38886431.chunk.css.map",
-    "static/css/main.199f4fa3.chunk.css.map": "/easynotion/static/css/main.199f4fa3.chunk.css.map",
-    "static/js/2.7822adfa.chunk.js.LICENSE.txt": "/easynotion/static/js/2.7822adfa.chunk.js.LICENSE.txt"
+    "static/js/2.13e1b7ab.chunk.js.LICENSE.txt": "/easynotion/static/js/2.13e1b7ab.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4bcaf238.js",
-    "static/css/2.38886431.chunk.css",
-    "static/js/2.7822adfa.chunk.js",
-    "static/css/main.199f4fa3.chunk.css",
-    "static/js/main.5b6f899c.chunk.js"
+    "static/css/2.f28cc0bd.chunk.css",
+    "static/js/2.13e1b7ab.chunk.js",
+    "static/css/main.c1bd1da6.chunk.css",
+    "static/js/main.e52e1f44.chunk.js"
   ]
 }
