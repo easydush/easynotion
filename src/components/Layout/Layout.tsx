@@ -12,10 +12,10 @@ const LayoutFn: FC = ({ children }) => {
         <NotesTree />
       </div>
       <div className='basis-4/5'>
-        <div>
+        <div className='px-2'>
           <Header />
         </div>
-        <div>
+        <div className='px-2'>
           {children}
         </div>
       </div>
