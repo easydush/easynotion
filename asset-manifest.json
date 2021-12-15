@@ -1,19 +1,12 @@
 {
   "files": {
-    "main.css": "/easynotion/static/css/main.c1bd1da6.chunk.css",
-    "main.js": "/easynotion/static/js/main.e52e1f44.chunk.js",
-    "runtime-main.js": "/easynotion/static/js/runtime-main.4bcaf238.js",
-    "static/css/2.f28cc0bd.chunk.css": "/easynotion/static/css/2.f28cc0bd.chunk.css",
-    "static/js/2.13e1b7ab.chunk.js": "/easynotion/static/js/2.13e1b7ab.chunk.js",
-    "static/js/3.7eba1b6a.chunk.js": "/easynotion/static/js/3.7eba1b6a.chunk.js",
-    "index.html": "/easynotion/index.html",
-    "static/js/2.13e1b7ab.chunk.js.LICENSE.txt": "/easynotion/static/js/2.13e1b7ab.chunk.js.LICENSE.txt"
+    "main.css": "/easynotion/static/css/main.232c934c.css",
+    "main.js": "/easynotion/static/js/main.35beba96.js",
+    "static/js/27.ea359aa1.chunk.js": "/easynotion/static/js/27.ea359aa1.chunk.js",
+    "index.html": "/easynotion/index.html"
   },
   "entrypoints": [
-    "static/js/runtime-main.4bcaf238.js",
-    "static/css/2.f28cc0bd.chunk.css",
-    "static/js/2.13e1b7ab.chunk.js",
-    "static/css/main.c1bd1da6.chunk.css",
-    "static/js/main.e52e1f44.chunk.js"
+    "static/css/main.232c934c.css",
+    "static/js/main.35beba96.js"
   ]
 }
