@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Note, VoidWithArgsFn } from 'types';
 import cuid from 'cuid';
+import { Input } from '../../components/Input';
 
 type NoteFormProps = {
   onFinish: VoidWithArgsFn;
@@ -10,7 +11,7 @@ type NoteFormProps = {
 export const NoteForm = ({ onFinish, initialData, parentId }: NoteFormProps) => {
   const [title, setTitle] = useState(initialData?.title ?? '');
   const [uri, setUri] = useState(initialData?.uri);
-  console.log(parentId);
+
   function handleFormSubmit(e: any) {
     e.preventDefault();
     onFinish({
@@ -22,17 +23,17 @@ export const NoteForm = ({ onFinish, initialData, parentId }: NoteFormProps) => 
   }
 
   return <form onSubmit={handleFormSubmit}>
-    <div>Title:</div>
-    <input
+    <Input
       type='text'
       name='title'
+      label='Title'
       required
       onChange={(e) => setTitle(e.target.value)}
     />
-    <div>URI:</div>
-    <input
+    <Input
       type='text'
       name='uri'
+      label='URI'
       onChange={(e) => setUri(e.target.value)}
     />
     <button type='submit'>Add</button>

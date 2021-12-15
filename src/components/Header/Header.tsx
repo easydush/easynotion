@@ -6,8 +6,6 @@ import { EDIT_NOTE, Note, RootState } from 'types';
 import { activate } from 'store/actions/ui';
 import { remove } from 'store/actions/note';
 
-import './header.css';
-
 interface HeaderProps {
   title?: string;
 }
