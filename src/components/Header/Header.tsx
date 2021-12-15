@@ -42,13 +42,13 @@ export const Header = ({ title }: HeaderProps) => {
 
   return <div className='mx-auto px-4 sm:px-6'>
     <div
-      className='flex justify-between items-center border-b-2 border-gray-100 py-2 md:justify-start md:space-x-5'>
+      className='flex justify-between items-center border-b-2 border-gray-100 py-4 md:justify-start md:space-x-5'>
       {!!title ? (
           <>
             <div className='flex justify-start lg:w-0 lg:flex-1'>
-              <h1 className='text-3xl font-bold text-gray-900'>{title}</h1>
+              <h1 className='text-3xl font-bold text-gray-900 '>{title}</h1>
             </div>
-            <div className={'mt-6 text-center text-base font-medium text-gray-500'}>
+            <div>
               <Button onClick={handleCreate}>
                 {<svg xmlns='http://www.w3.org/2000/svg' className='h-6 w-6' fill='none'
                       viewBox='0 0 24 24' stroke='currentColor'>
@@ -57,7 +57,7 @@ export const Header = ({ title }: HeaderProps) => {
                 </svg>}
               </Button>
             </div>
-            <div className={'mt-6 text-center text-base font-medium text-gray-500'}>
+            <div>
               <Button onClick={handleDelete}>
                 {<svg xmlns='http://www.w3.org/2000/svg' className='h-6 w-6' fill='none'
                                                    viewBox='0 0 24 24' stroke='currentColor'>

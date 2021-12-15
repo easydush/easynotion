@@ -1,8 +1,8 @@
+import { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import TreeMenu, { defaultChildren } from 'react-simple-tree-menu';
 
 import 'react-simple-tree-menu/dist/main.css';
-import { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
 
 export interface TreeProps {
   tree: any;
@@ -13,8 +13,7 @@ export const Menu = ({ tree }: TreeProps) => {
 
   const handleMenuItemClick = useCallback(
     ({ path }) => {
-     history.push(path);
-
+      history.push(path);
     },
     [history],
   );
