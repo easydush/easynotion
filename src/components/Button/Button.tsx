@@ -5,8 +5,9 @@ interface ButtonProps {
   primary?: boolean;
   backgroundColor?: string;
   size?: 'small' | 'medium' | 'large';
-  label: string;
+  label?: string;
   onClick?: () => void;
+  children?: React.ReactElement;
 }
 
 export const Button = ({
@@ -14,6 +15,7 @@ export const Button = ({
                          size = 'medium',
                          backgroundColor,
                          label,
+                        children,
                          ...props
                        }: ButtonProps) => {
   const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
@@ -25,6 +27,7 @@ export const Button = ({
       {...props}
     >
       {label}
+      {children}
     </button>
   );
 };

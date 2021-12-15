@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-import '../Header/header.css';
 import { Link} from 'components/Link';
 import { VoidWithArgsFn } from '../../types';
 

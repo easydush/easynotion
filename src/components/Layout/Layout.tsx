@@ -5,8 +5,6 @@ import { NotesTree } from './components';
 import { CREATE_NOTE } from 'types';
 import { activate } from 'store/actions/ui';
 
-import styles from './Layout.module.scss';
-
 
 const LayoutFn: FC = ({ children }) => {
   const dispatch = useDispatch();
@@ -17,14 +15,16 @@ const LayoutFn: FC = ({ children }) => {
 
 
   return (
-    <div className={styles.container}>
-      <div id='menu' className={styles.menu}>
+    <div className='flex flex-row'>
+      <div className='basis-1/5'>
         <Button size='small' onClick={handleCreateNote} label='Create new note' />
         <NotesTree />
       </div>
-      <div id='content' className={styles.content}>
-        <Header />
-        {children}
+      <div className='basis-4/5'>
+        <div>
+          <Header />
+        </div>
+        <div>{children}</div>
       </div>
     </div>
   );

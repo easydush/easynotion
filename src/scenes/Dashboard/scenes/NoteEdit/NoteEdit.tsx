@@ -1,12 +1,11 @@
 import { useHistory} from 'react-router-dom';
-import { CREATE_NOTE, CREATE_SUBNOTE, EDIT_NOTE, Note, RootState, VoidFn } from 'types';
+import { CREATE_NOTE, CREATE_SUBNOTE, EDIT_NOTE, Note, RootState } from 'types';
 import { Modal } from 'components';
 import { NoteForm } from 'forms/NoteForm';
 import { getNoteUrl } from 'tools';
 import { useDispatch, useSelector } from 'react-redux';
 import { create, update } from 'store/actions/note';
 import { deactivateAll } from 'store/actions/ui';
-import { log } from 'util';
 
 type NoteProps = {
   initialData?: Note;
