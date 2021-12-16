@@ -1,10 +1,10 @@
-import { convertString2SelectOption } from 'components/NoteLink/tools';
-import { CREATE_SUBNOTE, VoidFn, VoidWithArgsFn } from 'types';
-import { Button } from 'components';
-import { useDispatch } from 'react-redux';
-import { activate } from 'store/actions/ui';
-import { Popover } from 'components/Popover';
 import { ReactElement } from 'react';
+import { useDispatch } from 'react-redux';
+import { Button } from 'components';
+import { CREATE_SUBNOTE, MediaType, VoidFn, VoidWithArgsFn } from 'types';
+import { Popover, Icon } from 'components';
+import { convertString2SelectOption } from './tools';
+import { activate } from 'store/actions/ui';
 
 const TYPES = ['VIDEO', 'LINK', 'TEXT', 'IMAGE', 'TABLE'];
 
@@ -29,5 +29,12 @@ export const TypeSwitcher = ({ content, onHover, onChange }: TypeInputProps) => 
     if((option as Option).value === 'LINK') dispatch(activate(CREATE_SUBNOTE))
   };
 
-  return <Popover content={content}><>{options.map(option=><Button label={option.label} onClick={()=>handleChange(option)}/>)}</></Popover>
+  return <Popover content={content}>
+    <>
+      {options.map(option =>
+        <Button onClick={()=>handleChange(option)} size='small'>
+          {<Icon type={option.value as MediaType}/>}
+        </Button>)}
+    </>
+  </Popover>
 };

@@ -16,7 +16,7 @@
 
 .storybook-button--small {
     font-size: 12px;
-    padding: 10px 16px;
+    margin: 5px;
 }
 
 .storybook-button--medium {

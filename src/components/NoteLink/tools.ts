@@ -5,9 +5,3 @@ export const convert2SelectOption = (data: Note[])=>{
     return { value: note.id, label: note.title };
   }));
 }
-
-export const convertString2SelectOption = (data: string[])=>{
-  return data.map((item => {
-    return { value: item, label: String(item).toLowerCase() };
-  }));
-}

@@ -9,3 +9,5 @@ export * from './Modal';
 export * from './Video';
 export * from './Editor';
 export * from './Table';
+export * from './Icon';
+export * from './Popover';
