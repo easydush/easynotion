@@ -23,6 +23,7 @@ export const NoteForm = ({ onFinish, initialData, parentId }: NoteFormProps) => 
   }
 
   return <form onSubmit={handleFormSubmit}>
+    <div className='grid grid-cols-1'>
     <Input
       type='text'
       name='title'
@@ -36,7 +37,7 @@ export const NoteForm = ({ onFinish, initialData, parentId }: NoteFormProps) => 
       label='URI'
       onChange={(e) => setUri(e.target.value)}
     />
-    <button type='submit'>Add</button>
+    <button type='submit' className='justify-self-end'>Add</button></div>
   </form>;
 };
 

@@ -1,0 +1,34 @@
+.popover__wrapper {
+  position: relative;
+  margin-top: 1.5rem;
+  display: inline-block;
+}
+
+.popover__content {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  transform: translate(0, 10px);
+  padding: 1.5rem;
+  border: 1px solid lightseagreen;
+  width: auto;
+}
+
+.popover__content:before {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  right: calc(50% - 10px);
+  top: -11px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent lightseagreen transparent;
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+
+.popover__wrapper:hover .popover__content {
+  z-index: 10;
+  opacity: 1;
+  visibility: visible;
+}

@@ -9,13 +9,16 @@ type InputProps = {
 }
 
 export const Input = ({ type, name, label, required = false, onChange }: InputProps) => {
-  return <div className='flex flex-wrap'>
-    {label && <span>{label}:</span>}
-    <input
-    type={type}
-    name={name}
-    className='border-2 border-cyan-100'
-    required={required}
-    onChange={onChange}
-  /></div>;
+  return <div>
+    {label && <div>{label}:</div>}
+    <div >
+      <input
+      type={type}
+      name={name}
+      className='border-2 border-cyan-100'
+      required={required}
+      onChange={onChange}
+    />
+    </div>
+  </div>;
 };

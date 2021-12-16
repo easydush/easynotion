@@ -39,7 +39,7 @@ export const NoteEdit = ({ initialData, parentId }: NoteProps) => {
     history.push(`/note/${getNoteUrl(note)}`);
   };
 
-  return <Modal visible={isNoteFlowActive} title={isEdit ? 'Edit note' : 'Create new note'} onClose={handleClose}>
+  return <Modal visible={isNoteFlowActive} title={isEdit ? 'Edit note' : 'Create new note'} onClose={handleClose} >
     <NoteForm initialData={isEdit ? initialData : undefined} onFinish={handleFinish} parentId={isSubNoteFlow ? parentId : undefined} />
   </Modal>;
 };

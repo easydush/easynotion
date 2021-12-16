@@ -88,12 +88,10 @@ export const NoteView = ({ noteId }: NoteProps) => {
 
 
   return <>
-    {!isActiveBlockForm && <Button label={'Add new block'} onClick={handleAdd} />}
-    {isActiveBlockForm &&
-    (<>
-      <TypeSwitcher onChange={setType} />
-      {type !== 'LINK' && <BlockForm type={type as Exclude<MediaType, 'LINK'>} onFinish={handleFinish} initialData={currentBlock} />}
-    </>)
+    {(!isActiveBlockForm || type == 'LINK') &&
+    <TypeSwitcher content={<Button label={'Add new block'} />} onChange={setType} onHover={handleAdd} />}
+    {isActiveBlockForm && type !== 'LINK' &&
+    <BlockForm type={type as Exclude<MediaType, 'LINK'>} onFinish={handleFinish} initialData={currentBlock} />
     }
     {blocks.sort(compareBlocks).map((block) =>
       <>

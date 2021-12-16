@@ -2,11 +2,10 @@ import React, { ReactElement } from 'react';
 
 import './index.css';
 
-// интерфейс для пропсов
 interface ModalProps {
   visible: boolean;
   title: string;
-  children:ReactElement;
+  children: ReactElement;
   footer?: ReactElement | string;
   onClose: () => void;
 }
