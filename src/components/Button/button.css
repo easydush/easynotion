@@ -13,6 +13,10 @@
     color: #333;
     background-color: transparent;
 }
+.storybook-button--outlined {
+    border: lightseagreen 2px solid;
+    border-radius: 18px;
+}
 
 .storybook-button--small {
     font-size: 12px;

@@ -87,9 +87,9 @@ export const NoteView = ({ noteId }: NoteProps) => {
   };
 
 
-  return <>
-    {(!isActiveBlockForm || type == 'LINK') &&
-    <TypeSwitcher content={<Button label={'Add new block'} />} onChange={setType} onHover={handleAdd} />}
+  return <div className='grid grid-cols-1 gap-4'>
+    <TypeSwitcher content={<Button label={isActiveBlockForm ? 'Change block type' : 'Add new block'} outlined />}
+                  onChange={setType} onHover={handleAdd} />
     {isActiveBlockForm && type !== 'LINK' &&
     <BlockForm type={type as Exclude<MediaType, 'LINK'>} onFinish={handleFinish} initialData={currentBlock} />
     }
@@ -102,5 +102,5 @@ export const NoteView = ({ noteId }: NoteProps) => {
         <Button label={'Delete'} onClick={() => handleDelete(block.id)} />
       </>)
     }
-  </>;
+  </div>;
 };

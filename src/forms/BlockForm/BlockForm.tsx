@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { MediaType, Block, VoidWithArgsFn } from 'types';
 import { Switcher } from './components';
+import { Button } from 'components';
 
 type BlockFormProps = {
   type: Exclude<MediaType, 'LINK'>;
@@ -17,8 +18,12 @@ export const BlockForm = ({ type, onFinish, initialData }: BlockFormProps) => {
   }
 
   return <form onSubmit={handleFormSubmit}>
-    <Switcher type={type} onChange={setContent} initialContent={content} />
-    <button type='submit'>{initialData?.id ? 'Save' : 'Add'}</button>
+    <div className='grid grid-cols-1 gap-y-2'>
+      <Switcher type={type} onChange={setContent} initialContent={content} />
+      <div className='justify-self-end'>
+        <Button type='submit' outlined label={initialData?.id ? 'Save' : 'Add'} size='medium' />
+      </div>
+    </div>
   </form>;
 };
 
