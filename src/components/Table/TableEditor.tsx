@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import { VoidWithArgsFn } from '../../types';
+import { VoidWithArgsFn } from 'types';
 
 type EditorProps = {
   onChange: VoidWithArgsFn;
@@ -11,15 +11,14 @@ export const TableEditor = ({ onChange, initialContent }: EditorProps) => {
   const [content, setContent] = useState<string>(initialContent);
 
   const handleChange = (evt: any, editor: any) => {
-    setContent(editor.getContent());
-    onChange(content);
+    onChange(editor.getContent());
   };
 
   return (
       <Editor
         apiKey={process.env.REACT_APP_TINY_KEY}
         onInit={(evt, editor) => editorRef.current = editor}
-        initialValue='<p>This is the initial content of the editor.</p>'
+        initialValue={content}
         onChange={handleChange}
         init={{
           height: 500,

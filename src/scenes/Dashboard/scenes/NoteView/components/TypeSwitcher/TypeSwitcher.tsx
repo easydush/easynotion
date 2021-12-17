@@ -33,7 +33,7 @@ export const TypeSwitcher = ({ content, onHover, onChange }: TypeInputProps) => 
     <>
       {options.map(option =>
         <Button onClick={()=>handleChange(option)} size='small'>
-          {<Icon type={option.value as MediaType}/>}
+          {<Icon type={option.value as MediaType} />}
         </Button>)}
     </>
   </Popover>

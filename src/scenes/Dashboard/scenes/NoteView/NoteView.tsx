@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BlockView } from './components';
 import { Block, MediaType, Note, RootState } from 'types';
 import { BlockForm } from 'forms/BlockForm';
 import { TypeSwitcher } from './components/TypeSwitcher/TypeSwitcher';
-import { Button } from 'components';
+import { Button, Icon } from 'components';
 import { create, remove, update } from 'store/actions/block';
 import cuid from 'cuid';
 import { compareBlocks } from 'tools/blocks';
@@ -87,20 +87,29 @@ export const NoteView = ({ noteId }: NoteProps) => {
   };
 
 
-  return <div className='grid grid-cols-1 gap-4'>
+  return <div className='grid grid-cols-1 gap-4 p-2'>
     <TypeSwitcher content={<Button label={isActiveBlockForm ? 'Change block type' : 'Add new block'} outlined />}
                   onChange={setType} onHover={handleAdd} />
     {isActiveBlockForm && type !== 'LINK' &&
     <BlockForm type={type as Exclude<MediaType, 'LINK'>} onFinish={handleFinish} initialData={currentBlock} />
     }
     {blocks.sort(compareBlocks).map((block) =>
-      <>
-        <BlockView block={block} />
-        {block.order !== 0 && <Button label={'▲'} onClick={() => handleMoveUp(block)} />}
-        {block.order < blocks.length - 1 && <Button label={'▼'} onClick={() => handleMoveDown(block)} />}
-        <Button label={'Edit'} onClick={() => handleEdit(block)} />
-        <Button label={'Delete'} onClick={() => handleDelete(block.id)} />
-      </>)
+      <div className='p-2'>
+        <BlockView block={block}>
+          <div className='grid grid-cols-1'>
+            {block.order !== 0 &&
+            <Button onClick={() => handleMoveUp(block)}>{<Icon type='UP' />}</Button>
+            }
+            {block.order < blocks.length - 1 &&
+            <Button onClick={() => handleMoveDown(block)}>{<Icon type='DOWN' />}</Button>
+            }
+            <Button onClick={() => handleEdit(block)}>{<Icon type='EDIT' />}</Button>
+            <Button onClick={() => handleDelete(block.id)}>{<Icon type='DELETE' />}</Button>
+          </div>
+        </BlockView>
+
+      </div>)
     }
   </div>;
 };
+;

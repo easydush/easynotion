@@ -12,8 +12,7 @@ export const TextEditor = ({ onChange, initialContent }: EditorProps) => {
   const [content, setContent] = useState<string>(initialContent);
 
   const handleChange = (evt: any, editor: any) => {
-    setContent(editor.getContent());
-    onChange(content);
+    onChange(editor.getContent());
   };
 
   return (
