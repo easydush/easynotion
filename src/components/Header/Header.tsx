@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Icon } from 'components';
-import { EDIT_NOTE, MediaType, Note, RootState } from 'types';
+import { EDIT_NOTE, Note, RootState } from 'types';
 import { activate } from 'store/actions/ui';
 import { remove } from 'store/actions/note';
 

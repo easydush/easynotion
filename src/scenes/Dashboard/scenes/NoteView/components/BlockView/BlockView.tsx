@@ -1,7 +1,8 @@
 import { Block } from 'types';
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import styles from './BlockView.module.scss';
+import { Video, Image } from 'components';
 
 type BlockProps = {
   block: Block;
@@ -9,8 +10,18 @@ type BlockProps = {
 }
 
 export const BlockView = ({ block, children }: BlockProps) => {
-  return <div className={`${styles.block} rounded-lg outline-dashed outline-offset-4 outline-cyan-100 bg-teal-50 flex flex-row `}>
-    <div className='basis-96 m-4 truncate' dangerouslySetInnerHTML={{ __html: block.content }} />
+  const isMedia =  ['IMAGE', 'VIDEO'].includes(block.type)
+
+  return <div
+    className={`${styles.block} rounded-lg outline-dashed outline-offset-4 outline-cyan-100 bg-teal-50 flex flex-row `}>
+    {
+      isMedia ? <div className='basis-96 m-4 truncate'>
+      {block.type === 'IMAGE' ?
+          <Image src={block.content} alt={'image'} />:
+          <Video src={block.content} />}
+        </div> :
+        <div className='basis-96 m-4 truncate' dangerouslySetInnerHTML={{ __html: block.content }} />
+    }
     <div className='basis-4'>{children}</div>
   </div>;
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { VoidWithArgsFn } from '../../types';
+import { Input } from '../Input';
 
 
 interface LinkInputProps {
@@ -9,6 +10,6 @@ interface LinkInputProps {
 
 export const Link = ({ onChange, initialContent }: LinkInputProps) => {
   return (
-    <input type='url' onChange={onChange} value={initialContent} />
+    <Input type='url' onChange={onChange} value={initialContent} />
   );
 };
