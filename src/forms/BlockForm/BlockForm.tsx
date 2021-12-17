@@ -13,7 +13,6 @@ export const BlockForm = ({ type, onFinish, initialData }: BlockFormProps) => {
 
   function handleFormSubmit(e: any) {
     e.preventDefault();
-    // TODO: replace order
     onFinish(content);
   }
 

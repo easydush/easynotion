@@ -86,14 +86,13 @@ export const NoteView = ({ noteId }: NoteProps) => {
     handleMove(block, false);
   };
 
-
   return <div className='grid grid-cols-1 gap-4 p-2'>
     <TypeSwitcher content={<Button label={isActiveBlockForm ? 'Change block type' : 'Add new block'} outlined />}
                   onChange={setType} onHover={handleAdd} />
     {isActiveBlockForm && type !== 'LINK' &&
     <BlockForm type={type as Exclude<MediaType, 'LINK'>} onFinish={handleFinish} initialData={currentBlock} />
     }
-    {blocks.sort(compareBlocks).map((block) =>
+    {!isActiveBlockForm && blocks.sort(compareBlocks).map((block) =>
       <div className='p-2'>
         <BlockView block={block}>
           <div className='grid grid-cols-1'>
