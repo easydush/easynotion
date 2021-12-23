@@ -22,7 +22,8 @@ export const Header = ({ title }: HeaderProps) => {
     noteId = String(checkNote[1]);
   }
 
-  const note = useSelector<RootState, Note | undefined>((state) => state.note.notes.find((note) => note.id === noteId || note.uri === noteId));
+  const notes = useSelector<RootState, Note[] | undefined>((state) => state.note.notes);
+  const note = notes?.find((note) => note.id === noteId || note.uri === noteId)
 
   if (!title && note) {
     title = note?.title;
@@ -56,7 +57,7 @@ export const Header = ({ title }: HeaderProps) => {
             </Button>
           </div>
         </>) :
-      <h1 className='text-3xl font-bold text-gray-700'>Create note to start</h1>
+      <h1 className='text-3xl text-gray-700'>{notes?.length === 0 ? 'Create note to start' : 'Click on menu'}</h1>
     }
   </div>;
 };

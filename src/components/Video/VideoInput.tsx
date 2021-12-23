@@ -11,7 +11,6 @@ interface VideoInputProps {
 
 
 export const VideoInput = ({ onChange, initialContent }: VideoInputProps) => {
-// TODO: add spinner and validator
   return (
     <>
       <Link onChange={onChange} initialContent={initialContent} />

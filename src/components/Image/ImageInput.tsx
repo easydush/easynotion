@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Link } from 'components/Link';
 import { VoidWithArgsFn } from '../../types';
+import { Image } from './Image';
 
 interface ImageInputProps {
   onChange: VoidWithArgsFn;
@@ -9,11 +10,10 @@ interface ImageInputProps {
 }
 
 export const ImageInput = ({ onChange, initialContent }: ImageInputProps) => {
-  // TODO: add spinner and validator
   return (
     <>
       <Link onChange={onChange} initialContent={initialContent} />
-      <img src={initialContent} alt='' />
+      <Image src={initialContent} alt='' />
     </>
 
   );
