@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Note } from 'types';
 import { TreeItem } from 'types/tree';
 import { getNoteUrl } from '../../tools';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 interface NoteLinkProps {
@@ -11,13 +11,13 @@ interface NoteLinkProps {
 }
 
 export const NoteLink = ({ note, isActive }: NoteLinkProps) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleMenuItemClick = useCallback(
     () => {
-      history.push((note as TreeItem)?.path ?? getNoteUrl(note as Note));
+      navigate((note as TreeItem)?.path ?? getNoteUrl(note as Note));
     },
-    [history, note],
+    [navigate, note],
   );
 
   return (

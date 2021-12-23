@@ -1,4 +1,4 @@
-import { useHistory} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CREATE_NOTE, CREATE_SUBNOTE, EDIT_NOTE, Note, RootState } from 'types';
 import { Modal } from 'components';
 import { NoteForm } from 'forms/NoteForm';
@@ -24,7 +24,7 @@ export const NoteEdit = ({ initialData, parentId }: NoteProps) => {
   const isNoteFlowActive = isSubNoteFlow || isNoteFlow || isEditFlow;
 
   const isEdit = !!initialData?.id && isEditFlow;
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -43,7 +43,7 @@ export const NoteEdit = ({ initialData, parentId }: NoteProps) => {
       dispatch(createBlock({ id: cuid(), noteId: parentId, type: 'LINK', content: note.id }));
     }
     handleClose();
-    history.push(`/note/${getNoteUrl(note)}`);
+    navigate(`/note/${getNoteUrl(note)}`);
   };
 
   return <Modal visible={isNoteFlowActive} title={isEdit ? 'Edit note' : 'Create new note'} onClose={handleClose} >

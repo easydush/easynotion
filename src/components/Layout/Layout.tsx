@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import { Header } from 'components';
-import { NotesTree, Controls  } from './components';
+import { NotesTree, Controls } from './components';
 
 
 const LayoutFn: FC = ({ children }) => {
-
   return (
     <div className='flex flex-row'>
       <div className='basis-1/5'>

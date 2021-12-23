@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import {
   Dashboard,
 } from './index';
@@ -10,10 +10,9 @@ const Main = () => {
   return (
     <>
       <Layout>
-        <Switch>
-          <Route path='/' key='dashboard'>{<Dashboard />}</Route>
-          <Redirect to='/dashboard' />
-        </Switch>
+        <Routes>
+          <Route path="/" key='dashboard' element={<Dashboard/>}/>
+        </Routes>
       </Layout>
     </>
   );
@@ -23,8 +22,8 @@ const Main = () => {
 export const rootComp = () => {
 
   return (
-    <Switch>
-      <Route>{<Main />}</Route>
-    </Switch>
+    <Routes>
+      <Route path="/*" element={<Main />}/>
+    </Routes>
   );
 };
