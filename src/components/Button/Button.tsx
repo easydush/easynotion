@@ -13,7 +13,7 @@ interface ButtonProps {
 }
 
 export const Button = ({
-  type='button',
+                        type='button',
                          primary = false,
                          size = 'medium',
                          backgroundColor,

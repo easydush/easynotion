@@ -6,15 +6,18 @@ const initialState = {
   notes: [],
 };
 
-export const noteReducer =  (state = initialState, action: DefaultActionParams) => {
+export const noteReducer = (state = initialState, action: DefaultActionParams) => {
 
   switch (action.type) {
 
     case CREATE:
-      return { ...state, notes: [...state.notes, {...action.payload}] };
+      return { ...state, notes: [...state.notes, { ...action.payload }] };
 
     case UPDATE:
-      return { ...state, notes: [...state.notes.filter((note: Note) => note.id !== action.payload.id), {...action.payload}] };
+      return {
+        ...state,
+        notes: [...state.notes.filter((note: Note) => note.id !== action.payload.id), { ...action.payload }],
+      };
 
     case DELETE:
       return { ...state, notes: [...state.notes.filter((note: Note) => note.id !== action.payload)] };
@@ -22,4 +25,4 @@ export const noteReducer =  (state = initialState, action: DefaultActionParams) 
     default:
       return state;
   }
-}
+};

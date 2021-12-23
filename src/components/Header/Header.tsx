@@ -43,7 +43,7 @@ export const Header = ({ title }: HeaderProps) => {
     {!!title ? (
         <>
           <div className='flex justify-start lg:w-0 lg:flex-1'>
-            <h1 className='text-3xl font-bold text-gray-900'>{title}</h1>
+            <h1 className='text-3xl text-gray'>{title}</h1>
           </div>
           <div className='px-4'>
             <Button onClick={handleEdit}>
@@ -56,7 +56,7 @@ export const Header = ({ title }: HeaderProps) => {
             </Button>
           </div>
         </>) :
-      <h1 className='text-3xl font-bold text-gray-900'>Create note to start</h1>
+      <h1 className='text-3xl font-bold text-gray-700'>Create note to start</h1>
     }
   </div>;
 };

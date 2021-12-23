@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import cuid from 'cuid';
 import { BlockView } from './components';
-import { Block, MediaType, Note, RootState } from 'types';
+import { Block, CREATE_SUBNOTE, MediaType, Note, RootState } from 'types';
 import { BlockForm } from 'forms/BlockForm';
 import { TypeSwitcher } from './components/TypeSwitcher/TypeSwitcher';
 import { Button, Icon } from 'components';
-import { create, remove, update } from 'store/actions/block';
-import cuid from 'cuid';
+import { create, remove, reorder, update } from 'store/actions/block';
+import { remove as removeNote } from 'store/actions/note';
 import { compareBlocks } from 'tools/blocks';
+import { activate } from 'store/actions/ui';
 
 type NoteProps = {
   noteId: Note['id'];
@@ -22,8 +24,15 @@ export const NoteView = ({ noteId }: NoteProps) => {
   const [isActiveBlockForm, setActive] = useState(false);
   const [currentBlock, setBlock] = useState<Block>();
 
-  const showBlockForm = () => setActive(true);
+  useEffect(() => {
+    if (type === 'LINK') {
+      hideBlockForm();
+      dispatch(activate(CREATE_SUBNOTE));
+    }
+  }, [type, dispatch]);
 
+  const showBlockForm = () => setActive(true);
+  const hideBlockForm = () => setActive(false);
 
   const handleFinish = (content: string) => {
     if (currentBlock?.id) {
@@ -35,9 +44,10 @@ export const NoteView = ({ noteId }: NoteProps) => {
         order: currentBlock.order,
       }));
     } else {
-      dispatch(create({ id: cuid(), noteId: noteId, type: type as MediaType, content: content, order: blocks.length }));
+      dispatch(create({ id: cuid(), noteId: noteId, type: type as MediaType, content: content }));
     }
-    setActive(false);
+    hideBlockForm();
+    setBlock(undefined);
   };
 
   const handleMove = (block: Block, up: boolean) => {
@@ -46,26 +56,22 @@ export const NoteView = ({ noteId }: NoteProps) => {
 
     if (nearbyBlock) {
       dispatch(update({
-        id: nearbyBlock.id,
-        noteId: nearbyBlock.noteId,
-        type: nearbyBlock.type,
-        content: nearbyBlock.content,
+        ...nearbyBlock,
         order: block.order,
       }));
 
       dispatch(update({
-        id: block.id,
-        noteId: block.noteId,
-        type: block.type,
-        content: block.content,
+        ...block,
         order: newOrder,
       }));
     }
   };
 
 
-  const handleDelete = (id: Block['id']) => {
-    dispatch(remove(id));
+  const handleDelete = (block: Block) => {
+    dispatch(remove(block.id));
+    if (block.type === 'LINK') dispatch(removeNote(block.content));
+    dispatch(reorder(block.noteId));
   };
 
   const handleEdit = (block: Block) => {
@@ -87,10 +93,12 @@ export const NoteView = ({ noteId }: NoteProps) => {
   };
 
   return <div className='grid grid-cols-1 gap-4 p-2'>
+    {!currentBlock &&
     <TypeSwitcher content={<Button label={isActiveBlockForm ? 'Change block type' : 'Add new block'} outlined />}
-                  onChange={setType} onHover={handleAdd} />
+                  onChange={setType} onHover={handleAdd} />}
     {isActiveBlockForm && type !== 'LINK' &&
-    <BlockForm type={(currentBlock?.type ?? type) as Exclude<MediaType, 'LINK'>} onFinish={handleFinish} initialData={currentBlock} />
+    <BlockForm type={(currentBlock?.type ?? type) as Exclude<MediaType, 'LINK'>} onFinish={handleFinish}
+               initialData={currentBlock} />
     }
     {!isActiveBlockForm && blocks.sort(compareBlocks).map((block) =>
       <div className='p-2'>
@@ -103,7 +111,7 @@ export const NoteView = ({ noteId }: NoteProps) => {
             <Button onClick={() => handleMoveDown(block)}>{<Icon type='DOWN' />}</Button>
             }
             <Button onClick={() => handleEdit(block)}>{<Icon type='EDIT' />}</Button>
-            <Button onClick={() => handleDelete(block.id)}>{<Icon type='DELETE' />}</Button>
+            <Button onClick={() => handleDelete(block)}>{<Icon type='DELETE' />}</Button>
           </div>
         </BlockView>
 

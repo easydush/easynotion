@@ -29,15 +29,17 @@ export const NoteForm = ({ onFinish, initialData, parentId }: NoteFormProps) => 
       name='title'
       label='Title'
       required
+      value={title}
       onChange={(e) => setTitle(e.target.value)}
     />
     <Input
       type='text'
       name='uri'
       label='URI'
+      value={uri}
       onChange={(e) => setUri(e.target.value)}
     />
-    <button type='submit' className='justify-self-end'>Add</button></div>
+    <button type='submit' className='justify-self-end'>Save</button></div>
   </form>;
 };
 

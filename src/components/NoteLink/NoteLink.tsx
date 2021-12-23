@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Note, RootState, VoidWithArgsFn } from '../../types';
-import { convert2SelectOption } from './tools';
-import Select from 'react-select';
-import { NoteLinkButton } from '../NoteLinkButton';
+import React, { useCallback } from 'react';
+import { Note } from 'types';
+import { TreeItem } from 'types/tree';
+import { getNoteUrl } from '../../tools';
+import { useHistory } from 'react-router-dom';
 
 
-interface NoteInputProps {
-  onChange: VoidWithArgsFn;
-  initialContent?: any;
+interface NoteLinkProps {
+  note: Note | TreeItem;
+  isActive: boolean;
 }
 
-export const NoteLink = ({ onChange }: NoteInputProps) => {
-  const notes = useSelector<RootState, Note[]>((state) => state.note.notes || []);
-  const options = convert2SelectOption(notes);
-  const [selectedOption, setSelectedOption] = useState(null);
+export const NoteLink = ({ note, isActive }: NoteLinkProps) => {
+  const history = useHistory();
 
-  const handleChange = (option: any) => {
-    setSelectedOption(option);
-    onChange(()=><NoteLinkButton noteId={option?.value as Note['id']}/>);
-  };
+  const handleMenuItemClick = useCallback(
+    () => {
+      history.push((note as TreeItem)?.path ?? getNoteUrl(note as Note));
+    },
+    [history, note],
+  );
 
   return (
-    <Select
-      defaultValue={selectedOption}
-      onChange={handleChange}
-      options={options}
-    />
+    <div
+      className={`p-2 rounded-full outline-2 outline-offset-2 outline-cyan-200 
+      outline-dotted cursor-pointer ${isActive ? 'bg-teal-100' : 'bg-white'}`}
+      onClick={handleMenuItemClick}>
+      {note.title}
+    </div>
   );
 };

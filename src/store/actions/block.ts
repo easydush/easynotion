@@ -1,7 +1,7 @@
-import { CREATE_BLOCK, UPDATE_BLOCK, DELETE_BLOCK } from '../types/block';
-import { Block } from 'types';
+import { CREATE_BLOCK, UPDATE_BLOCK, DELETE_BLOCK, REORDER } from '../types/block';
+import { Block, Note } from 'types';
 
-export const create = (data: Block) => {
+export const create = (data: Omit<Block, 'order'>) => {
   return {
     type: CREATE_BLOCK,
     payload: data,
@@ -19,5 +19,12 @@ export const remove = (id: Block['id']) => {
   return {
     type: DELETE_BLOCK,
     payload: id,
+  };
+};
+
+export const reorder = (id: Note['id']) => {
+  return {
+    type: REORDER,
+    payload: id
   };
 };

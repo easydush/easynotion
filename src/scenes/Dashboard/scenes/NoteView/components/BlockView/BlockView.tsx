@@ -1,8 +1,9 @@
-import { Block } from 'types';
+import { Block, Note, RootState } from 'types';
 import React, { ReactElement } from 'react';
 
 import styles from './BlockView.module.scss';
-import { Video, Image } from 'components';
+import { Video, Image, NoteLink } from 'components';
+import { useSelector } from 'react-redux';
 
 type BlockProps = {
   block: Block;
@@ -10,17 +11,21 @@ type BlockProps = {
 }
 
 export const BlockView = ({ block, children }: BlockProps) => {
-  const isMedia =  ['IMAGE', 'VIDEO'].includes(block.type)
+  const isMedia = ['IMAGE', 'VIDEO'].includes(block.type);
+  const note = useSelector<RootState, Note | undefined>((state) => state.note.notes.find((note) => note.id === block.content));
 
   return <div
     className={`${styles.block} rounded-lg outline-dashed outline-offset-4 outline-cyan-100 bg-teal-50 flex flex-row `}>
     {
       isMedia ? <div className='basis-96 m-4 truncate'>
-      {block.type === 'IMAGE' ?
-          <Image src={block.content} alt={'image'} />:
-          <Video src={block.content} />}
+          {block.type === 'IMAGE' ?
+            <Image src={block.content} alt={'image'} /> :
+            <Video src={block.content} />}
         </div> :
-        <div className='basis-96 m-4 truncate' dangerouslySetInnerHTML={{ __html: block.content }} />
+        note ? <div className='basis-96 m-2 my-8'>
+            <div className='w-96'><NoteLink note={note} isActive={false} /></div>
+          </div> :
+          <div className='basis-96 m-4 truncate' dangerouslySetInnerHTML={{ __html: block.content }} />
     }
     <div className='basis-4'>{children}</div>
   </div>;
