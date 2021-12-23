@@ -2,8 +2,7 @@ import React from 'react';
 import './button.css';
 
 interface ButtonProps {
-  type?:  'button' | 'submit' | 'reset' | undefined;
-  primary?: boolean;
+  type?: 'button' | 'submit' | 'reset' | undefined;
   backgroundColor?: string;
   size?: 'small' | 'medium' | 'large';
   outlined?: boolean;
@@ -13,8 +12,7 @@ interface ButtonProps {
 }
 
 export const Button = ({
-                        type='button',
-                         primary = false,
+                         type = 'button',
                          size = 'medium',
                          backgroundColor,
                          outlined,
@@ -22,11 +20,10 @@ export const Button = ({
                          children,
                          ...props
                        }: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
   return (
     <button
       type={type}
-      className={['storybook-button', `storybook-button--${size}`, mode, outlined && `storybook-button--outlined`].join(' ')}
+      className={['storybook-button', `storybook-button--${size}`, 'storybook-button--secondary' , outlined && `storybook-button--outlined`].join(' ')}
       style={{ backgroundColor }}
       {...props}
     >

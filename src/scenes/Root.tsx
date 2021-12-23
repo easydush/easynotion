@@ -11,7 +11,7 @@ const Main = () => {
     <>
       <Layout>
         <Switch>
-          <Route path='/' component={Dashboard} key='dashboard' />
+          <Route path='/' key='dashboard'>{<Dashboard />}</Route>
           <Redirect to='/dashboard' />
         </Switch>
       </Layout>
@@ -24,7 +24,7 @@ export const rootComp = () => {
 
   return (
     <Switch>
-      <Route component={Main} />
+      <Route>{<Main />}</Route>
     </Switch>
   );
 };

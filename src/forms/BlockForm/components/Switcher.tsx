@@ -4,7 +4,7 @@ import { ImageInput,  TableEditor, TextEditor, VideoInput } from 'components';
 type SwitcherProps = {
   type: Exclude<MediaType, 'LINK'>;
   onChange: VoidWithArgsFn;
-  initialContent?: any;
+  initialContent?: string;
 }
 
 export const Switcher = ({ type, onChange, initialContent }: SwitcherProps) => {

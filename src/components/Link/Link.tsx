@@ -5,7 +5,7 @@ import { Input } from '../Input';
 
 interface LinkInputProps {
   onChange: VoidWithArgsFn;
-  initialContent?: any;
+  initialContent?: string;
 }
 
 export const Link = ({ onChange, initialContent }: LinkInputProps) => {

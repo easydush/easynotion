@@ -13,15 +13,15 @@ interface TypeInputProps {
 }
 
 type Option = {
-  value: any;
+  value: string;
   label: string;
 }
 
 export const TypeSwitcher = ({ content, onHover, onChange }: TypeInputProps) => {
   const options = convertString2SelectOption(TYPES);
 
-  const handleChange = (option: any) => {
-    onChange((option as Option).value);
+  const handleChange = (option: Option) => {
+    onChange(option.value);
     onHover();
   };
 
