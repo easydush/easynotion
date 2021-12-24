@@ -1,4 +1,4 @@
-import { CREATE_BLOCK, UPDATE_BLOCK, DELETE_BLOCK, REORDER, MOVE } from '../types/block';
+import { CREATE_BLOCK, UPDATE_BLOCK, DELETE_BLOCK, REORDER, MOVE, DELETE_NOTE_BLOCKS } from '../types/block';
 import { Block, Note } from 'types';
 
 export const create = (data: Omit<Block, 'order'>) => {
@@ -21,6 +21,14 @@ export const remove = (id: Block['id']) => {
     payload: id,
   };
 };
+
+export const removeAllByNoteId = (id: Note['id']) => {
+  return {
+    type: DELETE_NOTE_BLOCKS,
+    payload: id,
+  };
+};
+
 
 export const reorder = (id: Note['id']) => {
   return {

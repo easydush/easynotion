@@ -1,7 +1,7 @@
 import { Block, VoidWithArgsFn } from 'types';
 import { Button, Icon } from 'components';
 import React from 'react';
-import { move, remove, reorder } from 'store/actions/block';
+import { move, remove, removeAllByNoteId, reorder } from 'store/actions/block';
 import { remove as removeNote } from 'store/actions/note';
 import { useDispatch } from 'react-redux';
 
@@ -12,7 +12,7 @@ type ControlsProps = {
   onEdit: VoidWithArgsFn;
 }
 
-export const BlockControls = ({ block,isFirst, isLast, onEdit }: ControlsProps) => {
+export const BlockControls = ({ block, isFirst, isLast, onEdit }: ControlsProps) => {
   const dispatch = useDispatch();
 
   const handleMove = (block: Block, up: boolean) => {
@@ -20,7 +20,10 @@ export const BlockControls = ({ block,isFirst, isLast, onEdit }: ControlsProps) 
   };
   const handleDelete = (block: Block) => {
     dispatch(remove(block.id));
-    if (block.type === 'LINK') dispatch(removeNote(block.content));
+    if (block.type === 'LINK') {
+      dispatch(removeNote(block.content));
+      dispatch(removeAllByNoteId(block.content));
+    }
     dispatch(reorder(block.noteId));
   };
 

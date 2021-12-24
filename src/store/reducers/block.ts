@@ -1,4 +1,4 @@
-import { CREATE_BLOCK, UPDATE_BLOCK, DELETE_BLOCK, REORDER, MOVE } from '../types/block';
+import { CREATE_BLOCK, UPDATE_BLOCK, DELETE_BLOCK, REORDER, MOVE, DELETE_NOTE_BLOCKS } from '../types/block';
 import { DefaultActionParams } from '../types';
 import { Block, BlockState } from 'types';
 import { reorderBlocks } from '../../tools/blocks';
@@ -26,6 +26,9 @@ export const blockReducer = (state: BlockState = initialState, action: DefaultAc
 
       case DELETE_BLOCK:
         return { ...state, blocks: [...state.blocks.filter((block: Block) => block.id !== action.payload)] };
+
+      case DELETE_NOTE_BLOCKS:
+        return { ...state, blocks: [...state.blocks.filter((block: Block) => block.noteId !== action.payload)] };
 
       case REORDER:
         return {

@@ -39,7 +39,7 @@ export const NoteEdit = ({ initialData, parentId }: NoteProps) => {
     }
 
     if(isSubNoteFlow && parentId){
-      dispatch(createBlock({ id: cuid(), noteId: parentId, type: 'LINK', content: note.id }));
+      dispatch(createBlock({ id: note.id, noteId: parentId, type: 'LINK', content: note.id }));
     }
     handleClose();
     navigate(getNoteUrl(note));

@@ -5,6 +5,7 @@ import { Button, Icon } from 'components';
 import { EDIT_NOTE, Note, RootState } from 'types';
 import { activate } from 'store/actions/ui';
 import { remove } from 'store/actions/note';
+import { remove as removeBlock, removeAllByNoteId } from 'store/actions/block';
 
 interface HeaderProps {
   title?: string;
@@ -23,7 +24,7 @@ export const Header = ({ title }: HeaderProps) => {
   }
 
   const notes = useSelector<RootState, Note[] | undefined>((state) => state.note.notes);
-  const note = notes?.find((note) => note.id === noteId || note.uri === noteId)
+  const note = notes?.find((note) => note.id === noteId || note.uri === noteId);
 
   if (!title && note) {
     title = note?.title;
@@ -36,7 +37,11 @@ export const Header = ({ title }: HeaderProps) => {
   };
 
   const handleDelete = () => {
-    if (note) dispatch(remove(note.id));
+    if (note) {
+      dispatch(removeBlock(note.id));
+      dispatch(removeAllByNoteId(note.id))
+      dispatch(remove(note.id));
+    }
   };
 
   return <div
