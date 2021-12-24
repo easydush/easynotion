@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cuid from 'cuid';
 import { BlockView } from './components';
 import { Block, CREATE_SUBNOTE, MediaType, Note, RootState } from 'types';
 import { BlockForm } from 'forms/BlockForm';
 import { TypeSwitcher } from './components/TypeSwitcher/TypeSwitcher';
-import { Button, Icon } from 'components';
-import { create, remove, reorder, update } from 'store/actions/block';
-import { remove as removeNote } from 'store/actions/note';
+import { Button } from 'components';
+import { create, update } from 'store/actions/block';
 import { compareBlocks } from 'tools/blocks';
 import { activate } from 'store/actions/ui';
+import { BlockControls } from './components/BlockView/components';
 
 type NoteProps = {
   noteId: Note['id'];
@@ -24,15 +24,23 @@ export const NoteView = ({ noteId }: NoteProps) => {
   const [isActiveBlockForm, setActive] = useState(false);
   const [currentBlock, setBlock] = useState<Block>();
 
-  useEffect(() => {
-    if (type === 'LINK') {
-      hideBlockForm();
-      dispatch(activate(CREATE_SUBNOTE));
-    }
-  }, [type, dispatch]);
-
   const showBlockForm = () => setActive(true);
   const hideBlockForm = () => setActive(false);
+
+  const handleChangeType = (value: MediaType) => {
+    setType(value);
+    if (value === 'LINK') {
+      hideBlockForm();
+      dispatch(activate(CREATE_SUBNOTE));
+    } else {
+      handleAdd();
+    }
+
+  };
+  const handleAdd = () => {
+    setBlock(undefined);
+    showBlockForm();
+  };
 
   const handleFinish = (content: string) => {
     if (currentBlock?.id) {
@@ -50,52 +58,15 @@ export const NoteView = ({ noteId }: NoteProps) => {
     setBlock(undefined);
   };
 
-  const handleMove = (block: Block, up: boolean) => {
-    const newOrder = up ? block.order - 1 : block.order + 1;
-    const nearbyBlock = blocks.find(block => block.order === newOrder);
-
-    if (nearbyBlock) {
-      dispatch(update({
-        ...nearbyBlock,
-        order: block.order,
-      }));
-
-      dispatch(update({
-        ...block,
-        order: newOrder,
-      }));
-    }
-  };
-
-
-  const handleDelete = (block: Block) => {
-    dispatch(remove(block.id));
-    if (block.type === 'LINK') dispatch(removeNote(block.content));
-    dispatch(reorder(block.noteId));
-  };
-
   const handleEdit = (block: Block) => {
     setBlock(block);
     showBlockForm();
   };
 
-  const handleAdd = () => {
-    setBlock(undefined);
-    showBlockForm();
-  };
-
-  const handleMoveUp = (block: Block) => {
-    handleMove(block, true);
-  };
-
-  const handleMoveDown = (block: Block) => {
-    handleMove(block, false);
-  };
-
   return <div className='grid grid-cols-1 gap-4 p-2'>
     {!currentBlock &&
     <TypeSwitcher content={<Button label={isActiveBlockForm ? 'Change block type' : 'Add new block'} outlined />}
-                  onChange={setType} onHover={handleAdd} />}
+                  onChange={handleChangeType} />}
     {isActiveBlockForm && type !== 'LINK' &&
     <BlockForm type={(currentBlock?.type ?? type) as Exclude<MediaType, 'LINK'>} onFinish={handleFinish}
                initialData={currentBlock} />
@@ -103,18 +74,13 @@ export const NoteView = ({ noteId }: NoteProps) => {
     {!isActiveBlockForm && blocks.sort(compareBlocks).map((block) =>
       <div className='p-2'>
         <BlockView block={block}>
-          <div className='grid grid-cols-1'>
-            {block.order !== 0 &&
-            <Button onClick={() => handleMoveUp(block)}>{<Icon type='UP' />}</Button>
-            }
-            {block.order < blocks.length - 1 &&
-            <Button onClick={() => handleMoveDown(block)}>{<Icon type='DOWN' />}</Button>
-            }
-            <Button onClick={() => handleEdit(block)}>{<Icon type='EDIT' />}</Button>
-            <Button onClick={() => handleDelete(block)}>{<Icon type='DELETE' />}</Button>
-          </div>
+          {<div className='basis-4'>
+            <BlockControls block={block}
+                           isFirst={block.order === 0}
+                           isLast={block.order === blocks.length - 1}
+                           onEdit={handleEdit} />
+          </div>}
         </BlockView>
-
       </div>)
     }
   </div>;

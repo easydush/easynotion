@@ -7,7 +7,6 @@ import { NoteEdit, NoteView } from './scenes';
 export const Dashboard = () => {
   const location = useLocation();
   const path = location.pathname;
-
   let noteId: Note['id'] = '';
 
   const checkNote = /note\/(.+)/i.exec(path);

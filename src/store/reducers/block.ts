@@ -1,13 +1,13 @@
-import { CREATE_BLOCK, UPDATE_BLOCK, DELETE_BLOCK, REORDER } from '../types/block';
+import { CREATE_BLOCK, UPDATE_BLOCK, DELETE_BLOCK, REORDER, MOVE } from '../types/block';
 import { DefaultActionParams } from '../types';
-import { Block } from 'types';
+import { Block, BlockState } from 'types';
 import { reorderBlocks } from '../../tools/blocks';
 
 const initialState = {
   blocks: [],
 };
 
-export const blockReducer = (state = initialState, action: DefaultActionParams) => {
+export const blockReducer = (state: BlockState = initialState, action: DefaultActionParams) => {
     switch (action.type) {
       case CREATE_BLOCK:
         return {
@@ -35,10 +35,30 @@ export const blockReducer = (state = initialState, action: DefaultActionParams) 
           ],
         };
 
+      case MOVE: {
+        const block = state.blocks.find((item: Block) => item.id === action.payload.id);
+        console.log(block);
+        if (block) {
+          const newOrder = action.payload.up ? block.order - 1 : block.order + 1;
+          const nearbyBlock = state.blocks.find(block => block.order === newOrder);
+
+          return {
+            ...state,
+            blocks: [...state.blocks.filter((item: Block) => item.id !== block.id && item.id !== nearbyBlock?.id),
+              {
+                ...nearbyBlock,
+                order: block.order,
+              },
+              {
+                ...block,
+                order: newOrder,
+              }],
+          };
+        }
+        return state;
+      }
       default:
         return state;
     }
   }
-;
-;
 ;

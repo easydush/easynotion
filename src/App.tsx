@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import { Log } from 'tools';
 import { rootComp } from 'scenes/Root';
 
@@ -14,9 +14,9 @@ const AppFn = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
+        <HashRouter>
           {rootComp()}
-        </BrowserRouter>
+        </HashRouter>
       </PersistGate>
     </Provider>
   );

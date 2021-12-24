@@ -27,6 +27,6 @@ export const BlockView = ({ block, children }: BlockProps) => {
           </div> :
           <div className='basis-96 m-4 truncate' dangerouslySetInnerHTML={{ __html: block.content }} />
     }
-    <div className='basis-4'>{children}</div>
+    {children}
   </div>;
 };

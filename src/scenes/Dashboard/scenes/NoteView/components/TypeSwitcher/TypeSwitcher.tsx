@@ -1,14 +1,12 @@
 import { ReactElement } from 'react';
-import { Button } from 'components';
-import { MediaType, VoidFn, VoidWithArgsFn } from 'types';
-import { Popover, Icon } from 'components';
+import { Button, Popover, Icon } from 'components';
+import { MediaType, VoidWithArgsFn } from 'types';
 import { convertString2SelectOption } from './tools';
 
 const TYPES = ['VIDEO', 'LINK', 'TEXT', 'IMAGE', 'TABLE'];
 
 interface TypeInputProps {
   content: ReactElement;
-  onHover: VoidFn;
   onChange: VoidWithArgsFn;
 }
 
@@ -17,12 +15,11 @@ type Option = {
   label: string;
 }
 
-export const TypeSwitcher = ({ content, onHover, onChange }: TypeInputProps) => {
+export const TypeSwitcher = ({ content, onChange }: TypeInputProps) => {
   const options = convertString2SelectOption(TYPES);
 
   const handleChange = (option: Option) => {
     onChange(option.value);
-    onHover();
   };
 
   return <Popover content={content}>

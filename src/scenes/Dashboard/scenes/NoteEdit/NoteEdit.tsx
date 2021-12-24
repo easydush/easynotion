@@ -16,7 +16,6 @@ type NoteProps = {
 
 export const NoteEdit = ({ initialData, parentId }: NoteProps) => {
   const activeFlows = useSelector<RootState, string[]>((state) => state.ui.flows);
-
   const isNoteFlow = activeFlows.includes(CREATE_NOTE);
   const isSubNoteFlow = activeFlows.includes(CREATE_SUBNOTE);
   const isEditFlow = activeFlows.includes(EDIT_NOTE);
@@ -43,7 +42,7 @@ export const NoteEdit = ({ initialData, parentId }: NoteProps) => {
       dispatch(createBlock({ id: cuid(), noteId: parentId, type: 'LINK', content: note.id }));
     }
     handleClose();
-    navigate(`/note/${getNoteUrl(note)}`);
+    navigate(getNoteUrl(note));
   };
 
   return <Modal visible={isNoteFlowActive} title={isEdit ? 'Edit note' : 'Create new note'} onClose={handleClose} >

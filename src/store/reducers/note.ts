@@ -1,12 +1,12 @@
 import { CREATE, UPDATE, DELETE } from '../types/note';
 import { DefaultActionParams } from '../types';
-import { Note } from 'types';
+import { Note, NoteState } from 'types';
 
 const initialState = {
   notes: [],
 };
 
-export const noteReducer = (state = initialState, action: DefaultActionParams) => {
+export const noteReducer = (state: NoteState = initialState, action: DefaultActionParams) => {
 
   switch (action.type) {
 
@@ -20,7 +20,10 @@ export const noteReducer = (state = initialState, action: DefaultActionParams) =
       };
 
     case DELETE:
-      return { ...state, notes: [...state.notes.filter((note: Note) => note.id !== action.payload)] };
+      return {
+        ...state,
+        notes: [...state.notes.filter((note: Note) => note.id !== action.payload && note.parentId !== action.payload)],
+      };
 
     default:
       return state;

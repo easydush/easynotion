@@ -2,7 +2,7 @@ import { Note } from 'types';
 import { TreeItem } from '../types/tree';
 
 export const getNoteUrl = (value: Note) => {
-  return value.uri !== '' && value.uri ? value.uri : value.id;
+  return value.uri !== '' && value.uri ? `/note/${value.uri}` : `/note/${value.id}`;
 };
 
 const findChildren = (parentId: Note['id'], items: Note[]): Note[] => {
@@ -15,8 +15,8 @@ export const readNotesWithChildrenTemplate = (all: Note[], items: Note[], isRoot
 
   return roots.map(parent => {
     return {
-      key: parent.parentId,
-      path: `/note/${getNoteUrl(parent)}`,
+      key: parent.id,
+      path: getNoteUrl(parent),
       title: parent.title,
       isRoot: isRoot,
       nodes: readNotesWithChildrenTemplate(all, findChildren(parent.id, all), false),
