@@ -4,6 +4,7 @@ import { UI_ACTIONS } from 'store/constants';
 
 const initialState = {
   flows: [],
+  currentNoteId: null,
 };
 
 export const uiReducer = (state: UIState = initialState, action: DefaultActionParams) => {
@@ -18,6 +19,9 @@ export const uiReducer = (state: UIState = initialState, action: DefaultActionPa
 
     case UI_ACTIONS.DEACTIVATE_ALL:
       return initialState;
+
+    case UI_ACTIONS.SET_CURRENT_NOTE:
+      return { ...state, currentNoteId: action.payload };
 
     default:
       return state;

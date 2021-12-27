@@ -1,4 +1,6 @@
 import React from 'react';
+import { VoidWithArgsFn } from 'types';
+
 import './button.css';
 
 interface ButtonProps {
@@ -7,7 +9,7 @@ interface ButtonProps {
   size?: 'small' | 'medium' | 'large';
   outlined?: boolean;
   label?: string;
-  onClick?: () => void;
+  onClick?: VoidWithArgsFn;
   children?: React.ReactElement;
 }
 

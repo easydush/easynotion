@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Icon } from 'components';
 import { Note, RootState } from 'types';
@@ -13,20 +12,9 @@ interface HeaderProps {
 }
 
 export const Header = ({ title }: HeaderProps) => {
-  const location = useLocation();
-  const path = location.pathname;
-
-  let noteId: Note['id'] = '';
-
-  const checkNote = /note\/(.+)/i.exec(path);
-
-  if (checkNote) {
-    noteId = String(checkNote[1]);
-  }
+  const note = useSelector<RootState, Note | undefined>((state) => state.note.notes.find(note => note.id === state.ui.currentNoteId));
 
   const notes = useSelector<RootState, Note[] | undefined>((state) => state.note.notes);
-  const note = notes?.find((note) => note.id === noteId || note.uri === noteId);
-
   if (!title && note) {
     title = note?.title;
   }
@@ -40,7 +28,7 @@ export const Header = ({ title }: HeaderProps) => {
   const handleDelete = () => {
     if (note) {
       dispatch(removeBlock(note.id));
-      dispatch(removeAllByNoteId(note.id))
+      dispatch(removeAllByNoteId(note.id));
       dispatch(remove(note.id));
     }
   };
