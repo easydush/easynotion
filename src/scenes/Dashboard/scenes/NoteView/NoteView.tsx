@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cuid from 'cuid';
 import { BlockView } from './components';
-import { Block, CREATE_SUBNOTE, MediaType, Note, RootState } from 'types';
+import { Block, MediaType, Note, RootState } from 'types';
 import { BlockForm } from 'forms/BlockForm';
 import { TypeSwitcher } from './components/TypeSwitcher/TypeSwitcher';
 import { Button } from 'components';
@@ -10,6 +10,7 @@ import { create, update } from 'store/actions/block';
 import { compareBlocks } from 'tools/blocks';
 import { activate } from 'store/actions/ui';
 import { BlockControls } from './components/BlockView/components';
+import { FLOWS } from 'constants/flows';
 
 type NoteProps = {
   noteId: Note['id'];
@@ -31,7 +32,7 @@ export const NoteView = ({ noteId }: NoteProps) => {
     setType(value);
     if (value === 'LINK') {
       hideBlockForm();
-      dispatch(activate(CREATE_SUBNOTE));
+      dispatch(activate(FLOWS.CREATE_SUBNOTE));
     } else {
       handleAdd();
     }
@@ -72,7 +73,7 @@ export const NoteView = ({ noteId }: NoteProps) => {
                initialData={currentBlock} />
     }
     {!isActiveBlockForm && blocks.sort(compareBlocks).map((block) =>
-      <div className='p-2'>
+      <div className='p-2 max-w-7xl md:max-w-5xl' >
         <BlockView block={block}>
           {<div className='basis-4'>
             <BlockControls block={block}
@@ -85,4 +86,3 @@ export const NoteView = ({ noteId }: NoteProps) => {
     }
   </div>;
 };
-;

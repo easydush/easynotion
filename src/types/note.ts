@@ -19,7 +19,3 @@ export interface Block {
   type: MediaType;
   content: string;
 }
-
-export const CREATE_NOTE = 'createNote';
-export const CREATE_SUBNOTE = 'createSubNote';
-export const EDIT_NOTE = 'editNote';

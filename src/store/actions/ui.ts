@@ -1,15 +1,15 @@
-import { ACTIVATE, DEACTIVATE, DEACTIVATE_ALL } from '../types/ui';
+import { UI_ACTIONS } from 'store/constants';
 
 export const activate = (flowName: string) => {
   return {
-    type: ACTIVATE,
+    type: UI_ACTIONS.ACTIVATE,
     payload: flowName,
   };
 };
 
 export const deactivate = (flowName: string) => {
   return {
-    type: DEACTIVATE,
+    type: UI_ACTIONS.DEACTIVATE,
     payload: flowName,
   };
 };
@@ -17,7 +17,7 @@ export const deactivate = (flowName: string) => {
 
 export const deactivateAll = () => {
   return {
-    type: DEACTIVATE_ALL,
+    type: UI_ACTIONS.DEACTIVATE_ALL,
     payload: null,
   };
 };

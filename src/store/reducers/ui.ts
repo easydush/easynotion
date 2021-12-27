@@ -1,6 +1,6 @@
 import { UIState } from 'types';
-import { ACTIVATE, DEACTIVATE, DEACTIVATE_ALL } from '../types/ui';
-import { DefaultActionParams } from '../types';
+import { DefaultActionParams } from 'store/types';
+import { UI_ACTIONS } from 'store/constants';
 
 const initialState = {
   flows: [],
@@ -10,13 +10,13 @@ export const uiReducer = (state: UIState = initialState, action: DefaultActionPa
 
   switch (action.type) {
 
-    case ACTIVATE:
+    case UI_ACTIONS.ACTIVATE:
       return { ...state, flows: [...state.flows, action.payload] };
 
-    case DEACTIVATE:
+    case UI_ACTIONS.DEACTIVATE:
       return { ...state, flows: [...state.flows.filter((flow: string) => flow !== action.payload)] };
 
-    case DEACTIVATE_ALL:
+    case UI_ACTIONS.DEACTIVATE_ALL:
       return initialState;
 
     default:

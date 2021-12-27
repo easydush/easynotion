@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { CREATE_NOTE, CREATE_SUBNOTE, EDIT_NOTE, Note, RootState } from 'types';
+import { Note, RootState } from 'types';
 import { Modal } from 'components';
 import { NoteForm } from 'forms/NoteForm';
 import { getNoteUrl } from 'tools';
@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { create, update } from 'store/actions/note';
 import { create as createBlock } from 'store/actions/block';
 import { deactivateAll } from 'store/actions/ui';
-import cuid from 'cuid';
+import { FLOWS } from 'constants/flows';
 
 type NoteProps = {
   initialData?: Note;
@@ -16,9 +16,9 @@ type NoteProps = {
 
 export const NoteEdit = ({ initialData, parentId }: NoteProps) => {
   const activeFlows = useSelector<RootState, string[]>((state) => state.ui.flows);
-  const isNoteFlow = activeFlows.includes(CREATE_NOTE);
-  const isSubNoteFlow = activeFlows.includes(CREATE_SUBNOTE);
-  const isEditFlow = activeFlows.includes(EDIT_NOTE);
+  const isNoteFlow = activeFlows.includes(FLOWS.CREATE_NOTE);
+  const isSubNoteFlow = activeFlows.includes(FLOWS.CREATE_SUBNOTE);
+  const isEditFlow = activeFlows.includes(FLOWS.EDIT_NOTE);
 
   const isNoteFlowActive = isSubNoteFlow || isNoteFlow || isEditFlow;
 

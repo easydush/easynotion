@@ -2,13 +2,13 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Button } from 'components';
 import { activate } from 'store/actions/ui';
-import { CREATE_NOTE } from 'types';
+import { FLOWS } from 'constants/flows';
 
 export const Controls = () => {
   const dispatch = useDispatch();
 
   const handleCreateNote = () => {
-    dispatch(activate(CREATE_NOTE));
+    dispatch(activate(FLOWS.CREATE_NOTE));
   };
 
   return <div className='flex justify-between items-center py-4 pl-4 border-b-2 border-dashed border-cyan-100'>

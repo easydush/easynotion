@@ -18,6 +18,7 @@ export const BlockControls = ({ block, isFirst, isLast, onEdit }: ControlsProps)
   const handleMove = (block: Block, up: boolean) => {
     dispatch(move(block.id, up));
   };
+
   const handleDelete = (block: Block) => {
     dispatch(remove(block.id));
     if (block.type === 'LINK') {

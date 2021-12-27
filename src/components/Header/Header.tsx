@@ -2,10 +2,11 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Icon } from 'components';
-import { EDIT_NOTE, Note, RootState } from 'types';
+import { Note, RootState } from 'types';
 import { activate } from 'store/actions/ui';
 import { remove } from 'store/actions/note';
 import { remove as removeBlock, removeAllByNoteId } from 'store/actions/block';
+import { FLOWS } from 'constants/flows';
 
 interface HeaderProps {
   title?: string;
@@ -33,7 +34,7 @@ export const Header = ({ title }: HeaderProps) => {
   const dispatch = useDispatch();
 
   const handleEdit = () => {
-    dispatch(activate(EDIT_NOTE));
+    dispatch(activate(FLOWS.EDIT_NOTE));
   };
 
   const handleDelete = () => {
