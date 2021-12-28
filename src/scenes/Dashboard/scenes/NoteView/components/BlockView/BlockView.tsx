@@ -1,10 +1,10 @@
-import { Block, Note, RootState } from 'types';
 import React, { ReactElement } from 'react';
+import { useSelector } from 'react-redux';
+import { Block, Note, RootState } from 'types';
+import { Video, Image, NoteLink } from 'components';
+import { noteSelectors } from 'store/selectors';
 
 import styles from './BlockView.module.scss';
-import { Video, Image, NoteLink } from 'components';
-import { useSelector } from 'react-redux';
-import { noteSelectors } from 'store/selectors';
 
 type BlockProps = {
   block: Block;
@@ -13,7 +13,7 @@ type BlockProps = {
 
 export const BlockView = ({ block, children }: BlockProps) => {
   const isMedia = ['IMAGE', 'VIDEO'].includes(block.type);
-  const note = useSelector<RootState, Note | null>(noteSelectors.current);
+  const note = useSelector<RootState, Note | undefined>(noteSelectors.byId(block.content));
 
   return <div
     className={`${styles.block} rounded-lg outline-dashed outline-offset-4 outline-cyan-100 bg-teal-50 flex flex-row `}>
@@ -24,7 +24,7 @@ export const BlockView = ({ block, children }: BlockProps) => {
             <Video src={block.content} />}
         </div> :
         note ? <div className='basis-96 m-2 my-8'>
-            <div className='w-96'><NoteLink note={note} isActive={false} /></div>
+            <div className='w-96'><NoteLink note={note} isActive={false} isNode={false} /></div>
           </div> :
           <div className='basis-96 m-4 truncate' dangerouslySetInnerHTML={{ __html: block.content }} />
     }

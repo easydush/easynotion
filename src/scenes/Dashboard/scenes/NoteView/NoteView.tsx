@@ -18,8 +18,7 @@ type NoteProps = {
 }
 
 export const NoteView = ({ noteId }: NoteProps) => {
-  const blocks = useSelector<RootState, Block[]>(blockSelectors.allByNoteId(noteId));
-
+  const blocks = useSelector<RootState, Block[]>(blockSelectors.allByNoteId(noteId))
   const dispatch = useDispatch();
 
   const [type, setType] = useState('TEXT');
@@ -73,7 +72,7 @@ export const NoteView = ({ noteId }: NoteProps) => {
     <BlockForm type={(currentBlock?.type ?? type) as Exclude<MediaType, 'LINK'>} onFinish={handleFinish}
                initialData={currentBlock} />
     }
-    {!isActiveBlockForm && blocks.sort(compareBlocks).map((block) =>
+    {!isActiveBlockForm && blocks.map((block) =>
       <div className='p-2 max-w-7xl md:max-w-5xl'>
         <BlockView block={block}>
           {<div className='basis-4'>

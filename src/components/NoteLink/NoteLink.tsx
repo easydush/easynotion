@@ -12,9 +12,10 @@ import { useDispatch } from 'react-redux';
 interface NoteLinkProps {
   note: Note | TreeItem;
   isActive: boolean;
+  isNode: boolean;
 }
 
-export const NoteLink = ({ note, isActive }: NoteLinkProps) => {
+export const NoteLink = ({ note, isActive, isNode }: NoteLinkProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -36,7 +37,7 @@ export const NoteLink = ({ note, isActive }: NoteLinkProps) => {
       outline-dotted cursor-pointer ${isActive ? 'bg-teal-100' : 'bg-white'}`}
       onClick={handleMenuItemClick}>
       {note.title}
-      {note as TreeItem && <span onClick={handleAdd}>
+      {isNode && <span onClick={handleAdd}>
           <Icon type='ADD' />
       </span>}
     </div>
