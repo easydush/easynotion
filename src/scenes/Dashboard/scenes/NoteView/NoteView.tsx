@@ -11,13 +11,14 @@ import { compareBlocks } from 'tools/blocks';
 import { activate } from 'store/actions/ui';
 import { BlockControls } from './components/BlockView/components';
 import { FLOWS } from 'constants/flows';
+import { blockSelectors } from 'store/selectors';
 
 type NoteProps = {
   noteId: Note['id'];
 }
 
 export const NoteView = ({ noteId }: NoteProps) => {
-  const blocks = useSelector<RootState, Block[]>((state) => state.block.blocks.filter((item) => item.noteId === noteId));
+  const blocks = useSelector<RootState, Block[]>(blockSelectors.allByNoteId(noteId));
 
   const dispatch = useDispatch();
 
@@ -73,7 +74,7 @@ export const NoteView = ({ noteId }: NoteProps) => {
                initialData={currentBlock} />
     }
     {!isActiveBlockForm && blocks.sort(compareBlocks).map((block) =>
-      <div className='p-2 max-w-7xl md:max-w-5xl' >
+      <div className='p-2 max-w-7xl md:max-w-5xl'>
         <BlockView block={block}>
           {<div className='basis-4'>
             <BlockControls block={block}

@@ -4,6 +4,7 @@ import { NOTE_ACTIONS } from 'store/constants';
 
 const initialState = {
   notes: [],
+  currentNote: null,
 };
 
 export const noteReducer = (state: NoteState = initialState, action: DefaultActionParams) => {
@@ -24,6 +25,9 @@ export const noteReducer = (state: NoteState = initialState, action: DefaultActi
         ...state,
         notes: [...state.notes.filter((note: Note) => note.id !== action.payload && note.parentId !== action.payload)],
       };
+
+    case NOTE_ACTIONS.SET_CURRENT_NOTE:
+      return { ...state, currentNote: state.notes.find((note: Note) => note.id === action.payload || note.uri === action.payload) };
 
     default:
       return state;

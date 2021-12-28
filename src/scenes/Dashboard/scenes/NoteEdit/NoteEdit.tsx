@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import cuid from 'cuid';
 import { Note, RootState } from 'types';
 import { Modal } from 'components';
 import { NoteForm } from 'forms/NoteForm';
@@ -8,15 +9,15 @@ import { create, update } from 'store/actions/note';
 import { create as createBlock } from 'store/actions/block';
 import { deactivateAll } from 'store/actions/ui';
 import { FLOWS } from 'constants/flows';
-import cuid from 'cuid';
+import { uiSelectors } from 'store/selectors';
 
 type NoteProps = {
-  initialData?: Note;
+  initialData?: Note | null;
   parentId?: string;
 }
 
 export const NoteEdit = ({ initialData, parentId }: NoteProps) => {
-  const activeFlows = useSelector<RootState, string[]>((state) => state.ui.flows);
+  const activeFlows = useSelector<RootState, string[]>(uiSelectors.all);
   const isNoteFlow = activeFlows.includes(FLOWS.CREATE_NOTE);
   const isSubNoteFlow = activeFlows.includes(FLOWS.CREATE_SUBNOTE);
   const isEditFlow = activeFlows.includes(FLOWS.EDIT_NOTE);
@@ -39,14 +40,15 @@ export const NoteEdit = ({ initialData, parentId }: NoteProps) => {
       dispatch(create(note));
     }
 
-    if(isSubNoteFlow && parentId){
+    if (isSubNoteFlow && parentId) {
       dispatch(createBlock({ id: cuid(), noteId: parentId, type: 'LINK', content: note.id }));
     }
     handleClose();
     navigate(getNoteUrl(note));
   };
 
-  return <Modal visible={isNoteFlowActive} title={isEdit ? 'Edit note' : 'Create new note'} onClose={handleClose} >
-    <NoteForm initialData={isEdit ? initialData : undefined} onFinish={handleFinish} parentId={isSubNoteFlow ? parentId : undefined} />
+  return <Modal visible={isNoteFlowActive} title={isEdit ? 'Edit note' : 'Create new note'} onClose={handleClose}>
+    <NoteForm initialData={isEdit ? initialData : undefined} onFinish={handleFinish}
+              parentId={isSubNoteFlow ? parentId : undefined} />
   </Modal>;
 };

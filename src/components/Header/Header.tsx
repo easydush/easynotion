@@ -6,15 +6,16 @@ import { activate } from 'store/actions/ui';
 import { remove } from 'store/actions/note';
 import { remove as removeBlock, removeAllByNoteId } from 'store/actions/block';
 import { FLOWS } from 'constants/flows';
+import { noteSelectors } from 'store/selectors';
 
 interface HeaderProps {
   title?: string;
 }
 
 export const Header = ({ title }: HeaderProps) => {
-  const note = useSelector<RootState, Note | undefined>((state) => state.note.notes.find(note => note.id === state.ui.currentNoteId));
+  const note = useSelector<RootState, Note | null>(noteSelectors.current);
+  const notes = useSelector<RootState, Note[]>(noteSelectors.all);
 
-  const notes = useSelector<RootState, Note[] | undefined>((state) => state.note.notes);
   if (!title && note) {
     title = note?.title;
   }

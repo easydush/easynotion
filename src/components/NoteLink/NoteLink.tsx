@@ -3,8 +3,8 @@ import { Note } from 'types';
 import { TreeItem } from 'types/tree';
 import { getNoteUrl } from 'tools';
 import { useNavigate } from 'react-router-dom';
-import { Icon, Button } from 'components';
-import { activate, setCurrent } from 'store/actions/ui';
+import { Icon } from 'components';
+import { activate } from 'store/actions/ui';
 import { FLOWS } from 'constants/flows';
 import { useDispatch } from 'react-redux';
 
@@ -20,7 +20,6 @@ export const NoteLink = ({ note, isActive }: NoteLinkProps) => {
 
   const handleMenuItemClick = useCallback(
     () => {
-      dispatch(setCurrent((note as TreeItem).key))
       navigate((note as TreeItem)?.path ?? getNoteUrl(note as Note));
     },
     [navigate, note],
@@ -28,7 +27,6 @@ export const NoteLink = ({ note, isActive }: NoteLinkProps) => {
 
   const handleAdd = useCallback((e) => {
     e.stopPropagation();
-    dispatch(setCurrent((note as TreeItem).key))
     dispatch(activate(FLOWS.CREATE_SUBNOTE));
   }, []);
 

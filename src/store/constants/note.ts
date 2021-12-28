@@ -1,5 +1,6 @@
 export const enum NOTE_ACTIONS {
   CREATE = 'CREATE',
   UPDATE = 'UPDATE',
-  DELETE = 'DELETE'
+  DELETE = 'DELETE',
+  SET_CURRENT_NOTE = 'SET_CURRENT_NOTE',
 }

@@ -5,6 +5,7 @@ export type VoidWithArgsFn = (args: any) => void
 
 export interface NoteState {
   notes: Note[];
+  currentNote: Note | null;
 }
 
 export interface BlockState {
@@ -13,7 +14,6 @@ export interface BlockState {
 
 export interface UIState {
   flows: string[];
-  currentNoteId: Note['id'] | null;
 }
 
 export interface RootState {

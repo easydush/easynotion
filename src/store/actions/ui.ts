@@ -1,5 +1,4 @@
 import { UI_ACTIONS } from 'store/constants';
-import { Note } from 'types';
 
 export const activate = (flowName: string) => {
   return {
@@ -20,13 +19,6 @@ export const deactivateAll = () => {
   return {
     type: UI_ACTIONS.DEACTIVATE_ALL,
     payload: null,
-  };
-};
-
-export const setCurrent = (noteId: Note['id']) => {
-  return {
-    type: UI_ACTIONS.SET_CURRENT_NOTE,
-    payload: noteId,
   };
 };
 

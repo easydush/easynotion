@@ -4,6 +4,7 @@ import React, { ReactElement } from 'react';
 import styles from './BlockView.module.scss';
 import { Video, Image, NoteLink } from 'components';
 import { useSelector } from 'react-redux';
+import { noteSelectors } from 'store/selectors';
 
 type BlockProps = {
   block: Block;
@@ -12,7 +13,7 @@ type BlockProps = {
 
 export const BlockView = ({ block, children }: BlockProps) => {
   const isMedia = ['IMAGE', 'VIDEO'].includes(block.type);
-  const note = useSelector<RootState, Note | undefined>((state) => state.note.notes.find((note) => note.id === block.content));
+  const note = useSelector<RootState, Note | null>(noteSelectors.current);
 
   return <div
     className={`${styles.block} rounded-lg outline-dashed outline-offset-4 outline-cyan-100 bg-teal-50 flex flex-row `}>
