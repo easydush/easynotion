@@ -43,8 +43,7 @@ export const blockReducer = (state: BlockState = initialState, action: DefaultAc
       const block = state.blocks.find((item: Block) => item.id === action.payload.id);
       if (block) {
         const newOrder = action.payload.up ? block.order - 1 : block.order + 1;
-        const nearbyBlock = state.blocks.find(block => block.order === newOrder);
-
+        const nearbyBlock = state.blocks.find(item => block.noteId === item.noteId && item.order === newOrder);
         return {
           ...state,
           blocks: [...state.blocks.filter((item: Block) => item.id !== block.id && item.id !== nearbyBlock?.id),

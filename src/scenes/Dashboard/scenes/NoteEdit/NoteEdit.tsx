@@ -8,6 +8,7 @@ import { create, update } from 'store/actions/note';
 import { create as createBlock } from 'store/actions/block';
 import { deactivateAll } from 'store/actions/ui';
 import { FLOWS } from 'constants/flows';
+import cuid from 'cuid';
 
 type NoteProps = {
   initialData?: Note;
@@ -39,7 +40,7 @@ export const NoteEdit = ({ initialData, parentId }: NoteProps) => {
     }
 
     if(isSubNoteFlow && parentId){
-      dispatch(createBlock({ id: note.id, noteId: parentId, type: 'LINK', content: note.id }));
+      dispatch(createBlock({ id: cuid(), noteId: parentId, type: 'LINK', content: note.id }));
     }
     handleClose();
     navigate(getNoteUrl(note));
