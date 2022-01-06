@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import { VoidWithArgsFn } from '../../types';
+import { VoidFn } from '../../types';
 
 type EditorProps = {
-  onChange: VoidWithArgsFn;
+  onChange: VoidFn;
   initialContent?: string;
 }
 

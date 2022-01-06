@@ -1,4 +1,4 @@
-import { TreeItem } from 'types/tree';
+import { TreeItem } from 'types';
 import { MenuItem } from './components';
 
 export interface TreeProps {
@@ -6,7 +6,6 @@ export interface TreeProps {
 }
 
 export const Menu = ({ tree }: TreeProps) => {
-
   return <div>
     {tree.map((node: TreeItem) => (
       <MenuItem item={node} />

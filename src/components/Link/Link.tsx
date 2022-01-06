@@ -1,10 +1,10 @@
 import React from 'react';
-import { VoidWithArgsFn } from '../../types';
+import { VoidFn } from '../../types';
 import { Input } from '../Input';
 
 
 interface LinkInputProps {
-  onChange: VoidWithArgsFn;
+  onChange: VoidFn;
   initialContent?: string;
 }
 

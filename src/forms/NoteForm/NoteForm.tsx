@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { Note, VoidWithArgsFn } from 'types';
+import { useState, SyntheticEvent } from 'react';
 import cuid from 'cuid';
+import { Note, VoidFn } from 'types';
 import { Input } from 'components/Input';
 import { normalizeUri } from './tools';
 
 type NoteFormProps = {
-  onFinish: VoidWithArgsFn;
+  onFinish: VoidFn;
   initialData?: Note;
   parentId?: string;
 }
@@ -14,8 +14,8 @@ export const NoteForm = ({ onFinish, initialData, parentId }: NoteFormProps) => 
   const [title, setTitle] = useState(initialData?.title ?? '');
   const [uri, setUri] = useState(initialData?.uri);
 
-  function handleFormSubmit(e: any) {
-    e.preventDefault();
+  function handleFormSubmit(event: SyntheticEvent) {
+    event.preventDefault();
     onFinish({
       title,
       uri: uri ? normalizeUri(uri) : '',

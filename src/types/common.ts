@@ -1,7 +1,6 @@
 import { Block, Note } from './note';
 
-export type VoidFn = () => void
-export type VoidWithArgsFn = (args: any) => void
+export type VoidFn = (args: any) => void
 
 export interface NoteState {
   notes: Note[];

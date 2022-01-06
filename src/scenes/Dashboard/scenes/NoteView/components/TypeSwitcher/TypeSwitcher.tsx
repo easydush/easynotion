@@ -1,13 +1,13 @@
 import { ReactElement } from 'react';
 import { Button, Popover, Icon } from 'components';
-import { MediaType, VoidWithArgsFn } from 'types';
+import { MediaType, VoidFn } from 'types';
 import { convertString2SelectOption } from './tools';
 
 const TYPES = ['VIDEO', 'LINK', 'TEXT', 'IMAGE', 'TABLE'];
 
 interface TypeInputProps {
   content: ReactElement;
-  onChange: VoidWithArgsFn;
+  onChange: VoidFn;
 }
 
 type Option = {

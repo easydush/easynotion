@@ -1,4 +1,4 @@
-import { Block, VoidWithArgsFn } from 'types';
+import { Block, VoidFn } from 'types';
 import { Button, Icon } from 'components';
 import React from 'react';
 import { move, remove, removeAllByNoteId, reorder } from 'store/actions/block';
@@ -9,7 +9,7 @@ type ControlsProps = {
   block: Block;
   isFirst: boolean;
   isLast: boolean;
-  onEdit: VoidWithArgsFn;
+  onEdit: VoidFn;
 }
 
 export const BlockControls = ({ block, isFirst, isLast, onEdit }: ControlsProps) => {

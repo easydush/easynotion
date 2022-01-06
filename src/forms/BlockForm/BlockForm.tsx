@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { MediaType, Block, VoidWithArgsFn } from 'types';
+import { SyntheticEvent, useState } from 'react';
+import { MediaType, Block, VoidFn } from 'types';
 import { Switcher } from './components';
 import { Button } from 'components';
 
 type BlockFormProps = {
   type: Exclude<MediaType, 'LINK'>;
-  onFinish: VoidWithArgsFn;
+  onFinish: VoidFn;
   initialData?: Block;
 }
 export const BlockForm = ({ type, onFinish, initialData }: BlockFormProps) => {
   const [content, setContent] = useState(initialData?.content ?? '');
 
-  function handleFormSubmit(e: any) {
+  function handleFormSubmit(e: SyntheticEvent) {
     e.preventDefault();
     onFinish(content);
   }

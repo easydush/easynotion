@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { Link } from 'components/Link';
-import { VoidWithArgsFn } from '../../types';
+import { VoidFn } from '../../types';
 import { Image } from './Image';
 
 interface ImageInputProps {
-  onChange: VoidWithArgsFn;
+  onChange: VoidFn;
   initialContent?: any;
 }
 

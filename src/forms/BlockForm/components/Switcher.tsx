@@ -1,9 +1,9 @@
-import { MediaType,  VoidWithArgsFn } from 'types';
+import { MediaType,  VoidFn } from 'types';
 import { ImageInput,  TableEditor, TextEditor, VideoInput } from 'components';
 
 type SwitcherProps = {
   type: Exclude<MediaType, 'LINK'>;
-  onChange: VoidWithArgsFn;
+  onChange: VoidFn;
   initialContent?: string;
 }
 

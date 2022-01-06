@@ -1,1 +1,1 @@
-export * from './TreeMenu';
+export * from './Menu';
