@@ -1,6 +1,5 @@
-import React from 'react';
-import { VoidFn } from '../../types';
-import { Input } from '../Input';
+import { VoidFn } from 'types';
+import { Input } from 'components';
 
 
 interface LinkInputProps {

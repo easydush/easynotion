@@ -1,8 +1,7 @@
-import React, { ReactElement, useCallback, useEffect } from 'react';
+import { ReactElement, useCallback, useEffect } from 'react';
+import { Button, Icon } from 'components';
 
-import './index.css';
-import { Button } from '../Button';
-import { Icon } from '../Icon';
+import styles from './Modal.module.scss';
 
 interface ModalProps {
   visible: boolean;
@@ -30,21 +29,21 @@ export const Modal = ({
   useEffect(() => {
     document.addEventListener('keydown', onKeydown);
     return () => document.removeEventListener('keydown', onKeydown);
-  }, [onKeydown,]);
+  }, [onKeydown]);
 
   if (!visible) return null;
 
   return (
-    <div className='modal'>
-      <div className='modal-dialog'>
-        <div className='modal-header'>
-          <h3 className='modal-title'>{title}</h3>
+    <div className={styles.modal}>
+      <div className={styles.dialog}>
+        <div className={styles.header}>
+          <h3 className={styles.title}>{title}</h3>
           <Button onClick={onClose}>{<Icon type={'CLOSE'} />}</Button>
         </div>
-        <div className='modal-body'>
-          <div className='modal-content'>{children}</div>
+        <div className={styles.body}>
+          <div className={styles.content}>{children}</div>
         </div>
-        {footer && <div className='modal-footer'>{footer}</div>}
+        {footer && <div className={styles.footer}>{footer}</div>}
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ export interface TreeProps {
 export const Menu = ({ tree }: TreeProps) => {
   return <div>
     {tree.map((node: TreeItem) => (
-      <MenuItem item={node} />
+      <MenuItem item={node} key={node.key} />
     ))}
   </div>;
 };

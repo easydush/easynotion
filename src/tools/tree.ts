@@ -1,5 +1,4 @@
-import { Note } from 'types';
-import { TreeItem } from '../types/tree';
+import { Note, TreeItem } from 'types';
 
 export const getNoteUrl = (value: Note) => {
   return value.uri !== '' && value.uri ? `/note/${value.uri}` : `/note/${value.id}`;

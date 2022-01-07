@@ -2,10 +2,10 @@ import React from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { Log } from 'tools';
-import { persistor, store } from 'store';
 import { Dashboard } from 'scenes';
 import { Layout } from 'components';
+import { Log } from 'tools';
+import { persistor, store } from 'store';
 
 Log.logger = console;
 

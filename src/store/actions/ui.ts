@@ -1,13 +1,13 @@
 import { UI_ACTIONS } from 'store/constants';
 
-export const activate = (flowName: string) => {
+export const activateFlow = (flowName: string) => {
   return {
     type: UI_ACTIONS.ACTIVATE,
     payload: flowName,
   };
 };
 
-export const deactivate = (flowName: string) => {
+export const deactivateFlow = (flowName: string) => {
   return {
     type: UI_ACTIONS.DEACTIVATE,
     payload: flowName,
@@ -15,14 +15,14 @@ export const deactivate = (flowName: string) => {
 };
 
 
-export const deactivateAll = () => {
+export const deactivateAllFlows = () => {
   return {
     type: UI_ACTIONS.DEACTIVATE_ALL,
     payload: null,
   };
 };
 
-export const clearCurrent = () => {
+export const clearCurrentFlow = () => {
   return {
     type: UI_ACTIONS.CLEAR,
     payload: null,

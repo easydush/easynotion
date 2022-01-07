@@ -1,9 +1,7 @@
+import { useDispatch } from 'react-redux';
 import { Block, VoidFn } from 'types';
 import { Button, Icon } from 'components';
-import React from 'react';
-import { move, remove, removeAllByNoteId, reorder } from 'store/actions/block';
-import { remove as removeNote } from 'store/actions/note';
-import { useDispatch } from 'react-redux';
+import { removeNote, moveBlock, removeBlock, removeAllBlocksByNoteId, reorderBlocks } from 'store/actions';
 
 type ControlsProps = {
   block: Block;
@@ -16,16 +14,16 @@ export const BlockControls = ({ block, isFirst, isLast, onEdit }: ControlsProps)
   const dispatch = useDispatch();
 
   const handleMove = (block: Block, up: boolean) => {
-    dispatch(move(block.id, up));
+    dispatch(moveBlock(block.id, up));
   };
 
   const handleDelete = (block: Block) => {
-    dispatch(remove(block.id));
+    dispatch(removeBlock(block.id));
     if (block.type === 'LINK') {
       dispatch(removeNote(block.content));
-      dispatch(removeAllByNoteId(block.content));
+      dispatch(removeAllBlocksByNoteId(block.content));
     }
-    dispatch(reorder(block.noteId));
+    dispatch(reorderBlocks(block.noteId));
   };
 
 

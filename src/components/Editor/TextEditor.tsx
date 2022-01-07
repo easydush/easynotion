@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { Editor as TinyMCEEditor } from 'tinymce';
 import { Editor } from '@tinymce/tinymce-react';
-import { VoidFn } from '../../types';
+import { VoidFn } from 'types';
 
 type EditorProps = {
   onChange: VoidFn;
@@ -11,7 +12,7 @@ export const TextEditor = ({ onChange, initialContent }: EditorProps) => {
   const editorRef = useRef({});
   const [content, setContent] = useState<string>(initialContent ?? '');
 
-  const handleChange = (evt: any, editor: any) => {
+  const handleChange = (evt: Object, editor: TinyMCEEditor) => {
     onChange(editor.getContent());
   };
 

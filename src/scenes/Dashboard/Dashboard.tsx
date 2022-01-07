@@ -1,9 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Note, RootState } from 'types';
-import { NoteEdit, NoteView } from './scenes';
-import { setCurrent } from '../../store/actions/note';
+import { setCurrentNote } from 'store/actions';
 import { noteSelectors } from 'store/selectors';
+import { NoteEdit, NoteView } from './scenes';
 
 
 export const Dashboard = () => {
@@ -19,7 +20,9 @@ export const Dashboard = () => {
     noteId = String(checkNote[1]);
   }
 
-  dispatch(setCurrent(noteId));
+  useEffect(() => {
+    dispatch(setCurrentNote(noteId));
+  }, [path]);
 
   const note = useSelector<RootState, Note | null>(noteSelectors.current);
 

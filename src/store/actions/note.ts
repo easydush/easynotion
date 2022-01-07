@@ -1,28 +1,28 @@
 import { Note } from 'types';
 import { NOTE_ACTIONS} from 'store/constants';
 
-export const create = (data: Note) => {
+export const createNote = (data: Note) => {
   return {
     type: NOTE_ACTIONS.CREATE,
     payload: data,
   };
 };
 
-export const update = (data: Note) => {
+export const updateNote = (data: Note) => {
   return {
     type: NOTE_ACTIONS.UPDATE,
     payload: data,
   };
 };
 
-export const setCurrent = (noteId: Note['id'] | Note['uri']) => {
+export const setCurrentNote = (noteId: Note['id'] | Note['uri']) => {
   return {
     type: NOTE_ACTIONS.SET_CURRENT_NOTE,
     payload: noteId,
   };
 };
 
-export const remove = (id: Note['id']) => {
+export const removeNote = (id: Note['id']) => {
   return {
     type: NOTE_ACTIONS.DELETE,
     payload: id,

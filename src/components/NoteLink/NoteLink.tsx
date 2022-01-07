@@ -1,35 +1,37 @@
-import React, { useCallback } from 'react';
-import { Note } from 'types';
-import { TreeItem } from 'types/tree';
-import { getNoteUrl } from 'tools';
-import { useNavigate } from 'react-router-dom';
-import { Icon } from 'components';
-import { activate } from 'store/actions/ui';
-import { FLOWS } from 'constants/flows';
+import { useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Note, TreeItem } from 'types';
+import { Icon } from 'components';
+import { getNoteUrl } from 'tools';
+import { activateFlow, deactivateAllFlows } from 'store/actions';
+import { FLOWS } from 'constants/flows';
 
 
 interface NoteLinkProps {
   note: Note | TreeItem;
-  isActive: boolean;
-  isNode: boolean;
+  isNode?: boolean;
 }
 
-export const NoteLink = ({ note, isActive, isNode }: NoteLinkProps) => {
+export const NoteLink = ({ note, isNode = false }: NoteLinkProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  const isActive = location.pathname === (note as TreeItem).path;
 
   const handleMenuItemClick = useCallback(
     () => {
+      dispatch(deactivateAllFlows());
       navigate((note as TreeItem)?.path ?? getNoteUrl(note as Note));
     },
-    [navigate, note],
+    [navigate, note, dispatch],
   );
 
   const handleAdd = useCallback((e) => {
     e.stopPropagation();
-    dispatch(activate(FLOWS.CREATE_SUBNOTE));
-  }, []);
+    dispatch(activateFlow(FLOWS.CREATE_SUBNOTE));
+  }, [dispatch]);
 
   return (
     <div

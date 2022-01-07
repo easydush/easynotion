@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 import { Block, Note, RootState } from 'types';
 import { Video, Image, NoteLink } from 'components';
@@ -24,7 +24,7 @@ export const BlockView = ({ block, children }: BlockProps) => {
             <Video src={block.content} />}
         </div> :
         note ? <div className='basis-96 m-2 my-8'>
-            <div className='w-96'><NoteLink note={note} isActive={false} isNode={false} /></div>
+            <div className='w-96'><NoteLink note={note} /></div>
           </div> :
           <div className='basis-96 m-4 truncate' dangerouslySetInnerHTML={{ __html: block.content }} />
     }

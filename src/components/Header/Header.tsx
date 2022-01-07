@@ -1,12 +1,15 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Icon } from 'components';
 import { Note, RootState } from 'types';
-import { activate } from 'store/actions/ui';
-import { remove } from 'store/actions/note';
-import { remove as removeBlock, removeAllByNoteId } from 'store/actions/block';
+import { Button, Icon } from 'components';
 import { FLOWS } from 'constants/flows';
-import { noteSelectors } from 'store/selectors';
+import {
+  activateFlow,
+  removeNote,
+  removeBlock,
+  removeAllBlocksByNoteId,
+  deactivateAllFlows,
+} from 'store/actions';
+import { noteSelectors, uiSelectors } from 'store/selectors';
 
 interface HeaderProps {
   title?: string;
@@ -14,7 +17,10 @@ interface HeaderProps {
 
 export const Header = ({ title }: HeaderProps) => {
   const note = useSelector<RootState, Note | null>(noteSelectors.current);
-  const notes = useSelector<RootState, Note[]>(noteSelectors.all);
+
+  const activeFlows = useSelector<RootState, string[]>(uiSelectors.all);
+
+  const isControlsActive = activeFlows.includes(FLOWS.SHOW_CONTROLS);
 
   if (!title && note) {
     title = note?.title;
@@ -22,15 +28,23 @@ export const Header = ({ title }: HeaderProps) => {
 
   const dispatch = useDispatch();
 
+  const handleActivateControls = () => {
+    dispatch(activateFlow(FLOWS.SHOW_CONTROLS));
+  };
+
+  const handleSave = () => {
+    dispatch(deactivateAllFlows());
+  };
+
   const handleEdit = () => {
-    dispatch(activate(FLOWS.EDIT_NOTE));
+    dispatch(activateFlow(FLOWS.EDIT_NOTE));
   };
 
   const handleDelete = () => {
     if (note) {
       dispatch(removeBlock(note.id));
-      dispatch(removeAllByNoteId(note.id));
-      dispatch(remove(note.id));
+      dispatch(removeAllBlocksByNoteId(note.id));
+      dispatch(removeNote(note.id));
     }
   };
 
@@ -41,18 +55,34 @@ export const Header = ({ title }: HeaderProps) => {
           <div className='flex justify-start lg:w-0 lg:flex-1'>
             <h1 className='text-3xl text-gray'>{title}</h1>
           </div>
-          <div className='px-4'>
-            <Button onClick={handleEdit}>
-              <Icon type='EDIT' />
-            </Button>
-          </div>
-          <div className='px-4'>
-            <Button onClick={handleDelete}>
-              <Icon type='DELETE' />
-            </Button>
-          </div>
+          {isControlsActive ?
+            <>
+              <div className='px-4'>
+                <Button onClick={handleSave}>
+                  <Icon type='SAVE' />
+                </Button>
+              </div>
+              <div className='px-4'>
+                <Button onClick={handleEdit}>
+                  <Icon type='EDIT' />
+                </Button>
+              </div>
+              <div className='px-4'>
+                <Button onClick={handleDelete}>
+                  <Icon type='DELETE' />
+                </Button>
+              </div>
+            </> :
+            <div className='px-4'>
+              <Button onClick={handleActivateControls}>
+                <Icon type='EDIT_NOTE' />
+              </Button>
+            </div>
+          }
         </>) :
-      <h1 className='text-3xl text-gray-700'>{notes?.length === 0 ? 'Create note to start' : 'Click on menu'}</h1>
+      <h1 className='text-3xl text-gray-700'>
+        Click on menu or create a new note
+      </h1>
     }
   </div>;
 };

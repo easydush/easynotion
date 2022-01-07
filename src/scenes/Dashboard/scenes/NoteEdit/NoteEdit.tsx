@@ -1,14 +1,12 @@
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import cuid from 'cuid';
 import { Note, RootState } from 'types';
 import { Modal } from 'components';
-import { NoteForm } from 'forms/NoteForm';
 import { getNoteUrl } from 'tools';
-import { useDispatch, useSelector } from 'react-redux';
-import { create, update } from 'store/actions/note';
-import { create as createBlock } from 'store/actions/block';
-import { deactivateAll } from 'store/actions/ui';
 import { FLOWS } from 'constants/flows';
+import { NoteForm } from 'forms/NoteForm';
+import { deactivateAllFlows, createBlock, createNote, updateNote } from 'store/actions';
 import { uiSelectors } from 'store/selectors';
 
 type NoteProps = {
@@ -30,14 +28,14 @@ export const NoteEdit = ({ initialData, parentId }: NoteProps) => {
   const dispatch = useDispatch();
 
   const handleClose = () => {
-    dispatch(deactivateAll());
+    dispatch(deactivateAllFlows());
   };
 
   const handleFinish = (note: Note) => {
     if (isEdit) {
-      dispatch(update(note));
+      dispatch(updateNote(note));
     } else {
-      dispatch(create(note));
+      dispatch(createNote(note));
     }
 
     if (isSubNoteFlow && parentId) {

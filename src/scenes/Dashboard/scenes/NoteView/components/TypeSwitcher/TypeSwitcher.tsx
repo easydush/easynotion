@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
-import { Button, Popover, Icon } from 'components';
 import { MediaType, VoidFn } from 'types';
+import { Button, Popover, Icon } from 'components';
 import { convertString2SelectOption } from './tools';
 
 const TYPES = ['VIDEO', 'LINK', 'TEXT', 'IMAGE', 'TABLE'];
@@ -25,7 +25,7 @@ export const TypeSwitcher = ({ content, onChange }: TypeInputProps) => {
   return <Popover content={content}>
     <>
       {options.map(option =>
-        <Button onClick={() => handleChange(option)} size='small'>
+        <Button key={option.label} onClick={() => handleChange(option)}>
           {<Icon type={option.value as MediaType} />}
         </Button>)}
     </>

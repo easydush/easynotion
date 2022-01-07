@@ -1,7 +1,5 @@
-import React from 'react';
-
-import { Link } from 'components/Link';
-import { VoidFn } from '../../types';
+import { VoidFn } from 'types';
+import { Link } from 'components';
 import { Video } from './Video';
 
 interface VideoInputProps {

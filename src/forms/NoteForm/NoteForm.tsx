@@ -1,7 +1,7 @@
 import { useState, SyntheticEvent } from 'react';
 import cuid from 'cuid';
 import { Note, VoidFn } from 'types';
-import { Input } from 'components/Input';
+import { Input } from 'components';
 import { normalizeUri } from './tools';
 
 type NoteFormProps = {

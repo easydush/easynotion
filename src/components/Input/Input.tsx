@@ -1,4 +1,4 @@
-import { VoidFn } from '../../types';
+import { VoidFn } from 'types';
 
 type InputProps = {
   type: string,

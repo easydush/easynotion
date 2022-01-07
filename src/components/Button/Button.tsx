@@ -1,35 +1,27 @@
 import React from 'react';
 import { VoidFn } from 'types';
 
-import './button.css';
+import styles from './Button.module.css';
 
 interface ButtonProps {
   type?: 'button' | 'submit' | 'reset' | undefined;
-  backgroundColor?: string;
-  size?: 'small' | 'medium' | 'large';
   outlined?: boolean;
-  label?: string;
   onClick?: VoidFn;
-  children?: React.ReactElement;
+  children?: React.ReactElement | string;
 }
 
 export const Button = ({
                          type = 'button',
-                         size = 'medium',
-                         backgroundColor,
                          outlined,
-                         label,
                          children,
                          ...props
                        }: ButtonProps) => {
   return (
     <button
       type={type}
-      className={['storybook-button', `storybook-button--${size}`, 'storybook-button--secondary' , outlined && `storybook-button--outlined`].join(' ')}
-      style={{ backgroundColor }}
+      className={`${styles.button} ${outlined && styles.outlined}`}
       {...props}
     >
-      {label}
       {children}
     </button>
   );
