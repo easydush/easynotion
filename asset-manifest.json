@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.css": "/easynotion/static/css/main.737054c2.css",
-    "main.js": "/easynotion/static/js/main.208b2586.js",
+    "main.css": "/easynotion/static/css/main.4e1d84d7.css",
+    "main.js": "/easynotion/static/js/main.217f9abe.js",
     "static/js/27.ea359aa1.chunk.js": "/easynotion/static/js/27.ea359aa1.chunk.js",
     "index.html": "/easynotion/index.html"
   },
   "entrypoints": [
-    "static/css/main.737054c2.css",
-    "static/js/main.208b2586.js"
+    "static/css/main.4e1d84d7.css",
+    "static/js/main.217f9abe.js"
   ]
 }
