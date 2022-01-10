@@ -1,7 +1,7 @@
 import React from 'react';
 import { VoidFn } from 'types';
 
-import styles from './Button.module.css';
+import styles from './Button.module.scss';
 
 interface ButtonProps {
   type?: 'button' | 'submit' | 'reset' | undefined;

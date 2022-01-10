@@ -22,7 +22,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     dispatch(setCurrentNote(noteId));
-  }, [path]);
+  }, [path, noteId, dispatch]);
 
   const note = useSelector<RootState, Note | null>(noteSelectors.current);
 
