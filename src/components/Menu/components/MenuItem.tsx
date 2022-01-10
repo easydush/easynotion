@@ -1,14 +1,16 @@
+import React from 'react';
 import { TreeItem } from 'types';
-import { NoteLink } from 'components';
 
 type ItemProps = {
   item: TreeItem;
+  nodeRender: (node: TreeItem) => React.ReactElement;
 }
 
-export const MenuItem = ({ item }: ItemProps) => {
+export const MenuItem = ({ item, nodeRender }: ItemProps) => {
   return <div className={`my-4 ml-4 text-lg font-normal  ${item.isRoot && 'mb-8'}`}>
-    <NoteLink note={item} isNode />
-    {item.nodes && item.nodes.map((child) => (<MenuItem item={child} key={child.key} />),
+    {nodeRender(item)}
+    {item.nodes && item.nodes.map((childNode) => (
+      <MenuItem item={childNode} key={childNode.key} nodeRender={nodeRender} />),
     )}
   </div>;
 };
