@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useCallback, useState } from 'react';
 import { MediaType, Block, VoidFn } from 'types';
 import { Button } from 'components';
 import { Switcher } from './components';
@@ -11,10 +11,10 @@ type BlockFormProps = {
 export const BlockForm = ({ type, onFinish, initialData }: BlockFormProps) => {
   const [content, setContent] = useState(initialData?.content ?? '');
 
-  function handleFormSubmit(e: SyntheticEvent) {
+  const handleFormSubmit = useCallback((e: SyntheticEvent) => {
     e.preventDefault();
     onFinish(content);
-  }
+  }, [onFinish, content]);
 
   return <form onSubmit={handleFormSubmit}>
     <div className='grid grid-cols-1 gap-y-2'>

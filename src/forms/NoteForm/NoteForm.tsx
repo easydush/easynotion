@@ -1,4 +1,4 @@
-import { useState, SyntheticEvent } from 'react';
+import { useState, SyntheticEvent, useCallback } from 'react';
 import cuid from 'cuid';
 import { Note, VoidFn } from 'types';
 import { Input } from 'components';
@@ -14,7 +14,7 @@ export const NoteForm = ({ onFinish, initialData, parentId }: NoteFormProps) => 
   const [title, setTitle] = useState(initialData?.title ?? '');
   const [uri, setUri] = useState(initialData?.uri);
 
-  function handleFormSubmit(event: SyntheticEvent) {
+  const handleFormSubmit =  useCallback((event: SyntheticEvent) => {
     event.preventDefault();
     onFinish({
       title,
@@ -22,7 +22,7 @@ export const NoteForm = ({ onFinish, initialData, parentId }: NoteFormProps) => 
       id: initialData?.id ?? cuid(),
       parentId: parentId,
     });
-  }
+  }, [onFinish, uri, initialData, parentId, title]);
 
   return <form onSubmit={handleFormSubmit}>
     <div className='grid grid-cols-1'>

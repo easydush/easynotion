@@ -4,11 +4,11 @@ import { Video } from './Video';
 
 interface VideoInputProps {
   onChange: VoidFn;
-  initialContent?: any;
+  initialContent?: string;
 }
 
 
-export const VideoInput = ({ onChange, initialContent }: VideoInputProps) => {
+export const VideoInput = ({ onChange, initialContent = '' }: VideoInputProps) => {
   return (
     <>
       <Link onChange={onChange} initialContent={initialContent} />

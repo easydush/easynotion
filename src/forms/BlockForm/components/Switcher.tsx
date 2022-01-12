@@ -1,25 +1,41 @@
-import { MediaType,  VoidFn } from 'types';
-import { ImageInput,  TableEditor, TextEditor, VideoInput } from 'components';
+import { BaseSyntheticEvent, useCallback } from 'react';
+import { MediaType } from 'types';
+import { ImageInput, TableEditor, TextEditor, VideoInput } from 'components';
 
 type SwitcherProps = {
   type: Exclude<MediaType, 'LINK'>;
-  onChange: VoidFn;
+  onChange: (value: string) => void;
   initialContent?: string;
 }
 
 export const Switcher = ({ type, onChange, initialContent }: SwitcherProps) => {
-  const handleChange = (event: any) => {
+  const handleChange = useCallback((event: BaseSyntheticEvent) => {
     onChange(event?.target?.value ?? event);
-  };
+  }, [onChange]);
+
+  let Component;
 
   switch (type) {
-    case 'IMAGE':
-      return <ImageInput onChange={handleChange} initialContent={initialContent} />;
-    case 'TEXT':
-      return <TextEditor onChange={handleChange} initialContent={initialContent}/>;
-    case 'TABLE':
-      return <TableEditor onChange={handleChange} initialContent={initialContent}/>;
-    case 'VIDEO':
-      return <VideoInput onChange={handleChange} initialContent={initialContent}/>;
+    case 'IMAGE': {
+      Component = ImageInput;
+      break;
+    }
+
+    case 'TEXT': {
+      Component = TextEditor;
+      break;
+    }
+
+    case 'TABLE': {
+      Component = TableEditor;
+      break;
+    }
+
+    case 'VIDEO': {
+      Component = VideoInput;
+      break;
+    }
   }
+
+  return <Component onChange={handleChange} initialContent={initialContent} />;
 };

@@ -1,4 +1,5 @@
 import { Block, Note } from './note';
+import { FLOWS } from 'constants/flows';
 
 export type VoidFn = (args: any) => void
 
@@ -12,7 +13,7 @@ export interface BlockState {
 }
 
 export interface UIState {
-  flows: string[];
+  flows: FLOWS[];
 }
 
 export interface RootState {

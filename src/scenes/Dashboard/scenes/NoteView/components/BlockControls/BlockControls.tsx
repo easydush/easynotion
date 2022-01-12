@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Block, VoidFn } from 'types';
 import { Button, Icon } from 'components';
@@ -13,27 +14,27 @@ type ControlsProps = {
 export const BlockControls = ({ block, isFirst, isLast, onEdit }: ControlsProps) => {
   const dispatch = useDispatch();
 
-  const handleMove = (block: Block, up: boolean) => {
+  const handleMove =  useCallback((block: Block, up: boolean) => {
     dispatch(moveBlock(block.id, up));
-  };
+  }, [dispatch]);
 
-  const handleDelete = (block: Block) => {
+  const handleDelete =  useCallback((block: Block) => {
     dispatch(removeBlock(block.id));
     if (block.type === 'LINK') {
       dispatch(removeNote(block.content));
       dispatch(removeAllBlocksByNoteId(block.content));
     }
     dispatch(reorderBlocks(block.noteId));
-  };
+  }, [dispatch]);
 
 
-  const handleMoveUp = (block: Block) => {
+  const handleMoveUp =  useCallback((block: Block) => {
     handleMove(block, true);
-  };
+  }, [handleMove]);
 
-  const handleMoveDown = (block: Block) => {
+  const handleMoveDown =  useCallback((block: Block) => {
     handleMove(block, false);
-  };
+  }, [handleMove]);
 
   return <div className='grid grid-cols-1'>
     {!isFirst &&

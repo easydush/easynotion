@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import cuid from 'cuid';
@@ -7,15 +8,13 @@ import { getNoteUrl } from 'tools';
 import { FLOWS } from 'constants/flows';
 import { NoteForm } from 'forms/NoteForm';
 import { deactivateAllFlows, createBlock, createNote, updateNote } from 'store/actions';
-import { uiSelectors } from 'store/selectors';
+import { noteSelectors, uiSelectors } from 'store/selectors';
 
-type NoteProps = {
-  initialData?: Note | null;
-  parentId?: string;
-}
+export const NoteEdit = () => {
+  const initialData = useSelector<RootState, Note | null>(noteSelectors.current);
+  const parentId = initialData?.id;
 
-export const NoteEdit = ({ initialData, parentId }: NoteProps) => {
-  const activeFlows = useSelector<RootState, string[]>(uiSelectors.all);
+  const activeFlows = useSelector<RootState, FLOWS[]>(uiSelectors.all);
   const isNoteFlow = activeFlows.includes(FLOWS.CREATE_NOTE);
   const isSubNoteFlow = activeFlows.includes(FLOWS.CREATE_SUBNOTE);
   const isEditFlow = activeFlows.includes(FLOWS.EDIT_NOTE);
@@ -27,11 +26,11 @@ export const NoteEdit = ({ initialData, parentId }: NoteProps) => {
 
   const dispatch = useDispatch();
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     dispatch(deactivateAllFlows());
-  };
+  }, [dispatch]);
 
-  const handleFinish = (note: Note) => {
+  const handleFinish = useCallback((note: Note) => {
     if (isEdit) {
       dispatch(updateNote(note));
     } else {
@@ -43,7 +42,7 @@ export const NoteEdit = ({ initialData, parentId }: NoteProps) => {
     }
     handleClose();
     navigate(getNoteUrl(note));
-  };
+  }, [dispatch, handleClose, isSubNoteFlow, isEdit, navigate, parentId]);
 
   return <Modal visible={isNoteFlowActive} title={isEdit ? 'Edit note' : 'Create new note'} onClose={handleClose}>
     <NoteForm initialData={isEdit ? initialData : undefined} onFinish={handleFinish}

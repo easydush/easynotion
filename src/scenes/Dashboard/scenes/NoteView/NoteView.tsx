@@ -1,34 +1,39 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cuid from 'cuid';
-import { Block, MediaType, Note, RootState } from 'types';
+import { Block, MediaType, RootState } from 'types';
 import { Button } from 'components';
 import { FLOWS } from 'constants/flows';
 import { BlockForm } from 'forms/BlockForm';
-import { activateFlow, createBlock, deactivateFlow, updateBlock } from 'store/actions';
+import { activateFlow, createBlock, deactivateFlow, setCurrentNote, updateBlock } from 'store/actions';
 import { blockSelectors, uiSelectors } from 'store/selectors';
 import { BlockView, BlockControls, TypeSwitcher } from './components';
+import { useParams } from 'react-router-dom';
 
-type NoteProps = {
-  noteId: Note['id'];
-}
-
-export const NoteView = ({ noteId }: NoteProps) => {
-  const blocks = useSelector<RootState, Block[]>(blockSelectors.allByNoteId(noteId));
+export const NoteView = () => {
+  const params = useParams();
   const dispatch = useDispatch();
+
+  const noteId = params.id ?? '';
+
+  const blocks = useSelector<RootState, Block[]>(blockSelectors.allByNoteId(noteId));
 
   const [type, setType] = useState('TEXT');
   const [currentBlock, setBlock] = useState<Block>();
 
-  const activeFlows = useSelector<RootState, string[]>(uiSelectors.all);
+  const activeFlows = useSelector<RootState, FLOWS[]>(uiSelectors.all);
   const isActiveBlockForm = activeFlows.includes(FLOWS.EDIT_BLOCK);
   const isControlsActive = activeFlows.includes(FLOWS.SHOW_CONTROLS);
 
-  const showBlockForm = () => dispatch(activateFlow(FLOWS.EDIT_BLOCK));
-  const hideBlockForm = () => dispatch(deactivateFlow(FLOWS.EDIT_BLOCK));
+  const showBlockForm = useCallback(() => dispatch(activateFlow(FLOWS.EDIT_BLOCK)), [dispatch]);
+  const hideBlockForm = useCallback(() => dispatch(deactivateFlow(FLOWS.EDIT_BLOCK)), [dispatch]);
 
+  const handleAdd = useCallback(() => {
+    setBlock(undefined);
+    showBlockForm();
+  }, [showBlockForm]);
 
-  const handleChangeType = (value: MediaType) => {
+  const handleChangeType = useCallback((value: MediaType) => {
     setType(value);
     if (value === 'LINK') {
       hideBlockForm();
@@ -36,14 +41,9 @@ export const NoteView = ({ noteId }: NoteProps) => {
     } else {
       handleAdd();
     }
+  }, [dispatch, handleAdd, hideBlockForm]);
 
-  };
-  const handleAdd = () => {
-    setBlock(undefined);
-    showBlockForm();
-  };
-
-  const handleFinish = (content: string) => {
+  const handleFinish = useCallback((content: string) => {
     if (currentBlock?.id) {
       dispatch(updateBlock({
         id: currentBlock.id,
@@ -57,12 +57,16 @@ export const NoteView = ({ noteId }: NoteProps) => {
     }
     hideBlockForm();
     setBlock(undefined);
-  };
+  }, [currentBlock, dispatch, hideBlockForm, noteId, type]);
 
-  const handleEdit = (block: Block) => {
+  const handleEdit = useCallback((block: Block) => {
     setBlock(block);
     showBlockForm();
-  };
+  }, [showBlockForm]);
+
+  useEffect(() => {
+    dispatch(setCurrentNote(noteId));
+  }, [noteId, dispatch]);
 
   return <div className='grid grid-cols-1 gap-4 p-2'>
     {!currentBlock && isControlsActive &&

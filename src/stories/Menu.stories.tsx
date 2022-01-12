@@ -23,7 +23,13 @@ const Template: ComponentStory<typeof Menu> = (args) =>
 
 export const Basic = Template.bind({});
 Basic.args = {
-  tree: [{ key: '1', title: 'Root', path: '', isRoot: true, nodes: [{ key: '2', title: 'Child 1', path: '', isRoot: false, nodes: [] }] }],
+  tree: [{
+    key: '1',
+    title: 'Root',
+    path: '',
+    isRoot: true,
+    nodes: [{ key: '2', title: 'Child 1', path: '', isRoot: false, nodes: [] }],
+  }],
   nodeRender: (node: TreeItem) =>
     <div
       className={`p-2 flex justify-between rounded-full outline-2 outline-offset-2 outline-cyan-200 

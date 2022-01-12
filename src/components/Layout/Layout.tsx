@@ -3,7 +3,7 @@ import { Header } from 'components';
 import { NotesTree, Controls } from './components';
 
 
-const LayoutFn: FC = ({ children }) => {
+export const Layout: FC = ({ children }) => {
   return (
     <div className='flex flex-row'>
       <div className='basis-1/5'>
@@ -21,5 +21,3 @@ const LayoutFn: FC = ({ children }) => {
     </div>
   );
 };
-
-export const Layout = LayoutFn;

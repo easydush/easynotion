@@ -4,10 +4,10 @@ import { Image } from './Image';
 
 interface ImageInputProps {
   onChange: VoidFn;
-  initialContent?: any;
+  initialContent?: string;
 }
 
-export const ImageInput = ({ onChange, initialContent }: ImageInputProps) => {
+export const ImageInput = ({ onChange, initialContent = '' }: ImageInputProps) => {
   return (
     <>
       <Link onChange={onChange} initialContent={initialContent} />

@@ -4,42 +4,42 @@ import { BLOCK_ACTIONS } from 'store/constants';
 export const createBlock = (data: Omit<Block, 'order'>) => {
   return {
     type: BLOCK_ACTIONS.CREATE_BLOCK,
-    payload: data,
+    payload: { block: data },
   };
 };
 
 export const updateBlock = (data: Block) => {
   return {
     type: BLOCK_ACTIONS.UPDATE_BLOCK,
-    payload: data,
+    payload: { block: data },
   };
 };
 
 export const removeBlock = (id: Block['id']) => {
   return {
     type: BLOCK_ACTIONS.DELETE_BLOCK,
-    payload: id,
+    payload: { id },
   };
 };
 
 export const removeAllBlocksByNoteId = (id: Note['id']) => {
   return {
     type: BLOCK_ACTIONS.DELETE_NOTE_BLOCKS,
-    payload: id,
+    payload: { noteId: id },
   };
 };
 
 
 export const reorderBlocks = (id: Note['id']) => {
   return {
-    type: BLOCK_ACTIONS.REORDER,
-    payload: id,
+    type: BLOCK_ACTIONS.REORDER_BLOCKS,
+    payload: { noteId: id },
   };
 };
 
 export const moveBlock = (id: Block['id'], up: boolean) => {
   return {
-    type: BLOCK_ACTIONS.MOVE,
+    type: BLOCK_ACTIONS.MOVE_BLOCK,
     payload: { id: id, up: up },
   };
 };

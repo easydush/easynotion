@@ -1,10 +1,10 @@
-import { useCallback } from 'react';
+import { SyntheticEvent, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Note, TreeItem } from 'types';
 import { Icon } from 'components';
 import { getNoteUrl } from 'tools';
-import { activateFlow, deactivateAllFlows } from 'store/actions';
+import { activateFlow, deactivateAllFlows, setCurrentNote } from 'store/actions';
 import { FLOWS } from 'constants/flows';
 
 
@@ -28,10 +28,11 @@ export const NoteLink = ({ note, isNode = false }: NoteLinkProps) => {
     [navigate, note, dispatch],
   );
 
-  const handleAdd = useCallback((e) => {
+  const handleAdd = useCallback((e: SyntheticEvent) => {
     e.stopPropagation();
+    dispatch(setCurrentNote((note as TreeItem).key));
     dispatch(activateFlow(FLOWS.CREATE_SUBNOTE));
-  }, [dispatch]);
+  }, [dispatch, note]);
 
   return (
     <div
