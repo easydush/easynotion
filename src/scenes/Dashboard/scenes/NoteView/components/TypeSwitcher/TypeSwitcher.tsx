@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 import { MediaType, VoidFn } from 'types';
 import { Button, Popover, Icon } from 'components';
 import { convertString2SelectOption } from './tools';
@@ -15,7 +15,7 @@ type Option = {
   label: string;
 }
 
-export const TypeSwitcher = ({ content, onChange }: TypeInputProps) => {
+export const TypeSwitcher: FC<TypeInputProps> = ({ content, onChange }) => {
   const options = convertString2SelectOption(TYPES);
 
   const handleChange = (option: Option) => {

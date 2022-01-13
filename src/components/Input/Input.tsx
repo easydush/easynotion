@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { VoidFn } from 'types';
 
 type InputProps = {
@@ -9,17 +10,13 @@ type InputProps = {
   onChange?: VoidFn,
 }
 
-export const Input = ({ type, name, label, value, onChange, required = false }: InputProps) => {
+export const Input: FC<InputProps> = ({ label, required = false,  ...props }) => {
   return <div>
     {label && <div>{label}:</div>}
     <div>
       <input
-        type={type}
-        name={name}
-        value={value}
         className='border-2 border-cyan-100'
-        required={required}
-        onChange={onChange}
+        {...props}
       />
     </div>
   </div>;

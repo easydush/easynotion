@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Block, VoidFn } from 'types';
 import { Button, Icon } from 'components';
@@ -11,7 +11,7 @@ type ControlsProps = {
   onEdit: VoidFn;
 }
 
-export const BlockControls = ({ block, isFirst, isLast, onEdit }: ControlsProps) => {
+export const BlockControls: FC<ControlsProps> = ({ block, isFirst, isLast, onEdit }) => {
   const dispatch = useDispatch();
 
   const handleMove =  useCallback((block: Block, up: boolean) => {

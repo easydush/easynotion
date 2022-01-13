@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Note, RootState } from 'types';
 import { Button, Icon } from 'components';
@@ -16,7 +16,7 @@ interface HeaderProps {
   title?: string;
 }
 
-export const Header = ({ title }: HeaderProps) => {
+export const Header: FC<HeaderProps> = ({ title }) => {
   const note = useSelector<RootState, Note | null>(noteSelectors.current);
 
   const activeFlows = useSelector<RootState, FLOWS[]>(uiSelectors.all);

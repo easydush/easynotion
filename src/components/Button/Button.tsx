@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { VoidFn } from 'types';
 
 import styles from './Button.module.scss';
@@ -10,12 +10,12 @@ interface ButtonProps {
   children?: React.ReactElement | string;
 }
 
-export const Button = ({
+export const Button: FC<ButtonProps> = ({
                          type = 'button',
                          outlined,
                          children,
                          ...props
-                       }: ButtonProps) => {
+                       }) => {
   return (
     <button
       type={type}

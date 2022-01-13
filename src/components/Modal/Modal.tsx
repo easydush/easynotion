@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useEffect } from 'react';
+import { FC, ReactElement, useCallback, useEffect } from 'react';
 import { Button, Icon } from 'components';
 
 import styles from './Modal.module.scss';
@@ -11,13 +11,13 @@ interface ModalProps {
   onClose: () => void;
 }
 
-export const Modal = ({
+export const Modal: FC<ModalProps> = ({
                         visible = false,
                         title = '',
                         footer = '',
                         onClose,
                         children,
-                      }: ModalProps) => {
+                      }) => {
   const onKeydown = useCallback(({ key }: KeyboardEvent) => {
     switch (key) {
       case 'Escape':

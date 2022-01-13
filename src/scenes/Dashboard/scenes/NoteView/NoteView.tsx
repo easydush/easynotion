@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cuid from 'cuid';
 import { Block, MediaType, RootState } from 'types';
@@ -10,7 +10,7 @@ import { blockSelectors, uiSelectors } from 'store/selectors';
 import { BlockView, BlockControls, TypeSwitcher } from './components';
 import { useParams } from 'react-router-dom';
 
-export const NoteView = () => {
+export const NoteView: FC = () => {
   const params = useParams();
   const dispatch = useDispatch();
 

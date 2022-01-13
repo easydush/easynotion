@@ -1,9 +1,10 @@
+import { FC } from 'react';
 import { MediaType } from 'types';
 
 type IconProps = {
   type: MediaType | 'ADD' | 'EDIT' | 'EDIT_NOTE' | 'SAVE' | 'DELETE' | 'UP' | 'DOWN' | 'CLOSE';
 }
-export const Icon = ({ type }: IconProps) => {
+export const Icon: FC<IconProps> = ({ type }) => {
   switch (type) {
     case 'VIDEO':
       return <svg xmlns='http://www.w3.org/2000/svg' className='h-6 w-6' fill='none' viewBox='0 0 24 24'

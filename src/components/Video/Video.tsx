@@ -1,10 +1,11 @@
+import { FC } from 'react';
 import { extractId } from './utils';
 
 interface VideoProps {
   src: string;
 }
 
-export const Video = ({ src }: VideoProps) => {
+export const Video: FC<VideoProps> = ({ src }) => {
   const embedId = extractId(src);
 
   return (

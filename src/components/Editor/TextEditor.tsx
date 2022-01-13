@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { FC, useCallback, useRef, useState } from 'react';
 import { Editor as TinyMCEEditor } from 'tinymce';
 import { Editor } from '@tinymce/tinymce-react';
 import { VoidFn } from 'types';
@@ -8,7 +8,7 @@ type EditorProps = {
   initialContent?: string;
 }
 
-export const TextEditor = ({ onChange, initialContent }: EditorProps) => {
+export const TextEditor: FC<EditorProps> = ({ onChange, initialContent }) => {
   const editorRef = useRef({});
   const [content, setContent] = useState<string>(initialContent ?? '');
 

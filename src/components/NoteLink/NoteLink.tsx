@@ -1,4 +1,4 @@
-import { SyntheticEvent, useCallback } from 'react';
+import { FC, SyntheticEvent, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Note, TreeItem } from 'types';
@@ -13,7 +13,7 @@ interface NoteLinkProps {
   isNode?: boolean;
 }
 
-export const NoteLink = ({ note, isNode = false }: NoteLinkProps) => {
+export const NoteLink: FC<NoteLinkProps> = ({ note, isNode = false }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();

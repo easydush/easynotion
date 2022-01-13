@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { VoidFn } from 'types';
 import { Input } from 'components';
 
@@ -7,7 +8,7 @@ interface LinkInputProps {
   initialContent?: string;
 }
 
-export const Link = ({ onChange, initialContent }: LinkInputProps) => {
+export const Link: FC<LinkInputProps> = ({ onChange, initialContent }) => {
   return (
     <Input type='url' onChange={onChange} value={initialContent} />
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { TreeItem } from 'types';
 
 type ItemProps = {
@@ -6,7 +6,7 @@ type ItemProps = {
   nodeRender: (node: TreeItem) => React.ReactElement;
 }
 
-export const MenuItem = ({ item, nodeRender }: ItemProps) => {
+export const MenuItem: FC<ItemProps> = ({ item, nodeRender }: ItemProps) => {
   return <div className={`my-4 ml-4 text-lg font-normal  ${item.isRoot && 'mb-8'}`}>
     {nodeRender(item)}
     {item.nodes && item.nodes.map((childNode) => (

@@ -1,9 +1,10 @@
-import { useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Icon } from 'components';
 import { FLOWS } from 'constants/flows';
 import { activateFlow } from 'store/actions';
-export const Controls = () => {
+
+export const Controls: FC = () => {
   const dispatch = useDispatch();
 
   const handleCreateNote =  useCallback(() => {

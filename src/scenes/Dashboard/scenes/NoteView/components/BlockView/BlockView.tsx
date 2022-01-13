@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 import { Block, Note, RootState } from 'types';
 import { Video, Image, NoteLink } from 'components';
@@ -11,7 +11,7 @@ type BlockProps = {
   children: ReactElement;
 }
 
-export const BlockView = ({ block, children }: BlockProps) => {
+export const BlockView: FC<BlockProps> = ({ block, children }) => {
   const isMedia = ['IMAGE', 'VIDEO'].includes(block.type);
   const note = useSelector<RootState, Note | undefined>(noteSelectors.byId(block.content));
 
