@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Icon } from 'components';
+import { MediaType } from '../types';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -24,13 +25,13 @@ export const Basic = () => (
     <Template type='DOWN' />
     <Template type='EDIT' />
     <Template type='EDIT_NOTE' />
-    <Template type='IMAGE' />
-    <Template type='LINK' />
+    <Template type={MediaType.IMAGE} />
+    <Template type={MediaType.LINK} />
     <Template type='SAVE' />
-    <Template type='TABLE' />
-    <Template type='TEXT' />
+    <Template type={MediaType.TABLE} />
+    <Template type={MediaType.TEXT} />
     <Template type='UP' />
-    <Template type='VIDEO' />
+    <Template type={MediaType.VIDEO} />
   </div>
 );
 

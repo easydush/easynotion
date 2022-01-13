@@ -4,7 +4,7 @@ import { Button } from 'components';
 import { Switcher } from './components';
 
 type BlockFormProps = {
-  type: Exclude<MediaType, 'LINK'>;
+  type: Exclude<MediaType, MediaType.LINK>;
   onFinish: VoidFn;
   initialData?: Block;
 }

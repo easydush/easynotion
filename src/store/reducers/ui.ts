@@ -16,10 +16,10 @@ type UIActionParams = {
 export const uiReducer = (state: UIState = initialState, action: UIActionParams) => {
   switch (action.type) {
     case UI_ACTIONS.ACTIVATE_FLOW:
-      return { ...state, flows: [...state.flows, action.payload.flow] };
+      return { flows: [...state.flows, action.payload.flow] };
 
     case UI_ACTIONS.DEACTIVATE_FLOW:
-      return { ...state, flows: [...state.flows.filter((flow) => flow !== action.payload.flow)] };
+      return { flows: [...state.flows.filter((flow) => flow !== action.payload.flow)] };
 
     case UI_ACTIONS.DEACTIVATE_ALL_FLOWS:
       return initialState;

@@ -25,7 +25,6 @@ type BlockActionParams = {
 export const blockReducer = (state: BlockState = initialState, action: BlockActionParams) => {
   switch (action.type) {
     case BLOCK_ACTIONS.CREATE_BLOCK:
-      console.log(action.payload);
       return {
         ...state,
         blocks: [...state.blocks, {

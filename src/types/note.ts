@@ -1,9 +1,10 @@
-export type MediaType =
-  | 'VIDEO'
-  | 'LINK'
-  | 'TEXT'
-  | 'IMAGE'
-  | 'TABLE'
+export enum MediaType {
+  'VIDEO' = 'VIDEO',
+  'LINK' = 'LINK',
+  'TEXT' = 'TEXT',
+  'IMAGE' = 'IMAGE',
+  'TABLE' = 'TABLE',
+}
 
 export interface Note {
   id: string;

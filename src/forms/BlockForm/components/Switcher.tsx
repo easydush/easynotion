@@ -3,7 +3,7 @@ import { MediaType } from 'types';
 import { ImageInput, TableEditor, TextEditor, VideoInput } from 'components';
 
 type SwitcherProps = {
-  type: Exclude<MediaType, 'LINK'>;
+  type: Exclude<MediaType, MediaType.LINK>;
   onChange: (value: string) => void;
   initialContent?: string;
 }
@@ -16,22 +16,22 @@ export const Switcher = ({ type, onChange, initialContent }: SwitcherProps) => {
   let Component;
 
   switch (type) {
-    case 'IMAGE': {
+    case MediaType.IMAGE: {
       Component = ImageInput;
       break;
     }
 
-    case 'TEXT': {
+    case MediaType.TEXT: {
       Component = TextEditor;
       break;
     }
 
-    case 'TABLE': {
+    case MediaType.TABLE: {
       Component = TableEditor;
       break;
     }
 
-    case 'VIDEO': {
+    case MediaType.VIDEO: {
       Component = VideoInput;
       break;
     }

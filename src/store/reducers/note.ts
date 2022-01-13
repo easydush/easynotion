@@ -23,7 +23,7 @@ export const noteReducer = (state: NoteState = initialState, action: NoteActionP
     case NOTE_ACTIONS.UPDATE_NOTE:
       return {
         ...state,
-        notes: [...excludeNote(state.notes, action.payload.note.id), action.payload],
+        notes: [...excludeNote(state.notes, action.payload.note.id), action.payload.note],
       };
 
     case NOTE_ACTIONS.DELETE_NOTE:

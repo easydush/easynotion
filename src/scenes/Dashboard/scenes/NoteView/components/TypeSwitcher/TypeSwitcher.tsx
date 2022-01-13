@@ -1,9 +1,7 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useCallback } from 'react';
 import { MediaType, VoidFn } from 'types';
 import { Button, Popover, Icon } from 'components';
 import { convertString2SelectOption } from './tools';
-
-const TYPES = ['VIDEO', 'LINK', 'TEXT', 'IMAGE', 'TABLE'];
 
 interface TypeInputProps {
   content: ReactElement;
@@ -15,12 +13,12 @@ type Option = {
   label: string;
 }
 
-export const TypeSwitcher: FC<TypeInputProps> = ({ content, onChange }) => {
-  const options = convertString2SelectOption(TYPES);
+const options = convertString2SelectOption(Object.keys(MediaType));
 
-  const handleChange = (option: Option) => {
+export const TypeSwitcher: FC<TypeInputProps> = ({ content, onChange }) => {
+  const handleChange = useCallback((option: Option) => {
     onChange(option.value);
-  };
+  }, [onChange]);
 
   return <Popover content={content}>
     <>

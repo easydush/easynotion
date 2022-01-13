@@ -2,7 +2,7 @@ import { FC, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import cuid from 'cuid';
-import { Note, RootState } from 'types';
+import { MediaType, Note, RootState } from 'types';
 import { Modal } from 'components';
 import { getNoteUrl } from 'tools';
 import { FLOWS } from 'constants/flows';
@@ -38,7 +38,7 @@ export const NoteEdit: FC = () => {
     }
 
     if (isSubNoteFlow && parentId) {
-      dispatch(createBlock({ id: cuid(), noteId: parentId, type: 'LINK', content: note.id }));
+      dispatch(createBlock({ id: cuid(), noteId: parentId, type: MediaType.LINK, content: note.id }));
     }
     handleClose();
     navigate(getNoteUrl(note));
