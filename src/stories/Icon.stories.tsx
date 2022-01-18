@@ -25,13 +25,13 @@ export const Basic = () => (
     <Template type='DOWN' />
     <Template type='EDIT' />
     <Template type='EDIT_NOTE' />
-    <Template type={MediaType.IMAGE} />
-    <Template type={MediaType.LINK} />
+    <Template type='IMAGE' />
+    <Template type='LINK' />
     <Template type='SAVE' />
-    <Template type={MediaType.TABLE} />
-    <Template type={MediaType.TEXT} />
+    <Template type='TABLE' />
+    <Template type='TEXT' />
     <Template type='UP' />
-    <Template type={MediaType.VIDEO} />
+    <Template type='VIDEO' />
   </div>
 );
 
