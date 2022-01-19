@@ -29,7 +29,7 @@ export const blockReducer = (state: BlockState = initialState, action: BlockActi
         ...state,
         blocks: [...state.blocks, {
           ...action.payload.block,
-          order: calcBlockOrder(state.blocks, action.payload.noteId),
+          order: calcBlockOrder(state.blocks, action.payload.block.noteId),
         }],
       };
 

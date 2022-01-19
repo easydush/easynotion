@@ -1,12 +1,12 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cuid from 'cuid';
-import { Block, MediaType, RootState } from 'types';
+import { Block, MediaType, Note, RootState } from 'types';
 import { Button } from 'components';
 import { FLOWS } from 'constants/flows';
 import { BlockForm } from 'forms/BlockForm';
 import { activateFlow, createBlock, deactivateFlow, setCurrentNote, updateBlock } from 'store/actions';
-import { blockSelectors, uiSelectors } from 'store/selectors';
+import { blockSelectors, noteSelectors, uiSelectors } from 'store/selectors';
 import { BlockView, BlockControls, TypeSwitcher } from './components';
 import { useParams } from 'react-router-dom';
 
@@ -16,7 +16,8 @@ export const NoteView: FC = () => {
 
   const noteId = params.id ?? '';
 
-  const blocks = useSelector<RootState, Block[]>(blockSelectors.allByNoteId(noteId));
+  const note = useSelector<RootState, Note | null>(noteSelectors.current);
+  const blocks = useSelector<RootState, Block[]>(blockSelectors.allByNoteId(note?.id ?? ''));
 
   const [type, setType] = useState('TEXT');
   const [currentBlock, setBlock] = useState<Block>();
@@ -53,11 +54,11 @@ export const NoteView: FC = () => {
         order: currentBlock.order,
       }));
     } else {
-      dispatch(createBlock({ id: cuid(), noteId: noteId, type: type as MediaType, content: content }));
+      dispatch(createBlock({ id: cuid(), noteId: note?.id ?? '', type: type as MediaType, content: content }));
     }
     hideBlockForm();
     setBlock(undefined);
-  }, [currentBlock, dispatch, hideBlockForm, noteId, type]);
+  }, [currentBlock, dispatch, hideBlockForm, note, type]);
 
   const handleEdit = useCallback((block: Block) => {
     setBlock(block);

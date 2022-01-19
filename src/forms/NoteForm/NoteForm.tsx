@@ -35,6 +35,7 @@ export const NoteForm = ({ onFinish, onCancel, initialData, parentId }: NoteForm
           required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          className='justify-evenly'
         />
       </div>
       <div className='col-span-6'>
@@ -44,9 +45,10 @@ export const NoteForm = ({ onFinish, onCancel, initialData, parentId }: NoteForm
           title='URI'
           value={uri}
           onChange={(e) => setUri(e.target.value)}
+          className='justify-evenly'
         />
       </div>
-      <div className='col-start-1 col-end-3'>
+      <div className='col-start-2 col-end-3'>
         <Button type='submit' outlined children={'Save'} />
       </div>
       <div className='col-end-7 col-span-2'>
