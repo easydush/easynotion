@@ -1,0 +1,42 @@
+import { FC, useCallback, useRef, useState } from 'react';
+import { Editor as TinyMCEEditor } from 'tinymce';
+import { Editor } from '@tinymce/tinymce-react';
+import { MediaType, VoidFn } from 'types';
+import { Loading } from 'components';
+import { tableConfig, textConfig } from './constants';
+
+type EditorProps = {
+  onChange: VoidFn;
+  type: MediaType.TEXT | MediaType.TABLE;
+  initialContent?: string;
+}
+
+export const ContentEditor: FC<EditorProps> = ({ onChange, type, initialContent }) => {
+  const editorRef = useRef({});
+  const [loading, setLoading] = useState(true);
+  const [content, setContent] = useState<string>(initialContent ?? '');
+
+  const handleChange = useCallback((evt: Object, editor: TinyMCEEditor) => {
+    onChange(editor.getContent());
+  }, [onChange]);
+
+  const handleInit = useCallback((evt, editor) => {
+    editorRef.current = editor;
+    setLoading(false);
+  }, []);
+
+  return (
+    <div>
+      {loading && (
+        <Loading />
+      )}
+      <Editor
+        apiKey={process.env.REACT_APP_TINY_KEY}
+        onInit={handleInit}
+        initialValue={content}
+        onChange={handleChange}
+        init={type === MediaType.TEXT ? textConfig : tableConfig}
+      />
+    </div>
+  );
+};

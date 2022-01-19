@@ -1,6 +1,6 @@
 import { BaseSyntheticEvent, useCallback } from 'react';
 import { MediaType } from 'types';
-import { ImageInput, TableEditor, TextEditor, VideoInput } from 'components';
+import { ContentEditor, ImageInput, VideoInput } from 'components';
 
 type SwitcherProps = {
   type: Exclude<MediaType, MediaType.LINK>;
@@ -21,19 +21,14 @@ export const Switcher = ({ type, onChange, initialContent }: SwitcherProps) => {
       break;
     }
 
-    case MediaType.TEXT: {
-      Component = TextEditor;
-      break;
-    }
-
-    case MediaType.TABLE: {
-      Component = TableEditor;
-      break;
-    }
-
     case MediaType.VIDEO: {
       Component = VideoInput;
       break;
+    }
+
+    case MediaType.TEXT:
+    case MediaType.TABLE: {
+      return <ContentEditor onChange={handleChange} initialContent={initialContent} type={type} />;
     }
   }
 
