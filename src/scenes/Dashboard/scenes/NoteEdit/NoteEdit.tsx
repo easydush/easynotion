@@ -45,7 +45,7 @@ export const NoteEdit: FC = () => {
   }, [dispatch, handleClose, isSubNoteFlow, isEdit, navigate, parentId]);
 
   return <Modal visible={isNoteFlowActive} title={isEdit ? 'Edit note' : 'Create new note'} onClose={handleClose}>
-    <NoteForm initialData={isEdit ? initialData : undefined} onFinish={handleFinish}
+    <NoteForm initialData={isEdit ? initialData : undefined} onFinish={handleFinish} onCancel={handleClose}
               parentId={isSubNoteFlow ? parentId : undefined} />
   </Modal>;
 };

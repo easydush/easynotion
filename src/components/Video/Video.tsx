@@ -6,7 +6,7 @@ interface VideoProps {
 }
 
 export const Video: FC<VideoProps> = ({ src }) => {
-  const embedId = extractId(src) || 'AalAw9Fqhyo';
+  const embedId = extractId(src);
 
   return (
     <div className='video-responsive'>

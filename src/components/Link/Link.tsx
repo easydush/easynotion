@@ -4,12 +4,13 @@ import { Input } from 'components';
 
 
 interface LinkInputProps {
-  onChange: VoidFn;
-  initialContent?: string;
+  onChange: VoidFn,
+  initialContent?: string,
+  title?: string,
 }
 
-export const Link: FC<LinkInputProps> = ({ onChange, initialContent }) => {
+export const Link: FC<LinkInputProps> = ({ onChange, initialContent, ...props }) => {
   return (
-    <Input type='url' onChange={onChange} value={initialContent} />
+    <Input type='url' onChange={onChange} value={initialContent} {...props} />
   );
 };

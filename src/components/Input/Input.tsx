@@ -5,19 +5,18 @@ type InputProps = {
   type: string,
   name?: string,
   value?: any,
-  label?: string,
+  title?: string,
   required?: boolean,
   onChange?: VoidFn,
+  className?: string,
 }
 
-export const Input: FC<InputProps> = ({ label, required = false,  ...props }) => {
-  return <div>
-    {label && <div>{label}:</div>}
-    <div>
+export const Input: FC<InputProps> = ({ title, className, required = false,  ...props }) => {
+  return <div className={`flex justify-between w-72 ${className}`}>
+      {title && <span>{title}:</span>}
       <input
         className='border-2 border-cyan-100'
         {...props}
       />
-    </div>
   </div>;
 };

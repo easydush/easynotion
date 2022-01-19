@@ -10,7 +10,7 @@ type BlockFormProps = {
   initialData?: Block;
 }
 export const BlockForm = ({ type, onFinish, onCancel, initialData }: BlockFormProps) => {
-  const [content, setContent] = useState(initialData?.content ?? '');
+  const [content, setContent] = useState(initialData?.content);
 
   const handleFormSubmit = useCallback((e: SyntheticEvent) => {
     e.preventDefault();
