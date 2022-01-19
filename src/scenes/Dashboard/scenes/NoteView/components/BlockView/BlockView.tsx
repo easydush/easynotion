@@ -16,7 +16,7 @@ export const BlockView: FC<BlockProps> = ({ block, children }) => {
   const note = useSelector<RootState, Note | undefined>(noteSelectors.byId(block.content));
 
   return <div
-    className={`${styles.block} rounded-lg outline-dashed outline-offset-4 outline-cyan-100 bg-teal-50 flex flex-row `}>
+    className={`${styles.block} rounded-lg outline-dashed outline-offset-4 outline-cyan-100 flex flex-row `}>
     {
       isMedia ? <div className='basis-96 m-4 truncate'>
           {block.type === 'IMAGE' ?
