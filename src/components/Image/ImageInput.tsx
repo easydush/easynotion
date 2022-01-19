@@ -11,7 +11,7 @@ interface ImageInputProps {
 export const ImageInput: FC<ImageInputProps> = ({ onChange, initialContent = '' }: ImageInputProps) => {
   return (
     <>
-      <Link onChange={onChange} initialContent={initialContent} />
+      <Link onChange={onChange} initialContent={initialContent} title='Image link' />
       <Image src={initialContent} alt='' />
     </>
 

@@ -1,20 +1,21 @@
 import { useState, SyntheticEvent, useCallback } from 'react';
 import cuid from 'cuid';
 import { Note, VoidFn } from 'types';
-import { Input } from 'components';
+import { Button, Input } from 'components';
 import { normalizeUri } from './tools';
 
 type NoteFormProps = {
   onFinish: VoidFn;
+  onCancel: VoidFn;
   initialData?: Note;
   parentId?: string;
 }
 
-export const NoteForm = ({ onFinish, initialData, parentId }: NoteFormProps) => {
+export const NoteForm = ({ onFinish, onCancel, initialData, parentId }: NoteFormProps) => {
   const [title, setTitle] = useState(initialData?.title ?? '');
   const [uri, setUri] = useState(initialData?.uri);
 
-  const handleFormSubmit =  useCallback((event: SyntheticEvent) => {
+  const handleFormSubmit = useCallback((event: SyntheticEvent) => {
     event.preventDefault();
     onFinish({
       title,
@@ -25,23 +26,32 @@ export const NoteForm = ({ onFinish, initialData, parentId }: NoteFormProps) => 
   }, [onFinish, uri, initialData, parentId, title]);
 
   return <form onSubmit={handleFormSubmit}>
-    <div className='grid grid-cols-1'>
-      <Input
-        type='text'
-        name='title'
-        label='Title'
-        required
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <Input
-        type='text'
-        name='uri'
-        label='URI'
-        value={uri}
-        onChange={(e) => setUri(e.target.value)}
-      />
-      <button type='submit' className='justify-self-end'>Save</button>
+    <div className='grid grid-cols-6 gap-4'>
+      <div className='col-span-6'>
+        <Input
+          type='text'
+          name='title'
+          title='Title'
+          required
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+      <div className='col-span-6'>
+        <Input
+          type='text'
+          name='uri'
+          title='URI'
+          value={uri}
+          onChange={(e) => setUri(e.target.value)}
+        />
+      </div>
+      <div className='col-start-1 col-end-3'>
+        <Button type='submit' outlined children={'Save'} />
+      </div>
+      <div className='col-end-7 col-span-2'>
+        <Button outlined children={'Cancel'} onClick={onCancel} />
+      </div>
     </div>
   </form>;
 };

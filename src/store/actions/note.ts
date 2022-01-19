@@ -22,6 +22,13 @@ export const setCurrentNote = (noteId: Note['id'] | Note['uri']) => {
   };
 };
 
+export const clearCurrentNote = () => {
+  return {
+    type: NOTE_ACTIONS.CLEAR_CURRENT_NOTE,
+    payload: null,
+  };
+};
+
 export const removeNote = (id: Note['id']) => {
   return {
     type: NOTE_ACTIONS.DELETE_NOTE,

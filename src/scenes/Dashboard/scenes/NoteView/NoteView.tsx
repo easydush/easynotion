@@ -64,6 +64,11 @@ export const NoteView: FC = () => {
     showBlockForm();
   }, [showBlockForm]);
 
+  const handleCancel = useCallback(() => {
+    hideBlockForm();
+    setBlock(undefined);
+  }, [hideBlockForm, setBlock]);
+
   useEffect(() => {
     dispatch(setCurrentNote(noteId));
   }, [noteId, dispatch]);
@@ -74,7 +79,7 @@ export const NoteView: FC = () => {
                   onChange={handleChangeType} />}
     {isActiveBlockForm && type !== 'LINK' &&
     <BlockForm type={(currentBlock?.type ?? type) as Exclude<MediaType, 'LINK'>} onFinish={handleFinish}
-               initialData={currentBlock} />
+               onCancel={handleCancel} initialData={currentBlock} />
     }
     {!isActiveBlockForm && blocks.map((block) =>
       <div className='p-2 max-w-7xl md:max-w-5xl' key={block.id}>

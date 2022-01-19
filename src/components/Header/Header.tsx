@@ -9,6 +9,7 @@ import {
   removeBlock,
   removeAllBlocksByNoteId,
   deactivateAllFlows,
+  clearCurrentNote,
 } from 'store/actions';
 import { noteSelectors, uiSelectors } from 'store/selectors';
 
@@ -46,6 +47,7 @@ export const Header: FC<HeaderProps> = ({ title }) => {
       dispatch(removeBlock(note.id));
       dispatch(removeAllBlocksByNoteId(note.id));
       dispatch(removeNote(note.id));
+      dispatch(clearCurrentNote());
     }
   }, [dispatch, note]);
 

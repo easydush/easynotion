@@ -38,6 +38,9 @@ export const noteReducer = (state: NoteState = initialState, action: NoteActionP
         currentNote: findNoteById(state.notes, action.payload.id),
       };
 
+    case NOTE_ACTIONS.CLEAR_CURRENT_NOTE:
+      return { ...state, currentNote: null };
+
     default:
       return state;
   }
