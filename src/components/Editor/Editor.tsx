@@ -31,6 +31,7 @@ export const ContentEditor: FC<EditorProps> = ({ onChange, type, initialContent 
         <Loading />
       )}
       <Editor
+        inline={true}
         apiKey={process.env.REACT_APP_TINY_KEY}
         onInit={handleInit}
         initialValue={content}

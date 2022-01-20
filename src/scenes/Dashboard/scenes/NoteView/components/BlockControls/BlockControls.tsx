@@ -36,7 +36,7 @@ export const BlockControls: FC<ControlsProps> = ({ block, isFirst, isLast, onEdi
     handleMove(block, false);
   }, [handleMove]);
 
-  return <div className='grid grid-cols-1'>
+  return <div >
     {!isFirst &&
     <Button onClick={() => handleMoveUp(block)}>{<Icon type='UP' />}</Button>
     }

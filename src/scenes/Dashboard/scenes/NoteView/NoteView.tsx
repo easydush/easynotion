@@ -76,15 +76,16 @@ export const NoteView: FC = () => {
 
   return <div className='grid grid-cols-1 gap-4 p-2'>
     {!currentBlock && isControlsActive &&
-    <TypeSwitcher label={isActiveBlockForm ? 'Change block type' : 'Add new block'} onChange={handleChangeType} />}
+    <TypeSwitcher label={'Add new block'} onChange={handleChangeType} />}
     {isActiveBlockForm && type !== 'LINK' &&
     <BlockForm type={(currentBlock?.type ?? type) as Exclude<MediaType, 'LINK'>} onFinish={handleFinish}
                onCancel={handleCancel} initialData={currentBlock} />
     }
-    {!isActiveBlockForm && blocks.map((block) =>
+    <>
+    {blocks.map((block) =>
       <div className='p-2 max-w-7xl md:max-w-5xl' key={block.id}>
-        <BlockView block={block}>
-          {isControlsActive ? <div className='basis-4'>
+        <BlockView block={block} isEdit={isActiveBlockForm}>
+          {isControlsActive ? <div className='basis-44'>
             <BlockControls block={block}
                            isFirst={block.order === 0}
                            isLast={block.order === blocks.length - 1}
@@ -93,5 +94,6 @@ export const NoteView: FC = () => {
         </BlockView>
       </div>)
     }
+    </>
   </div>;
 };
