@@ -72,7 +72,7 @@ export const Header: FC<HeaderProps> = ({ title }) => {
             </>
           }
             <div className='px-4'>
-              <ToggleSwitch value={isControlsActive} onToggle={handleToggle}/>
+              <ToggleSwitch value={isControlsActive} onToggle={handleToggle} />
             </div>
         </>) :
       <h1 className='text-3xl text-gray-700'>

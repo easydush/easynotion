@@ -76,8 +76,7 @@ export const NoteView: FC = () => {
 
   return <div className='grid grid-cols-1 gap-4 p-2'>
     {!currentBlock && isControlsActive &&
-    <TypeSwitcher content={<Button children={isActiveBlockForm ? 'Change block type' : 'Add new block'} outlined />}
-                  onChange={handleChangeType} />}
+    <TypeSwitcher label={isActiveBlockForm ? 'Change block type' : 'Add new block'} onChange={handleChangeType} />}
     {isActiveBlockForm && type !== 'LINK' &&
     <BlockForm type={(currentBlock?.type ?? type) as Exclude<MediaType, 'LINK'>} onFinish={handleFinish}
                onCancel={handleCancel} initialData={currentBlock} />

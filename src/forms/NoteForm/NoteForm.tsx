@@ -27,7 +27,7 @@ export const NoteForm = ({ onFinish, onCancel, initialData, parentId }: NoteForm
 
   return <form onSubmit={handleFormSubmit}>
     <div className='grid grid-cols-6 gap-4'>
-      <div className='col-span-6'>
+      <div className='col-span-6 '>
         <Input
           type='text'
           name='title'
@@ -35,7 +35,6 @@ export const NoteForm = ({ onFinish, onCancel, initialData, parentId }: NoteForm
           required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className='justify-evenly'
         />
       </div>
       <div className='col-span-6'>
@@ -45,7 +44,6 @@ export const NoteForm = ({ onFinish, onCancel, initialData, parentId }: NoteForm
           title='URI'
           value={uri}
           onChange={(e) => setUri(e.target.value)}
-          className='justify-evenly'
         />
       </div>
       <div className='col-start-2 col-end-3'>
