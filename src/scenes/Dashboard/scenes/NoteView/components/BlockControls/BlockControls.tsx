@@ -1,24 +1,31 @@
 import { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { Block, VoidFn } from 'types';
+import { useDispatch, useSelector } from 'react-redux';
+import { Block, RootState, VoidFn } from 'types';
 import { Button, Icon } from 'components';
-import { removeNote, moveBlock, removeBlock, removeAllBlocksByNoteId, reorderBlocks } from 'store/actions';
+import { FLOWS } from 'constants/flows';
+import {
+  removeNote,
+  moveBlock,
+  removeBlock,
+  removeAllBlocksByNoteId,
+  reorderBlocks,
+  activateFlow, setCurrentBlock,
+} from 'store/actions';
+import { blockSelectors } from 'store/selectors';
 
 type ControlsProps = {
   block: Block;
-  isFirst: boolean;
-  isLast: boolean;
-  onEdit: VoidFn;
 }
 
-export const BlockControls: FC<ControlsProps> = ({ block, isFirst, isLast, onEdit }) => {
+export const BlockControls: FC<ControlsProps> = ({ block }) => {
+  const blocksLength = useSelector<RootState, Block[]>(blockSelectors.allByNoteId(block.noteId)).length;
   const dispatch = useDispatch();
 
-  const handleMove =  useCallback((block: Block, up: boolean) => {
+  const handleMove = useCallback((up: boolean) => {
     dispatch(moveBlock(block.id, up));
   }, [dispatch]);
 
-  const handleDelete =  useCallback((block: Block) => {
+  const handleDelete = useCallback(() => {
     dispatch(removeBlock(block.id));
     if (block.type === 'LINK') {
       dispatch(removeNote(block.content));
@@ -28,22 +35,27 @@ export const BlockControls: FC<ControlsProps> = ({ block, isFirst, isLast, onEdi
   }, [dispatch]);
 
 
-  const handleMoveUp =  useCallback((block: Block) => {
-    handleMove(block, true);
+  const handleMoveUp = useCallback(() => {
+    handleMove(true);
   }, [handleMove]);
 
-  const handleMoveDown =  useCallback((block: Block) => {
-    handleMove(block, false);
+  const handleMoveDown = useCallback(() => {
+    handleMove(false);
   }, [handleMove]);
 
-  return <div >
-    {!isFirst &&
-    <Button onClick={() => handleMoveUp(block)}>{<Icon type='UP' />}</Button>
+  const handleEdit = useCallback(() => {
+    dispatch(activateFlow(FLOWS.EDIT_BLOCK));
+    dispatch(setCurrentBlock(block.id));
+  }, []);
+
+  return <div>
+    {!(block.order === 0) &&
+    <Button onClick={handleMoveUp}>{<Icon type='UP' />}</Button>
     }
-    {!isLast &&
-    <Button onClick={() => handleMoveDown(block)}>{<Icon type='DOWN' />}</Button>
+    {!(block.order === blocksLength - 1) &&
+    <Button onClick={handleMoveDown}>{<Icon type='DOWN' />}</Button>
     }
-    <Button onClick={() => onEdit(block)}>{<Icon type='EDIT' />}</Button>
-    <Button onClick={() => handleDelete(block)}>{<Icon type='DELETE' />}</Button>
+    <Button onClick={handleEdit}>{<Icon type='EDIT' />}</Button>
+    <Button onClick={handleDelete}>{<Icon type='DELETE' />}</Button>
   </div>;
 };

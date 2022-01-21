@@ -9,6 +9,7 @@ import { activateFlow, createBlock, deactivateFlow, setCurrentNote, updateBlock 
 import { blockSelectors, noteSelectors, uiSelectors } from 'store/selectors';
 import { BlockView, BlockControls, TypeSwitcher } from './components';
 import { useParams } from 'react-router-dom';
+import { BlockEdit } from './components/BlockEdit/BlockEdit';
 
 export const NoteView: FC = () => {
   const params = useParams();
@@ -20,19 +21,13 @@ export const NoteView: FC = () => {
   const blocks = useSelector<RootState, Block[]>(blockSelectors.allByNoteId(note?.id ?? ''));
 
   const [type, setType] = useState('TEXT');
-  const [currentBlock, setBlock] = useState<Block>();
 
   const activeFlows = useSelector<RootState, FLOWS[]>(uiSelectors.all);
-  const isActiveBlockForm = activeFlows.includes(FLOWS.EDIT_BLOCK);
+  const isActiveBlockAdd = activeFlows.includes(FLOWS.ADD_BLOCK);
   const isControlsActive = activeFlows.includes(FLOWS.SHOW_CONTROLS);
 
-  const showBlockForm = useCallback(() => dispatch(activateFlow(FLOWS.EDIT_BLOCK)), [dispatch]);
-  const hideBlockForm = useCallback(() => dispatch(deactivateFlow(FLOWS.EDIT_BLOCK)), [dispatch]);
-
-  const handleAdd = useCallback(() => {
-    setBlock(undefined);
-    showBlockForm();
-  }, [showBlockForm]);
+  const showBlockForm = useCallback(() => dispatch(activateFlow(FLOWS.ADD_BLOCK)), [dispatch]);
+  const hideBlockForm = useCallback(() => dispatch(deactivateFlow(FLOWS.ADD_BLOCK)), [dispatch]);
 
   const handleChangeType = useCallback((value: MediaType) => {
     setType(value);
@@ -40,60 +35,29 @@ export const NoteView: FC = () => {
       hideBlockForm();
       dispatch(activateFlow(FLOWS.CREATE_SUBNOTE));
     } else {
-      handleAdd();
+      showBlockForm();
     }
-  }, [dispatch, handleAdd, hideBlockForm]);
+  }, [dispatch, showBlockForm, hideBlockForm]);
 
-  const handleFinish = useCallback((content: string) => {
-    if (currentBlock?.id) {
-      dispatch(updateBlock({
-        id: currentBlock.id,
-        noteId: currentBlock.noteId,
-        type: currentBlock.type,
-        content: content,
-        order: currentBlock.order,
-      }));
-    } else {
-      dispatch(createBlock({ id: cuid(), noteId: note?.id ?? '', type: type as MediaType, content: content }));
-    }
-    hideBlockForm();
-    setBlock(undefined);
-  }, [currentBlock, dispatch, hideBlockForm, note, type]);
-
-  const handleEdit = useCallback((block: Block) => {
-    setBlock(block);
-    showBlockForm();
-  }, [showBlockForm]);
-
-  const handleCancel = useCallback(() => {
-    hideBlockForm();
-    setBlock(undefined);
-  }, [hideBlockForm, setBlock]);
 
   useEffect(() => {
     dispatch(setCurrentNote(noteId));
   }, [noteId, dispatch]);
 
   return <div className='grid grid-cols-1 gap-4 p-2'>
-    {!currentBlock && isControlsActive &&
-    <TypeSwitcher label={'Add new block'} onChange={handleChangeType} />}
-    {isActiveBlockForm && type !== 'LINK' &&
-    <BlockForm type={(currentBlock?.type ?? type) as Exclude<MediaType, 'LINK'>} onFinish={handleFinish}
-               onCancel={handleCancel} initialData={currentBlock} />
-    }
     <>
-    {blocks.map((block) =>
-      <div className='p-2 max-w-7xl md:max-w-5xl' key={block.id}>
-        <BlockView block={block} isEdit={isActiveBlockForm}>
-          {isControlsActive ? <div className='basis-44'>
-            <BlockControls block={block}
-                           isFirst={block.order === 0}
-                           isLast={block.order === blocks.length - 1}
-                           onEdit={handleEdit} />
-          </div> : <></>}
-        </BlockView>
-      </div>)
-    }
+      {blocks.map((block) =>
+        <div className='p-2 max-w-7xl md:max-w-5xl' key={block.id}>
+          <BlockView block={block} />
+        </div>)
+      }
     </>
+    {isControlsActive &&
+    <>
+      <TypeSwitcher label={'Add new block'} onChange={handleChangeType} />
+      {isActiveBlockAdd && <BlockEdit type={type as MediaType} noteId={noteId} />}
+    </>
+    }
+
   </div>;
 };

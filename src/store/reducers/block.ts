@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   blocks: [],
+  currentBlock: null,
 };
 
 type BlockActionParams = {
@@ -58,8 +59,9 @@ export const blockReducer = (state: BlockState = initialState, action: BlockActi
       const block = findBlockById(state.blocks, action.payload.id);
 
       if (block) {
+        const nearBlocks = filterBlocksByNoteId(state.blocks, block.noteId);
         const newOrder = action.payload.up ? block.order - 1 : block.order + 1;
-        const nearbyBlock = findBlockByOrder(state.blocks, block.noteId, newOrder);
+        const nearbyBlock = findBlockByOrder(nearBlocks, newOrder);
 
         if (nearbyBlock)
           return {
@@ -77,6 +79,12 @@ export const blockReducer = (state: BlockState = initialState, action: BlockActi
       }
       return state;
     }
+
+    case BLOCK_ACTIONS.SET_CURRENT_BLOCK:
+      return { ...state, currentBlock: findBlockById(state.blocks, action.payload.id) };
+
+    case BLOCK_ACTIONS.CLEAR_CURRENT_BLOCK:
+      return { ...state, currentBlock: null };
 
     default:
       return state;

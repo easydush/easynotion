@@ -1,5 +1,5 @@
 import { Block, Note } from 'types';
-import { BLOCK_ACTIONS } from 'store/constants';
+import { BLOCK_ACTIONS, NOTE_ACTIONS } from 'store/constants';
 
 export const createBlock = (data: Omit<Block, 'order'>) => {
   return {
@@ -40,6 +40,20 @@ export const reorderBlocks = (id: Note['id']) => {
 export const moveBlock = (id: Block['id'], up: boolean) => {
   return {
     type: BLOCK_ACTIONS.MOVE_BLOCK,
-    payload: { id: id, up: up },
+    payload: { id, up },
+  };
+};
+
+export const setCurrentBlock = (id: Block['id']) => {
+  return {
+    type: BLOCK_ACTIONS.SET_CURRENT_BLOCK,
+    payload: { id },
+  };
+};
+
+export const clearCurrentBlock = () => {
+  return {
+    type: BLOCK_ACTIONS.CLEAR_CURRENT_BLOCK,
+    payload: null,
   };
 };

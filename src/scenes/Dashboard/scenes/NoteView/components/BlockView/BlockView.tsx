@@ -1,20 +1,31 @@
-import { FC, ReactElement } from 'react';
-import { Block } from 'types';
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { Block, RootState } from 'types';
+import { FLOWS } from 'constants/flows';
+import { uiSelectors } from 'store/selectors';
 import { Content } from '../Content';
-
+import { BlockControls } from '../BlockControls';
+import { BlockEdit } from '../BlockEdit';
 import styles from './BlockView.module.scss';
 
 type BlockProps = {
   block: Block;
-  children: ReactElement;
-  isEdit: boolean;
 }
 
-export const BlockView: FC<BlockProps> = ({ block, isEdit,  children }) => {
+export const BlockView: FC<BlockProps> = ({ block }) => {
+  const activeFlows = useSelector<RootState, FLOWS[]>(uiSelectors.all);
+  const isActive = activeFlows.includes(FLOWS.EDIT_BLOCK);
+
   return <div
     className={`${styles.block} flex flex-row `}>
-    {children}
-    {isEdit? <></>: <Content block={block} />}
+    <BlockControls block={block} />
+    {isActive ?
+      <>
+        {block.type !== 'LINK' &&
+        <BlockEdit block={block} type={block.type} noteId={block.noteId} />
+        }
+      </> :
+      <Content block={block} />
+    }
   </div>;
-;
 };

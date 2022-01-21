@@ -18,4 +18,4 @@ export const filterBlocksByNoteId = (blocks: Block[], noteId: Note['id']) => blo
 export const excludeBlocks = (blocks: Block[], ids: Block['id'][]) => blocks.filter((block: Block) => !ids.includes(block.id));
 export const excludeBlocksByNoteId = (blocks: Block[], noteId: Note['id']) => blocks.filter((block: Block) => block.noteId !== noteId);
 export const findBlockById = (blocks: Block[], id: Block['id']) => blocks.find((item: Block) => item.id === id);
-export const findBlockByOrder = (blocks: Block[], noteId: Note['id'], order: Block['order']) => blocks.find(item => noteId === item.noteId && item.order === order);
+export const findBlockByOrder = (blocks: Block[], order: Block['order']) => blocks.find(item => item.order === order);

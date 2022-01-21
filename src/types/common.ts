@@ -10,6 +10,7 @@ export interface NoteState {
 
 export interface BlockState {
   blocks: Block[];
+  currentBlock: Block | null,
 }
 
 export interface UIState {
