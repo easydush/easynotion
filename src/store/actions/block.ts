@@ -1,5 +1,5 @@
 import { Block, Note } from 'types';
-import { BLOCK_ACTIONS, NOTE_ACTIONS } from 'store/constants';
+import { BLOCK_ACTIONS } from 'store/constants';
 
 export const createBlock = (data: Omit<Block, 'order'>) => {
   return {

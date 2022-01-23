@@ -1,6 +1,6 @@
 import { FC, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Block, RootState, VoidFn } from 'types';
+import { Block, RootState } from 'types';
 import { Button, Icon } from 'components';
 import { FLOWS } from 'constants/flows';
 import {
@@ -23,7 +23,7 @@ export const BlockControls: FC<ControlsProps> = ({ block }) => {
 
   const handleMove = useCallback((up: boolean) => {
     dispatch(moveBlock(block.id, up));
-  }, [dispatch]);
+  }, [dispatch, block]);
 
   const handleDelete = useCallback(() => {
     dispatch(removeBlock(block.id));
@@ -32,7 +32,7 @@ export const BlockControls: FC<ControlsProps> = ({ block }) => {
       dispatch(removeAllBlocksByNoteId(block.content));
     }
     dispatch(reorderBlocks(block.noteId));
-  }, [dispatch]);
+  }, [dispatch, block]);
 
 
   const handleMoveUp = useCallback(() => {
@@ -46,16 +46,16 @@ export const BlockControls: FC<ControlsProps> = ({ block }) => {
   const handleEdit = useCallback(() => {
     dispatch(activateFlow(FLOWS.EDIT_BLOCK));
     dispatch(setCurrentBlock(block.id));
-  }, []);
+  }, [block, dispatch]);
 
   return <div>
     {!(block.order === 0) &&
-    <Button onClick={handleMoveUp}>{<Icon type='UP' />}</Button>
+    <Button onClick={handleMoveUp} title='Move up'>{<Icon type='UP' />}</Button>
     }
     {!(block.order === blocksLength - 1) &&
-    <Button onClick={handleMoveDown}>{<Icon type='DOWN' />}</Button>
+    <Button onClick={handleMoveDown} title='Move down'>{<Icon type='DOWN' />}</Button>
     }
-    <Button onClick={handleEdit}>{<Icon type='EDIT' />}</Button>
-    <Button onClick={handleDelete}>{<Icon type='DELETE' />}</Button>
+    <Button onClick={handleEdit} title='Edit'>{<Icon type='EDIT' />}</Button>
+    <Button onClick={handleDelete} title='Delete'>{<Icon type='DELETE' />}</Button>
   </div>;
 };

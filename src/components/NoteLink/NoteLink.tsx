@@ -40,7 +40,7 @@ export const NoteLink: FC<NoteLinkProps> = ({ note, isNode = false }) => {
       outline-dotted cursor-pointer ${isActive ? 'bg-teal-100' : 'bg-white'}`}
       onClick={handleMenuItemClick}>
       {note.title}
-      {isNode && <span onClick={handleAdd}>
+      {isNode && <span onClick={handleAdd} title='Add note'>
           <Icon type='ADD' />
       </span>}
     </div>

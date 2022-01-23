@@ -1,15 +1,12 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import cuid from 'cuid';
 import { Block, MediaType, Note, RootState } from 'types';
-import { Button } from 'components';
 import { FLOWS } from 'constants/flows';
-import { BlockForm } from 'forms/BlockForm';
-import { activateFlow, createBlock, deactivateFlow, setCurrentNote, updateBlock } from 'store/actions';
+import { activateFlow, deactivateFlow, setCurrentNote } from 'store/actions';
 import { blockSelectors, noteSelectors, uiSelectors } from 'store/selectors';
-import { BlockView, BlockControls, TypeSwitcher } from './components';
+import { BlockView, TypeSwitcher } from './components';
 import { useParams } from 'react-router-dom';
-import { BlockEdit } from './components/BlockEdit/BlockEdit';
+import { BlockEdit } from './components/BlockEdit';
 
 export const NoteView: FC = () => {
   const params = useParams();

@@ -56,24 +56,24 @@ export const Header: FC<HeaderProps> = ({ title }) => {
             <h1 className='text-3xl text-gray'>{title}</h1>
           </div>
           {isControlsActive &&
-            <>
-              <div className='px-4'>
-              </div>
-              <div className='px-4'>
-                <Button onClick={handleEdit}>
-                  <Icon type='EDIT' />
-                </Button>
-              </div>
-              <div className='px-4'>
-                <Button onClick={handleDelete}>
-                  <Icon type='DELETE' />
-                </Button>
-              </div>
-            </>
-          }
+          <>
             <div className='px-4'>
-              <ToggleSwitch value={isControlsActive} onToggle={handleToggle} />
             </div>
+            <div className='px-2'>
+              <Button onClick={handleEdit} title='Edit note'>
+                <Icon type='EDIT' />
+              </Button>
+            </div>
+            <div className='px-2'>
+              <Button onClick={handleDelete} title='Delete note'>
+                <Icon type='DELETE' />
+              </Button>
+            </div>
+          </>
+          }
+          <div className='px-2'>
+            <ToggleSwitch value={isControlsActive} onToggle={handleToggle} />
+          </div>
         </>) :
       <h1 className='text-3xl text-gray-700'>
         Click on menu or create a new note

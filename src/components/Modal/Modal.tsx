@@ -38,7 +38,7 @@ export const Modal: FC<ModalProps> = ({
       <div className={styles.dialog}>
         <div className={styles.header}>
           <h3 className={styles.title}>{title}</h3>
-          <Button onClick={onClose}>{<Icon type={'CLOSE'} />}</Button>
+          <Button onClick={onClose} title='Close'>{<Icon type={'CLOSE'} />}</Button>
         </div>
         <div className={styles.body}>
           <div className={styles.content}>{children}</div>

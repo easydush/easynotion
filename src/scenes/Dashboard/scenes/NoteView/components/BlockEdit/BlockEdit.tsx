@@ -24,7 +24,7 @@ export const BlockEdit: FC<BlockEditProps> = ({ block, noteId, type }) => {
     } else {
       dispatch(createBlock({ id: cuid(), noteId, type, content }));
     }
-  }, [block, dispatch, type]);
+  }, [block, dispatch, type, noteId]);
 
   const handleCancel = useCallback(() => {
     dispatch(deactivateFlow(FLOWS.EDIT_BLOCK));
