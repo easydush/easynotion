@@ -2,9 +2,8 @@ import React, { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import cuid from 'cuid';
 import { Block, MediaType, Note } from 'types';
-import { FLOWS } from 'constants/flows';
 import { BlockForm } from 'forms/BlockForm';
-import { clearCurrentBlock, createBlock, deactivateFlow, updateBlock } from 'store/actions';
+import { clearCurrentBlock, createBlock, deactivateAllFlows, updateBlock } from 'store/actions';
 
 type BlockEditProps = {
   block?: Block;
@@ -16,7 +15,7 @@ export const BlockEdit: FC<BlockEditProps> = ({ block, noteId, type }) => {
   const dispatch = useDispatch();
 
   const handleClear = useCallback(() => {
-    dispatch(deactivateFlow(FLOWS.EDIT_BLOCK));
+    dispatch(deactivateAllFlows());
     dispatch(clearCurrentBlock());
   }, [dispatch]);
 
@@ -32,6 +31,5 @@ export const BlockEdit: FC<BlockEditProps> = ({ block, noteId, type }) => {
     handleClear();
   }, [block, dispatch, type, noteId, handleClear]);
 
-  return <BlockForm type={(block?.type ?? type) as Exclude<MediaType, 'LINK'>} onFinish={handleFinish}
-                    onCancel={handleClear} initialData={block} />;
+  return <BlockForm type={(block?.type ?? type) as Exclude<MediaType, 'LINK'>} onFinish={handleFinish} initialData={block} />;
 };

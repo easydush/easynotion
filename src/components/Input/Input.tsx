@@ -15,7 +15,7 @@ export const Input: FC<InputProps> = ({ title, required = false, checked, ...pro
   return <div className='grid grid-cols-6 gap-6'>
     {title && <span>{title}:</span>}
     <input
-      className={`col-span-5 border-2 border-cyan-100 ${checked ? 'checked' : ''}`}
+      className={`col-span-5 border-2 border-cyan-100 max-w-xl ${checked ? 'checked' : ''}`}
       {...props}
     />
   </div>;

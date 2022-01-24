@@ -1,6 +1,6 @@
-import { FC, useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Block, RootState } from 'types';
+import { FC, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { Block } from 'types';
 import { Button, Icon } from 'components';
 import { FLOWS } from 'constants/flows';
 import {
@@ -11,7 +11,6 @@ import {
   reorderBlocks,
   activateFlow, setCurrentBlock,
 } from 'store/actions';
-import { blockSelectors } from 'store/selectors';
 
 type ControlsProps = {
   block: Block;
@@ -49,8 +48,8 @@ export const BlockControls: FC<ControlsProps> = ({ block, isVisible , blocksLeng
     dispatch(setCurrentBlock(block.id));
   }, [block, dispatch]);
 
-  return <div className={`grid grid-cols-4 ${!isVisible && 'invisible'}`}>
-    <Button onClick={handleEdit} title='Edit'>{<Icon type='EDIT' />}</Button>
+  return <div className={`grid grid-cols-3 ${!isVisible && 'invisible'}`}>
+    {/*<Button onClick={handleEdit} title='Edit'>{<Icon type='EDIT' />}</Button>*/}
     <Button onClick={handleDelete} title='Delete'>{<Icon type='DELETE' />}</Button> {!(block.order === 0) &&
   <Button onClick={handleMoveUp} title='Move up'>{<Icon type='UP' />}</Button>
   }

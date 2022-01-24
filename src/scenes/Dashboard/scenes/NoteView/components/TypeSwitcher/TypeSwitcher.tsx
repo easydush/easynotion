@@ -1,10 +1,10 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, ReactElement, useCallback } from 'react';
 import { MediaType, VoidFn } from 'types';
 import { Button, Popover, Icon } from 'components';
 import { convertString2SelectOption } from './tools';
 
 interface TypeInputProps {
-  label: string;
+  label: string | ReactElement;
   onChange: VoidFn;
 }
 
@@ -23,7 +23,7 @@ export const TypeSwitcher: FC<TypeInputProps> = ({ label, onChange }) => {
 
   return <>
     <div className='pt-3'>
-      <Popover controller={<Button children={label} outlined />}>
+      <Popover controller={<Button children={label} />}>
         <>
           {options.map(option =>
             <Button key={option.label} onClick={() => handleChange(option)} title={option.label}>

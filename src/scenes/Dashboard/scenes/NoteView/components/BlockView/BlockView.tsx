@@ -19,6 +19,7 @@ export const BlockView: FC<BlockProps> = ({ block, isCurrent, blocksLength }) =>
   const dispatch = useDispatch();
   const activeFlows = useSelector<RootState, FLOWS[]>(uiSelectors.all);
   const isActive = activeFlows.includes(FLOWS.EDIT_BLOCK) && isCurrent;
+  const isControlsActive = activeFlows.includes(FLOWS.SHOW_CONTROLS);
 
   const [isVisible, setVisible] = useState(false);
   const showControls = useCallback(() => {
@@ -37,7 +38,7 @@ export const BlockView: FC<BlockProps> = ({ block, isCurrent, blocksLength }) =>
   return <div
     className={`${styles.block} flex flex-row `} onMouseEnter={showControls} onMouseLeave={hideControls}
     onDoubleClick={handleEdit}>
-    <BlockControls block={block} isVisible={isVisible} blocksLength={blocksLength} />
+    <BlockControls block={block} isVisible={isControlsActive && isVisible} blocksLength={blocksLength} />
     {isActive ?
       <>
         {block.type !== 'LINK' &&

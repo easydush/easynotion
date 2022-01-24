@@ -7,6 +7,7 @@ import { blockSelectors, noteSelectors, uiSelectors } from 'store/selectors';
 import { BlockView, TypeSwitcher } from './components';
 import { useParams } from 'react-router-dom';
 import { BlockEdit } from './components/BlockEdit';
+import { Icon } from '../../../../components';
 
 export const NoteView: FC = () => {
   const params = useParams();
@@ -45,14 +46,14 @@ export const NoteView: FC = () => {
   return <div className='grid grid-cols-1 gap-4 py-2'>
     <>
       {blocks.map((block) =>
-        <div className='p-2 max-w-7xl md:max-w-5xl' key={block.id}>
+        <div className='max-w-7xl md:max-w-5xl' key={block.id}>
           <BlockView block={block} isCurrent={currentBlock?.id === block.id} blocksLength={blocksLength} />
         </div>)
       }
     </>
     {isControlsActive &&
     <>
-      <TypeSwitcher label={'Add new block'} onChange={handleChangeType} />
+      <TypeSwitcher label={<Icon type='ADD' />} onChange={handleChangeType} />
       {isActiveBlockAdd && <BlockEdit type={type as MediaType} noteId={note?.id ?? ''} />}
     </>
     }

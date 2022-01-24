@@ -36,6 +36,7 @@ export const ContentEditor: FC<EditorProps> = ({ onChange, type, initialContent 
         onInit={handleInit}
         initialValue={content}
         onChange={handleChange}
+        onMouseLeave={handleChange}
        {...(type === MediaType.TEXT ? textConfig : tableConfig)}
       />
     </div>

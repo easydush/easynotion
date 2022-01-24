@@ -72,6 +72,9 @@ export const Header: FC<HeaderProps> = ({ title }) => {
           </>
           }
           <div className='px-2'>
+            Switch mode
+          </div>
+          <div className='px-2'>
             <ToggleSwitch value={isControlsActive} onToggle={handleToggle} />
           </div>
         </>) :

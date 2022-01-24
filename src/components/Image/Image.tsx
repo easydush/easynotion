@@ -7,7 +7,7 @@ interface ImageProps {
 
 export const Image: FC<ImageProps> = ({ src, alt }) => {
   return (
-    <div className='object-cover h-96 w-96'>
+    <div className='object-cover max-h-96 max-w-96'>
       <img src={src} alt={alt} />
     </div>
   );
