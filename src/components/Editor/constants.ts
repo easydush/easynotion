@@ -1,5 +1,6 @@
 export const textConfig = {
   height: 400,
+  width: 400,
   menubar: false,
   plugins: [
     'advlist autolink lists link image charmap print preview anchor',
@@ -14,7 +15,7 @@ export const textConfig = {
 
 export const tableConfig = {
   height: 400,
-  menubar: 'table',
+  menubar: false,
   plugins: [
     'table',
   ],

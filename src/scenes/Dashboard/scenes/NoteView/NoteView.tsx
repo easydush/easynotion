@@ -16,6 +16,8 @@ export const NoteView: FC = () => {
 
   const note = useSelector<RootState, Note | null>(noteSelectors.current);
   const blocks = useSelector<RootState, Block[]>(blockSelectors.allByNoteId(note?.id ?? ''));
+  const blocksLength = blocks.length;
+  const currentBlock = useSelector<RootState, Block | null>(blockSelectors.current);
 
   const [type, setType] = useState('TEXT');
 
@@ -36,23 +38,22 @@ export const NoteView: FC = () => {
     }
   }, [dispatch, showBlockForm, hideBlockForm]);
 
-
   useEffect(() => {
     dispatch(setCurrentNote(noteId));
   }, [noteId, dispatch]);
 
-  return <div className='grid grid-cols-1 gap-4 p-2'>
+  return <div className='grid grid-cols-1 gap-4 py-2'>
     <>
       {blocks.map((block) =>
         <div className='p-2 max-w-7xl md:max-w-5xl' key={block.id}>
-          <BlockView block={block} />
+          <BlockView block={block} isCurrent={currentBlock?.id === block.id} blocksLength={blocksLength} />
         </div>)
       }
     </>
     {isControlsActive &&
     <>
       <TypeSwitcher label={'Add new block'} onChange={handleChangeType} />
-      {isActiveBlockAdd && <BlockEdit type={type as MediaType} noteId={noteId} />}
+      {isActiveBlockAdd && <BlockEdit type={type as MediaType} noteId={note?.id ?? ''} />}
     </>
     }
 

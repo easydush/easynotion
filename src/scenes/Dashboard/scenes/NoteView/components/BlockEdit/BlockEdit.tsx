@@ -15,6 +15,11 @@ type BlockEditProps = {
 export const BlockEdit: FC<BlockEditProps> = ({ block, noteId, type }) => {
   const dispatch = useDispatch();
 
+  const handleClear = useCallback(() => {
+    dispatch(deactivateFlow(FLOWS.EDIT_BLOCK));
+    dispatch(clearCurrentBlock());
+  }, [dispatch]);
+
   const handleFinish = useCallback((content: string) => {
     if (block?.id) {
       dispatch(updateBlock({
@@ -24,13 +29,9 @@ export const BlockEdit: FC<BlockEditProps> = ({ block, noteId, type }) => {
     } else {
       dispatch(createBlock({ id: cuid(), noteId, type, content }));
     }
-  }, [block, dispatch, type, noteId]);
-
-  const handleCancel = useCallback(() => {
-    dispatch(deactivateFlow(FLOWS.EDIT_BLOCK));
-    dispatch(clearCurrentBlock());
-  }, [dispatch]);
+    handleClear();
+  }, [block, dispatch, type, noteId, handleClear]);
 
   return <BlockForm type={(block?.type ?? type) as Exclude<MediaType, 'LINK'>} onFinish={handleFinish}
-                    onCancel={handleCancel} initialData={block} />;
+                    onCancel={handleClear} initialData={block} />;
 };

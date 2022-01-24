@@ -12,11 +12,11 @@ type InputProps = {
 }
 
 export const Input: FC<InputProps> = ({ title, required = false, checked, ...props }) => {
-  return <>
+  return <div className='grid grid-cols-6 gap-6'>
     {title && <span>{title}:</span>}
     <input
-      className={`border-2 border-cyan-100 ${checked ? 'checked' : ''}`}
+      className={`col-span-5 border-2 border-cyan-100 ${checked ? 'checked' : ''}`}
       {...props}
     />
-  </>;
+  </div>;
 };

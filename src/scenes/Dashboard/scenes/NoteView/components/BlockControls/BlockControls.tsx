@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Block, RootState } from 'types';
 import { Button, Icon } from 'components';
@@ -15,10 +15,11 @@ import { blockSelectors } from 'store/selectors';
 
 type ControlsProps = {
   block: Block;
+  isVisible: boolean;
+  blocksLength: number;
 }
 
-export const BlockControls: FC<ControlsProps> = ({ block }) => {
-  const blocksLength = useSelector<RootState, Block[]>(blockSelectors.allByNoteId(block.noteId)).length;
+export const BlockControls: FC<ControlsProps> = ({ block, isVisible , blocksLength}) => {
   const dispatch = useDispatch();
 
   const handleMove = useCallback((up: boolean) => {
@@ -48,14 +49,13 @@ export const BlockControls: FC<ControlsProps> = ({ block }) => {
     dispatch(setCurrentBlock(block.id));
   }, [block, dispatch]);
 
-  return <div>
-    {!(block.order === 0) &&
-    <Button onClick={handleMoveUp} title='Move up'>{<Icon type='UP' />}</Button>
-    }
+  return <div className={`grid grid-cols-4 ${!isVisible && 'invisible'}`}>
+    <Button onClick={handleEdit} title='Edit'>{<Icon type='EDIT' />}</Button>
+    <Button onClick={handleDelete} title='Delete'>{<Icon type='DELETE' />}</Button> {!(block.order === 0) &&
+  <Button onClick={handleMoveUp} title='Move up'>{<Icon type='UP' />}</Button>
+  }
     {!(block.order === blocksLength - 1) &&
     <Button onClick={handleMoveDown} title='Move down'>{<Icon type='DOWN' />}</Button>
     }
-    <Button onClick={handleEdit} title='Edit'>{<Icon type='EDIT' />}</Button>
-    <Button onClick={handleDelete} title='Delete'>{<Icon type='DELETE' />}</Button>
   </div>;
 };
