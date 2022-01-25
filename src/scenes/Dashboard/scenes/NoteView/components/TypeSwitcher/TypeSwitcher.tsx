@@ -22,7 +22,7 @@ export const TypeSwitcher: FC<TypeInputProps> = ({ onChange, isFirst }) => {
 
   return <>
     <div className='pl-2 pr-14'>
-      <Popover controller={isFirst ? <Button outlined children='Add block'/> : <Icon type='ADD' />}>
+      <Popover controller={<Icon type='ADD' />}>
         <>
           {options.map(option =>
             <Button key={option.label} onClick={() => handleChange(option)} title={option.label}>

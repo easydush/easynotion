@@ -1,14 +1,18 @@
 import { BaseSyntheticEvent, useCallback } from 'react';
-import { MediaType } from 'types';
-import { ContentEditor, ImageInput, VideoInput } from 'components';
+import { useSelector } from 'react-redux';
+import { MediaType, Note, RootState } from 'types';
+import { ContentEditor, ImageInput, VideoInput, NoteSelector } from 'components';
+import { noteSelectors } from 'store/selectors';
 
 type SwitcherProps = {
-  type: Exclude<MediaType, MediaType.LINK>;
+  type: MediaType;
   onChange: (value: string) => void;
   initialContent?: string;
 }
 
 export const Switcher = ({ type, onChange, initialContent }: SwitcherProps) => {
+  const note = useSelector<RootState, Note | null>(noteSelectors.current);
+
   const handleChange = useCallback((event: BaseSyntheticEvent) => {
     onChange(event?.target?.value ?? event);
   }, [onChange]);
@@ -24,6 +28,10 @@ export const Switcher = ({ type, onChange, initialContent }: SwitcherProps) => {
     case MediaType.VIDEO: {
       Component = VideoInput;
       break;
+    }
+
+    case MediaType.LINK: {
+      return <NoteSelector noteId={note?.id ?? ''} onChange={handleChange} initialContent={initialContent} />;
     }
 
     case MediaType.TEXT:

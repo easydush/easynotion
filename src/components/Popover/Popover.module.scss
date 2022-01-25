@@ -17,18 +17,18 @@
   width: 115px;
 }
 
-.popover__pointer {
-  position: absolute;
-  z-index: 10;
-  content: "";
-  right: calc(40%);
-  top: 0;
-  border-style: solid;
-  border-width: 0 10px 10px 10px;
-  border-color: transparent transparent lightseagreen transparent;
-  transition-duration: 0.3s;
-  transition-property: transform;
-}
+//.popover__pointer {
+//  position: absolute;
+//  z-index: 10;
+//  content: "";
+//  right: calc(40%);
+//  top: 0;
+//  border-style: solid;
+//  border-width: 0 10px 10px 10px;
+//  border-color: transparent transparent lightseagreen transparent;
+//  transition-duration: 0.3s;
+//  transition-property: transform;
+//}
 
 
 .popover__wrapper:hover .popover__content {

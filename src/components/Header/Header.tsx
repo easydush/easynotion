@@ -20,6 +20,7 @@ interface HeaderProps {
 
 export const Header: FC<HeaderProps> = ({ title }) => {
   const note = useSelector<RootState, Note | null>(noteSelectors.current);
+  const notes = useSelector<RootState, Note[]>(noteSelectors.all);
 
   const activeFlows = useSelector<RootState, FLOWS[]>(uiSelectors.all);
 
@@ -77,7 +78,7 @@ export const Header: FC<HeaderProps> = ({ title }) => {
           </div>
         </>) :
       <h1 className='text-3xl text-gray-700'>
-        Click on menu or create a new note
+        {notes.length === 0 ? 'Create a note to start' : 'Select a note from menu'}
       </h1>
     }
   </div>;

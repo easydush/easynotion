@@ -2,7 +2,6 @@ import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Block, MediaType, Note, RootState } from 'types';
-import { Icon } from 'components';
 import { FLOWS } from 'constants/flows';
 import { activateFlow, deactivateFlow, setCurrentNote } from 'store/actions';
 import { blockSelectors, noteSelectors, uiSelectors } from 'store/selectors';
@@ -31,12 +30,7 @@ export const NoteView: FC = () => {
 
   const handleChangeType = useCallback((value: MediaType) => {
     setType(value);
-    if (value === 'LINK') {
-      hideBlockForm();
-      dispatch(activateFlow(FLOWS.CREATE_SUBNOTE));
-    } else {
-      showBlockForm();
-    }
+    showBlockForm();
   }, [dispatch, showBlockForm, hideBlockForm]);
 
   useEffect(() => {
@@ -44,10 +38,13 @@ export const NoteView: FC = () => {
   }, [noteId, dispatch]);
 
   useEffect(() => {
-    if (blocksLength === 0) dispatch(activateFlow(FLOWS.SHOW_CONTROLS));
+    if (blocksLength === 0) {
+      dispatch(activateFlow(FLOWS.SHOW_CONTROLS));
+      dispatch(activateFlow(FLOWS.ADD_BLOCK));
+    }
   }, [blocksLength, dispatch]);
 
-  return <div className='grid grid-cols-1 gap-4 py-2'>
+  return <div className='grid grid-cols-1 py-2'>
     <>
       {blocks.map((block) =>
         <div className='max-w-7xl md:max-w-5xl' key={block.id}>
