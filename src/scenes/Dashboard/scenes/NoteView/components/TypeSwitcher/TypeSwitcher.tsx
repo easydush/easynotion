@@ -1,11 +1,11 @@
-import React, { FC, ReactElement, useCallback } from 'react';
+import React, { FC, useCallback } from 'react';
 import { MediaType, VoidFn } from 'types';
 import { Button, Popover, Icon } from 'components';
 import { convertString2SelectOption } from './tools';
 
 interface TypeInputProps {
-  label: string | ReactElement;
   onChange: VoidFn;
+  isFirst?: boolean;
 }
 
 type Option = {
@@ -15,15 +15,14 @@ type Option = {
 
 const options = convertString2SelectOption(Object.keys(MediaType));
 
-export const TypeSwitcher: FC<TypeInputProps> = ({ label, onChange }) => {
-
+export const TypeSwitcher: FC<TypeInputProps> = ({ onChange, isFirst }) => {
   const handleChange = useCallback((option: Option) => {
     onChange(option.value);
   }, [onChange]);
 
   return <>
-    <div className='pt-3'>
-      <Popover controller={<Button children={label} />}>
+    <div className='pl-2 pr-14'>
+      <Popover controller={isFirst ? <Button outlined children='Add block'/> : <Icon type='ADD' />}>
         <>
           {options.map(option =>
             <Button key={option.label} onClick={() => handleChange(option)} title={option.label}>

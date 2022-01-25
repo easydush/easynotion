@@ -18,8 +18,8 @@ type BlockProps = {
 export const BlockView: FC<BlockProps> = ({ block, isCurrent, blocksLength }) => {
   const dispatch = useDispatch();
   const activeFlows = useSelector<RootState, FLOWS[]>(uiSelectors.all);
-  const isActive = activeFlows.includes(FLOWS.EDIT_BLOCK) && isCurrent;
   const isControlsActive = activeFlows.includes(FLOWS.SHOW_CONTROLS);
+  const isActive = activeFlows.includes(FLOWS.EDIT_BLOCK) && isCurrent && isControlsActive;
 
   const [isVisible, setVisible] = useState(false);
   const showControls = useCallback(() => {

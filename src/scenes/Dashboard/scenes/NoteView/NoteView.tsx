@@ -1,13 +1,13 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Block, MediaType, Note, RootState } from 'types';
+import { Icon } from 'components';
 import { FLOWS } from 'constants/flows';
 import { activateFlow, deactivateFlow, setCurrentNote } from 'store/actions';
 import { blockSelectors, noteSelectors, uiSelectors } from 'store/selectors';
 import { BlockView, TypeSwitcher } from './components';
-import { useParams } from 'react-router-dom';
 import { BlockEdit } from './components/BlockEdit';
-import { Icon } from '../../../../components';
 
 export const NoteView: FC = () => {
   const params = useParams();
@@ -43,6 +43,10 @@ export const NoteView: FC = () => {
     dispatch(setCurrentNote(noteId));
   }, [noteId, dispatch]);
 
+  useEffect(() => {
+    if (blocksLength === 0) dispatch(activateFlow(FLOWS.SHOW_CONTROLS));
+  }, [blocksLength, dispatch]);
+
   return <div className='grid grid-cols-1 gap-4 py-2'>
     <>
       {blocks.map((block) =>
@@ -50,13 +54,14 @@ export const NoteView: FC = () => {
           <BlockView block={block} isCurrent={currentBlock?.id === block.id} blocksLength={blocksLength} />
         </div>)
       }
+      {isControlsActive &&
+      <div className='max-w-7xl md:max-w-5xl'>
+        <div className='flex flex-row'>
+          <TypeSwitcher onChange={handleChangeType} isFirst={blocksLength === 0} />
+          {isActiveBlockAdd && <BlockEdit type={type as MediaType} noteId={note?.id ?? ''} />}
+        </div>
+      </div>
+      }
     </>
-    {isControlsActive &&
-    <>
-      <TypeSwitcher label={<Icon type='ADD' />} onChange={handleChangeType} />
-      {isActiveBlockAdd && <BlockEdit type={type as MediaType} noteId={note?.id ?? ''} />}
-    </>
-    }
-
   </div>;
 };

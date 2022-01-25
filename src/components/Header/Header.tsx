@@ -49,7 +49,7 @@ export const Header: FC<HeaderProps> = ({ title }) => {
   }, [dispatch, isControlsActive]);
 
   return <div
-    className='flex justify-between items-center py-4 pl-4 border-b-2 border-gray-100'>
+    className='flex justify-between items-center py-4 pl-24 border-b-2 border-gray-100'>
     {!!title ? (
         <>
           <div className='flex justify-start lg:w-0 lg:flex-1'>
@@ -57,8 +57,6 @@ export const Header: FC<HeaderProps> = ({ title }) => {
           </div>
           {isControlsActive &&
           <>
-            <div className='px-4'>
-            </div>
             <div className='px-2'>
               <Button onClick={handleEdit} title='Edit note'>
                 <Icon type='EDIT' />

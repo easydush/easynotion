@@ -26,7 +26,7 @@ export const ContentEditor: FC<EditorProps> = ({ onChange, type, initialContent 
   }, []);
 
   return (
-    <div>
+    <div className='border-2 border-gray-100 w-96'>
       {loading && (
         <Loading />
       )}

@@ -8,10 +8,18 @@ type BlockFormProps = {
   initialData?: Block;
 }
 
+const isEditorElement = (node: Node) => {
+  const tox = document.getElementsByClassName('tox');
+  const toolbar = tox.item(0);
+  const tools = tox.item(1);
+
+  return toolbar?.contains(node) || tools?.contains(node);
+};
+
 const useOutsideHandler = (ref: React.RefObject<Element>, handle: () => void) => {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+      if (ref.current && !ref.current.contains(event.target as Node) && !isEditorElement(event.target as Node)) {
         handle();
       }
     }
@@ -31,6 +39,7 @@ const useKeyboardHandler = (handle: () => void) => {
         handle();
       }
     }
+
     document.addEventListener('keydown', handleSave);
     return () => {
       document.removeEventListener('keydown', handleSave);
@@ -44,7 +53,7 @@ export const BlockForm = ({ type, onFinish, initialData }: BlockFormProps) => {
   const wrapperRef = useRef(null);
 
   const handleFinish = useCallback(() => {
-    onFinish(content)
+    onFinish(content);
     setContent(undefined);
   }, [content, onFinish]);
 
@@ -57,9 +66,7 @@ export const BlockForm = ({ type, onFinish, initialData }: BlockFormProps) => {
   useKeyboardHandler(handleFinish);
 
   return <form onSubmit={handleFormSubmit} ref={wrapperRef} id={formId}>
-    <div className='grid grid-cols-1 gap-y-2'>
       <Switcher type={type} onChange={setContent} initialContent={content} />
-    </div>
   </form>;
 };
 
