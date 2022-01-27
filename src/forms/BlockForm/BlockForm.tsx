@@ -1,4 +1,10 @@
-import React, { SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { MediaType, Block, VoidFn } from 'types';
 import { Switcher } from './components';
 
@@ -6,7 +12,7 @@ type BlockFormProps = {
   type: MediaType;
   onFinish: VoidFn;
   initialData?: Block;
-}
+};
 
 const isEditorElement = (node: Node) => {
   const tox = document.getElementsByClassName('tox');
@@ -16,10 +22,17 @@ const isEditorElement = (node: Node) => {
   return toolbar?.contains(node) || tools?.contains(node);
 };
 
-const useOutsideHandler = (ref: React.RefObject<Element>, handle: () => void) => {
+const useOutsideHandler = (
+  ref: React.RefObject<Element>,
+  handle: () => void,
+) => {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node) && !isEditorElement(event.target as Node)) {
+      if (
+        ref.current &&
+        !ref.current.contains(event.target as Node) &&
+        !isEditorElement(event.target as Node)
+      ) {
         handle();
       }
     }
@@ -57,16 +70,20 @@ export const BlockForm = ({ type, onFinish, initialData }: BlockFormProps) => {
     setContent(undefined);
   }, [content, onFinish]);
 
-  const handleFormSubmit = useCallback((e: SyntheticEvent) => {
-    e.preventDefault();
-    handleFinish();
-  }, [handleFinish]);
+  const handleFormSubmit = useCallback(
+    (e: SyntheticEvent) => {
+      e.preventDefault();
+      handleFinish();
+    },
+    [handleFinish],
+  );
 
   useOutsideHandler(wrapperRef, handleFinish);
   useKeyboardHandler(handleFinish);
 
-  return <form onSubmit={handleFormSubmit} ref={wrapperRef} id={formId}>
+  return (
+    <form onSubmit={handleFormSubmit} ref={wrapperRef} id={formId}>
       <Switcher type={type} onChange={setContent} initialContent={content} />
-  </form>;
+    </form>
+  );
 };
-

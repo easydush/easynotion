@@ -9,5 +9,5 @@ export const Home: FC = () => {
     dispatch(setCurrentNote(undefined));
   }, [dispatch]);
 
-  return <div></div>;
-}
+  return <div />;
+};

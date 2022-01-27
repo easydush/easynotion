@@ -4,5 +4,5 @@ export const enum FLOWS {
   EDIT_NOTE = 'editNote',
   ADD_BLOCK = 'addBlock',
   EDIT_BLOCK = 'editBlock',
-  SHOW_CONTROLS = 'showControls'
+  SHOW_CONTROLS = 'showControls',
 }

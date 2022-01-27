@@ -8,14 +8,17 @@ const initialState = {
 };
 
 type NoteActionParams = {
-  type: string,
+  type: string;
   payload: {
-    id: Note['id'],
-    note: Note,
-  }
-}
+    id: Note['id'];
+    note: Note;
+  };
+};
 
-export const noteReducer = (state: NoteState = initialState, action: NoteActionParams) => {
+export const noteReducer = (
+  state: NoteState = initialState,
+  action: NoteActionParams,
+) => {
   switch (action.type) {
     case NOTE_ACTIONS.CREATE_NOTE:
       return { ...state, notes: [...state.notes, action.payload.note] };
@@ -23,7 +26,10 @@ export const noteReducer = (state: NoteState = initialState, action: NoteActionP
     case NOTE_ACTIONS.UPDATE_NOTE:
       return {
         ...state,
-        notes: [...excludeNote(state.notes, action.payload.note.id), action.payload.note],
+        notes: [
+          ...excludeNote(state.notes, action.payload.note.id),
+          action.payload.note,
+        ],
       };
 
     case NOTE_ACTIONS.DELETE_NOTE:

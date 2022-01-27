@@ -1,1 +1,1 @@
-export * from './NoteLink'
+export * from './NoteLink';

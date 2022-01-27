@@ -29,7 +29,6 @@ export const removeAllBlocksByNoteId = (id: Note['id']) => {
   };
 };
 
-
 export const reorderBlocks = (id: Note['id']) => {
   return {
     type: BLOCK_ACTIONS.REORDER_BLOCKS,

@@ -14,10 +14,7 @@ export const persistConfig = {
 // @ts-ignore
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = createStore(
-  persistedReducer,
-  applyMiddleware(logger),
-);
+export const store = createStore(persistedReducer, applyMiddleware(logger));
 
 // @ts-ignore
 export let persistor = persistStore(store);

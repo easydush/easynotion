@@ -4,9 +4,12 @@ import { useDispatch } from 'react-redux';
 import { Note, TreeItem } from 'types';
 import { Icon } from 'components';
 import { getNoteUrl } from 'tools';
-import { activateFlow, deactivateAllFlows, setCurrentNote } from 'store/actions';
+import {
+  activateFlow,
+  deactivateAllFlows,
+  setCurrentNote,
+} from 'store/actions';
 import { FLOWS } from 'constants/flows';
-
 
 interface NoteLinkProps {
   note: Note | TreeItem;
@@ -20,29 +23,32 @@ export const NoteLink: FC<NoteLinkProps> = ({ note, isNode = false }) => {
 
   const isActive = location.pathname === (note as TreeItem).path;
 
-  const handleMenuItemClick = useCallback(
-    () => {
-      dispatch(deactivateAllFlows());
-      navigate((note as TreeItem)?.path ?? getNoteUrl(note as Note));
-    },
-    [navigate, note, dispatch],
-  );
+  const handleMenuItemClick = useCallback(() => {
+    dispatch(deactivateAllFlows());
+    navigate((note as TreeItem)?.path ?? getNoteUrl(note as Note));
+  }, [navigate, note, dispatch]);
 
-  const handleAdd = useCallback((e: SyntheticEvent) => {
-    e.stopPropagation();
-    dispatch(setCurrentNote((note as TreeItem).key));
-    dispatch(activateFlow(FLOWS.CREATE_SUBNOTE));
-  }, [dispatch, note]);
+  const handleAdd = useCallback(
+    (e: SyntheticEvent) => {
+      e.stopPropagation();
+      dispatch(setCurrentNote((note as TreeItem).key));
+      dispatch(activateFlow(FLOWS.CREATE_SUBNOTE));
+    },
+    [dispatch, note],
+  );
 
   return (
     <div
       className={`mr-2 my-2 p-2 flex justify-between rounded-full outline-2 outline-cyan-200 
       outline-dotted cursor-pointer ${isActive ? 'bg-teal-100' : 'bg-white'}`}
-      onClick={handleMenuItemClick}>
+      onClick={handleMenuItemClick}
+    >
       {note.title}
-      {isNode && <div onClick={handleAdd} title='Add note'>
-          <Icon type='ADD_SUBNOTE' />
-      </div>}
+      {isNode && (
+        <div onClick={handleAdd} title="Add note">
+          <Icon type="ADD_SUBNOTE" />
+        </div>
+      )}
     </div>
   );
 };

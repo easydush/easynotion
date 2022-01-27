@@ -4,13 +4,18 @@ import cuid from 'cuid';
 import { Block, MediaType, Note } from 'types';
 import { BlockForm } from 'forms/BlockForm';
 import { FLOWS } from 'constants/flows';
-import { clearCurrentBlock, createBlock, deactivateFlow, updateBlock } from 'store/actions';
+import {
+  clearCurrentBlock,
+  createBlock,
+  deactivateFlow,
+  updateBlock,
+} from 'store/actions';
 
 type BlockEditProps = {
   block?: Block;
   noteId: Note['id'];
   type: MediaType;
-}
+};
 
 export const BlockEdit: FC<BlockEditProps> = ({ block, noteId, type }) => {
   const dispatch = useDispatch();
@@ -21,20 +26,30 @@ export const BlockEdit: FC<BlockEditProps> = ({ block, noteId, type }) => {
     dispatch(clearCurrentBlock());
   }, [dispatch]);
 
-  const handleFinish = useCallback((content: string) => {
-    if (content) {
-      if (block?.id) {
-        dispatch(updateBlock({
-          ...block,
-          content,
-        }));
-      } else {
-        dispatch(createBlock({ id: cuid(), noteId, type, content }));
+  const handleFinish = useCallback(
+    (content: string) => {
+      if (content) {
+        if (block?.id) {
+          dispatch(
+            updateBlock({
+              ...block,
+              content,
+            }),
+          );
+        } else {
+          dispatch(createBlock({ id: cuid(), noteId, type, content }));
+        }
       }
-    }
-    handleClear();
-  }, [block, dispatch, type, noteId, handleClear]);
+      handleClear();
+    },
+    [block, dispatch, type, noteId, handleClear],
+  );
 
-  return <BlockForm type={(block?.type ?? type) as MediaType} onFinish={handleFinish}
-                    initialData={block} />;
+  return (
+    <BlockForm
+      type={(block?.type ?? type) as MediaType}
+      onFinish={handleFinish}
+      initialData={block}
+    />
+  );
 };

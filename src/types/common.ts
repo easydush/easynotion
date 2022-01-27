@@ -1,7 +1,7 @@
 import { Block, Note } from './note';
 import { FLOWS } from 'constants/flows';
 
-export type VoidFn = (args: any) => void
+export type VoidFn = (args: any) => void;
 
 export interface NoteState {
   notes: Note[];
@@ -10,7 +10,7 @@ export interface NoteState {
 
 export interface BlockState {
   blocks: Block[];
-  currentBlock: Block | null,
+  currentBlock: Block | null;
 }
 
 export interface UIState {

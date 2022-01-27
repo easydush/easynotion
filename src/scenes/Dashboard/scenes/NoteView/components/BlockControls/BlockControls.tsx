@@ -9,21 +9,29 @@ import {
   removeBlock,
   removeAllBlocksByNoteId,
   reorderBlocks,
-  activateFlow, setCurrentBlock,
+  activateFlow,
+  setCurrentBlock,
 } from 'store/actions';
 
 type ControlsProps = {
   block: Block;
   isVisible: boolean;
   blocksLength: number;
-}
+};
 
-export const BlockControls: FC<ControlsProps> = ({ block, isVisible , blocksLength}) => {
+export const BlockControls: FC<ControlsProps> = ({
+  block,
+  isVisible,
+  blocksLength,
+}) => {
   const dispatch = useDispatch();
 
-  const handleMove = useCallback((up: boolean) => {
-    dispatch(moveBlock(block.id, up));
-  }, [dispatch, block]);
+  const handleMove = useCallback(
+    (up: boolean) => {
+      dispatch(moveBlock(block.id, up));
+    },
+    [dispatch, block],
+  );
 
   const handleDelete = useCallback(() => {
     dispatch(removeBlock(block.id));
@@ -34,7 +42,6 @@ export const BlockControls: FC<ControlsProps> = ({ block, isVisible , blocksLeng
     dispatch(reorderBlocks(block.noteId));
   }, [dispatch, block]);
 
-
   const handleMoveUp = useCallback(() => {
     handleMove(true);
   }, [handleMove]);
@@ -43,18 +50,21 @@ export const BlockControls: FC<ControlsProps> = ({ block, isVisible , blocksLeng
     handleMove(false);
   }, [handleMove]);
 
-  const handleEdit = useCallback(() => {
-    dispatch(activateFlow(FLOWS.EDIT_BLOCK));
-    dispatch(setCurrentBlock(block.id));
-  }, [block, dispatch]);
-
-  return <div className={`grid grid-cols-3 ${!isVisible && 'invisible'}`}>
-    {/*<Button onClick={handleEdit} title='Edit'>{<Icon type='EDIT' />}</Button>*/}
-    <Button onClick={handleDelete} title='Delete'>{<Icon type='DELETE' />}</Button> {!(block.order === 0) &&
-  <Button onClick={handleMoveUp} title='Move up'>{<Icon type='UP' />}</Button>
-  }
-    {!(block.order === blocksLength - 1) &&
-    <Button onClick={handleMoveDown} title='Move down'>{<Icon type='DOWN' />}</Button>
-    }
-  </div>;
+  return (
+    <div className={`grid grid-cols-3 ${!isVisible && 'invisible'}`}>
+      <Button onClick={handleDelete} title="Delete">
+        {<Icon type="DELETE" />}
+      </Button>{' '}
+      {!(block.order === 0) && (
+        <Button onClick={handleMoveUp} title="Move up">
+          {<Icon type="UP" />}
+        </Button>
+      )}
+      {!(block.order === blocksLength - 1) && (
+        <Button onClick={handleMoveDown} title="Move down">
+          {<Icon type="DOWN" />}
+        </Button>
+      )}
+    </div>
+  );
 };

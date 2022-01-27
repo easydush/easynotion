@@ -12,18 +12,20 @@ type NoteSelectorProps = {
   isAddButtonActive?: boolean;
   initialContent?: string;
   parentId?: string;
-  title?: string,
-}
+  title?: string;
+};
 
 export const NoteSelector: FC<NoteSelectorProps> = ({
-                                                      noteId,
-                                                      onChange,
-                                                      initialContent,
-                                                      parentId,
-                                                      title,
-                                                      isAddButtonActive = true,
-                                                    }) => {
-  const notes = useSelector<RootState, Note[]>(noteSelectors.excludeChildren(noteId));
+  noteId,
+  onChange,
+  initialContent,
+  parentId,
+  title,
+  isAddButtonActive = true,
+}) => {
+  const notes = useSelector<RootState, Note[]>(
+    noteSelectors.excludeChildren(noteId),
+  );
   const dispatch = useDispatch();
 
   const handleClick = useCallback(() => {
@@ -31,15 +33,30 @@ export const NoteSelector: FC<NoteSelectorProps> = ({
     dispatch(activateFlow(FLOWS.CREATE_SUBNOTE));
   }, [dispatch]);
 
-  return <>{notes.length > 0 ?
-    <div className='grid grid-cols-5 gap-6'>
-      {title && <span>{title}:</span>}
-      <select onChange={onChange} defaultValue={parentId ?? initialContent} disabled={!!parentId && !initialContent}
-              className={`col-span-4 border-2 border-cyan-100 max-w-xl`}>
-        {notes.map(note => <option key={note.id} value={note.id}>{note.title}</option>)}
-      </select>
-    </div> :
-    <span>No notes available.</span>}
-    {isAddButtonActive && <Button children={'Add new'} onClick={handleClick} />}
-  </>;
+  return (
+    <>
+      {notes.length > 0 ? (
+        <div className="grid grid-cols-5 gap-6">
+          {title && <span>{title}:</span>}
+          <select
+            onChange={onChange}
+            defaultValue={parentId ?? initialContent}
+            disabled={!!parentId && !initialContent}
+            className={`col-span-4 border-2 border-cyan-100 max-w-xl`}
+          >
+            {notes.map((note) => (
+              <option key={note.id} value={note.id}>
+                {note.title}
+              </option>
+            ))}
+          </select>
+        </div>
+      ) : (
+        <span>No notes available.</span>
+      )}
+      {isAddButtonActive && (
+        <Button children={'Add new'} onClick={handleClick} />
+      )}
+    </>
+  );
 };

@@ -5,7 +5,6 @@ import { Menu, NoteLink } from 'components';
 import { convertNotes2Tree } from 'tools';
 import { noteSelectors } from 'store/selectors';
 
-
 export const NotesTree: FC = () => {
   const notes = useSelector<RootState, Note[]>(noteSelectors.all);
   const tree = convertNotes2Tree(notes, notes);
@@ -13,5 +12,3 @@ export const NotesTree: FC = () => {
 
   return <Menu tree={tree} nodeRender={renderNode} />;
 };
-
-

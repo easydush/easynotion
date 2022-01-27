@@ -8,7 +8,7 @@ export * from './Loading';
 export * from './NoteLink';
 export * from './NoteSelector';
 export * from './Modal';
-export * from './ToggleSwitch'
+export * from './ToggleSwitch';
 export * from './Video';
 export * from './Editor';
 export * from './Icon';

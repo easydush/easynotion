@@ -12,19 +12,22 @@ interface ModalProps {
 }
 
 export const Modal: FC<ModalProps> = ({
-                        visible = false,
-                        title = '',
-                        footer = '',
-                        onClose,
-                        children,
-                      }) => {
-  const onKeydown = useCallback(({ key }: KeyboardEvent) => {
-    switch (key) {
-      case 'Escape':
-        onClose();
-        break;
-    }
-  }, [onClose]);
+  visible = false,
+  title = '',
+  footer = '',
+  onClose,
+  children,
+}) => {
+  const onKeydown = useCallback(
+    ({ key }: KeyboardEvent) => {
+      switch (key) {
+        case 'Escape':
+          onClose();
+          break;
+      }
+    },
+    [onClose],
+  );
 
   useEffect(() => {
     document.addEventListener('keydown', onKeydown);
@@ -38,7 +41,9 @@ export const Modal: FC<ModalProps> = ({
       <div className={styles.dialog}>
         <div className={styles.header}>
           <h3 className={styles.title}>{title}</h3>
-          <Button onClick={onClose} title='Close'>{<Icon type={'CLOSE'} />}</Button>
+          <Button onClick={onClose} title="Close">
+            {<Icon type={'CLOSE'} />}
+          </Button>
         </div>
         <div className={styles.body}>
           <div className={styles.content}>{children}</div>

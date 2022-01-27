@@ -49,40 +49,44 @@ export const Header: FC<HeaderProps> = ({ title }) => {
   }, [dispatch, note]);
 
   const handleToggle = useCallback(() => {
-    isControlsActive ? dispatch(deactivateAllFlows()) : dispatch(activateFlow(FLOWS.SHOW_CONTROLS));
+    isControlsActive
+      ? dispatch(deactivateAllFlows())
+      : dispatch(activateFlow(FLOWS.SHOW_CONTROLS));
   }, [dispatch, isControlsActive]);
 
-  return <div
-    className='flex justify-between items-center py-4 pl-24 border-b-2 border-gray-100'>
-    {!!title ? (
+  return (
+    <div className="flex justify-between items-center py-4 pl-24 border-b-2 border-gray-100">
+      {!!title ? (
         <>
-          <div className='flex justify-start lg:w-0 lg:flex-1'>
-            <h1 className='text-3xl text-gray'>{title}</h1>
+          <div className="flex justify-start lg:w-0 lg:flex-1">
+            <h1 className="text-3xl text-gray">{title}</h1>
           </div>
-          {isControlsActive &&
-          <>
-            <div className='px-2'>
-              <Button onClick={handleEdit} title='Edit note'>
-                <Icon type='EDIT' />
-              </Button>
-            </div>
-            <div className='px-2'>
-              <Button onClick={handleDelete} title='Delete note'>
-                <Icon type='DELETE' />
-              </Button>
-            </div>
-          </>
-          }
-          <div className='px-2'>
-            Switch mode
-          </div>
-          <div className='px-2'>
+          {isControlsActive && (
+            <>
+              <div className="px-2">
+                <Button onClick={handleEdit} title="Edit note">
+                  <Icon type="EDIT" />
+                </Button>
+              </div>
+              <div className="px-2">
+                <Button onClick={handleDelete} title="Delete note">
+                  <Icon type="DELETE" />
+                </Button>
+              </div>
+            </>
+          )}
+          <div className="px-2">Switch mode</div>
+          <div className="px-2">
             <ToggleSwitch value={isControlsActive} onToggle={handleToggle} />
           </div>
-        </>) :
-      <h1 className='text-3xl text-gray-700'>
-        {notes.length === 0 ? 'Create a note to start' : 'Select a note from menu'}
-      </h1>
-    }
-  </div>;
+        </>
+      ) : (
+        <h1 className="text-3xl text-gray-700">
+          {notes.length === 0
+            ? 'Create a note to start'
+            : 'Select a note from menu'}
+        </h1>
+      )}
+    </div>
+  );
 };

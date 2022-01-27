@@ -9,16 +9,23 @@ type EditorProps = {
   onChange: VoidFn;
   type: MediaType.TEXT | MediaType.TABLE;
   initialContent?: string;
-}
+};
 
-export const ContentEditor: FC<EditorProps> = ({ onChange, type, initialContent }) => {
+export const ContentEditor: FC<EditorProps> = ({
+  onChange,
+  type,
+  initialContent,
+}) => {
   const editorRef = useRef({});
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState<string>(initialContent ?? '');
 
-  const handleChange = useCallback((evt: Object, editor: TinyMCEEditor) => {
-    onChange(editor.getContent());
-  }, [onChange]);
+  const handleChange = useCallback(
+    (evt: Object, editor: TinyMCEEditor) => {
+      onChange(editor.getContent());
+    },
+    [onChange],
+  );
 
   const handleInit = useCallback((evt, editor) => {
     editorRef.current = editor;
@@ -26,10 +33,8 @@ export const ContentEditor: FC<EditorProps> = ({ onChange, type, initialContent 
   }, []);
 
   return (
-    <div className='border-2 border-gray-100 w-96'>
-      {loading && (
-        <Loading />
-      )}
+    <div className="border-2 border-gray-100 w-96">
+      {loading && <Loading />}
       <Editor
         inline={true}
         apiKey={process.env.REACT_APP_TINY_KEY}
@@ -37,7 +42,7 @@ export const ContentEditor: FC<EditorProps> = ({ onChange, type, initialContent 
         initialValue={content}
         onChange={handleChange}
         onMouseLeave={handleChange}
-       {...(type === MediaType.TEXT ? textConfig : tableConfig)}
+        {...(type === MediaType.TEXT ? textConfig : tableConfig)}
       />
     </div>
   );

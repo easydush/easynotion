@@ -12,12 +12,12 @@ interface ButtonProps {
 }
 
 export const Button: FC<ButtonProps> = ({
-                                          type = 'button',
-                                          outlined,
-                                          title,
-                                          children,
-                                          ...props
-                                        }) => {
+  type = 'button',
+  outlined,
+  title,
+  children,
+  ...props
+}) => {
   return (
     <button
       type={type}

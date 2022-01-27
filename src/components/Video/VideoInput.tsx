@@ -11,12 +11,16 @@ interface VideoInputProps {
 const DEFAULT_VIDEO_LINK = 'https://www.youtube.com/watch?v=AalAw9Fqhyo';
 
 export const VideoInput: FC<VideoInputProps> = ({
-                                                  onChange,
-                                                  initialContent = DEFAULT_VIDEO_LINK,
-                                                }: VideoInputProps) => {
+  onChange,
+  initialContent = DEFAULT_VIDEO_LINK,
+}: VideoInputProps) => {
   return (
     <>
-      <Link onChange={onChange} initialContent={initialContent} title='Video link' />
+      <Link
+        onChange={onChange}
+        initialContent={initialContent}
+        title="Video link"
+      />
       <Video src={initialContent} />
     </>
   );

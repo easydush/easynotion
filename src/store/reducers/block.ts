@@ -4,7 +4,9 @@ import {
   calcBlockOrder,
   excludeBlocks,
   excludeBlocksByNoteId,
-  filterBlocksByNoteId, findBlockById, findBlockByOrder,
+  filterBlocksByNoteId,
+  findBlockById,
+  findBlockByOrder,
   reorderBlocks,
 } from 'tools/blocks';
 
@@ -14,43 +16,61 @@ const initialState = {
 };
 
 type BlockActionParams = {
-  type: string,
+  type: string;
   payload: {
-    id: Block['id'],
-    noteId: Note['id'],
-    block: Block,
-    up: boolean,
-  }
-}
+    id: Block['id'];
+    noteId: Note['id'];
+    block: Block;
+    up: boolean;
+  };
+};
 
-export const blockReducer = (state: BlockState = initialState, action: BlockActionParams) => {
+export const blockReducer = (
+  state: BlockState = initialState,
+  action: BlockActionParams,
+) => {
   switch (action.type) {
     case BLOCK_ACTIONS.CREATE_BLOCK:
       return {
         ...state,
-        blocks: [...state.blocks, {
-          ...action.payload.block,
-          order: calcBlockOrder(state.blocks, action.payload.block.noteId),
-        }],
+        blocks: [
+          ...state.blocks,
+          {
+            ...action.payload.block,
+            order: calcBlockOrder(state.blocks, action.payload.block.noteId),
+          },
+        ],
       };
 
     case BLOCK_ACTIONS.UPDATE_BLOCK:
       return {
         ...state,
-        blocks: [...excludeBlocks(state.blocks, [action.payload.block.id]), action.payload.block],
+        blocks: [
+          ...excludeBlocks(state.blocks, [action.payload.block.id]),
+          action.payload.block,
+        ],
       };
 
     case BLOCK_ACTIONS.DELETE_BLOCK:
-      return { ...state, blocks: excludeBlocks(state.blocks, [action.payload.id]) };
+      return {
+        ...state,
+        blocks: excludeBlocks(state.blocks, [action.payload.id]),
+      };
 
     case BLOCK_ACTIONS.DELETE_NOTE_BLOCKS:
-      return { ...state, blocks: excludeBlocksByNoteId(state.blocks, action.payload.noteId) };
+      return {
+        ...state,
+        blocks: excludeBlocksByNoteId(state.blocks, action.payload.noteId),
+      };
 
     case BLOCK_ACTIONS.REORDER_BLOCKS: {
       return {
         ...state,
-        blocks: [...excludeBlocksByNoteId(state.blocks, action.payload.noteId),
-          ...reorderBlocks(filterBlocksByNoteId(state.blocks, action.payload.noteId)),
+        blocks: [
+          ...excludeBlocksByNoteId(state.blocks, action.payload.noteId),
+          ...reorderBlocks(
+            filterBlocksByNoteId(state.blocks, action.payload.noteId),
+          ),
         ],
       };
     }
@@ -66,7 +86,8 @@ export const blockReducer = (state: BlockState = initialState, action: BlockActi
         if (nearbyBlock)
           return {
             ...state,
-            blocks: [...excludeBlocks(state.blocks, [block.id, nearbyBlock.id]),
+            blocks: [
+              ...excludeBlocks(state.blocks, [block.id, nearbyBlock.id]),
               {
                 ...nearbyBlock,
                 order: block.order,
@@ -74,14 +95,18 @@ export const blockReducer = (state: BlockState = initialState, action: BlockActi
               {
                 ...block,
                 order: newOrder,
-              }],
+              },
+            ],
           };
       }
       return state;
     }
 
     case BLOCK_ACTIONS.SET_CURRENT_BLOCK:
-      return { ...state, currentBlock: findBlockById(state.blocks, action.payload.id) };
+      return {
+        ...state,
+        currentBlock: findBlockById(state.blocks, action.payload.id),
+      };
 
     case BLOCK_ACTIONS.CLEAR_CURRENT_BLOCK:
       return { ...state, currentBlock: null };
@@ -90,4 +115,3 @@ export const blockReducer = (state: BlockState = initialState, action: BlockActi
       return state;
   }
 };
-
