@@ -35,9 +35,9 @@ export const NoteSelector: FC<NoteSelectorProps> = ({
 
   return (
     <>
-      {notes.length > 0 ? (
-        <div className="grid grid-cols-5 gap-6">
-          {title && <span>{title}:</span>}
+      <div className="grid grid-cols-5 gap-6">
+        {title && <span>{title}:</span>}
+        {notes.length > 0 ? (
           <select
             onChange={onChange}
             defaultValue={parentId ?? initialContent}
@@ -50,10 +50,10 @@ export const NoteSelector: FC<NoteSelectorProps> = ({
               </option>
             ))}
           </select>
-        </div>
-      ) : (
-        <span>No notes available.</span>
-      )}
+        ) : (
+          <span>No notes available.</span>
+        )}
+      </div>
       {isAddButtonActive && (
         <Button children={'Add new'} onClick={handleClick} />
       )}
