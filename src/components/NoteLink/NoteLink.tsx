@@ -36,13 +36,13 @@ export const NoteLink: FC<NoteLinkProps> = ({ note, isNode = false }) => {
 
   return (
     <div
-      className={`p-2 flex justify-between rounded-full outline-2 outline-offset-2 outline-cyan-200 
+      className={`mr-2 my-2 p-2 flex justify-between rounded-full outline-2 outline-cyan-200 
       outline-dotted cursor-pointer ${isActive ? 'bg-teal-100' : 'bg-white'}`}
       onClick={handleMenuItemClick}>
       {note.title}
-      {isNode && <span onClick={handleAdd} title='Add note'>
-          <Icon type='ADD' />
-      </span>}
+      {isNode && <div onClick={handleAdd} title='Add note'>
+          <Icon type='ADD_SUBNOTE' />
+      </div>}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 type IconProps = {
-  type: 'VIDEO' | 'TEXT' | 'TABLE' | 'IMAGE' | 'LINK' | 'ADD' | 'EDIT' | 'EDIT_NOTE' | 'SAVE' | 'DELETE' | 'UP' | 'DOWN' | 'CLOSE';
+  type: 'VIDEO' | 'TEXT' | 'TABLE' | 'IMAGE' | 'LINK' | 'ADD' | 'EDIT' | 'EDIT_NOTE' | 'SAVE' | 'ADD_SUBNOTE' | 'DELETE' | 'UP' | 'DOWN' | 'CLOSE';
 }
 export const Icon: FC<IconProps> = ({ type }) => {
   switch (type) {
@@ -52,6 +52,11 @@ export const Icon: FC<IconProps> = ({ type }) => {
                   stroke='currentColor'>
         <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2}
               d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' />
+      </svg>;
+    case 'ADD_SUBNOTE':
+      return <svg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px' fill='#000000'>
+        <path d='M0 0h24v24H0V0z' fill='none' />
+        <path d='M11 9l1.42 1.42L8.83 14H18V4h2v12H8.83l3.59 3.58L11 21l-6-6 6-6z' />
       </svg>;
     case 'DELETE':
       return <svg xmlns='http://www.w3.org/2000/svg' className='h-6 w-6' fill='none'

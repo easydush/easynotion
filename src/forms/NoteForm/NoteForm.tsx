@@ -1,7 +1,7 @@
 import { useState, SyntheticEvent, useCallback } from 'react';
 import cuid from 'cuid';
 import { Note, VoidFn } from 'types';
-import { Button, Input } from 'components';
+import { Button, Input, NoteSelector } from 'components';
 import { normalizeUri } from './tools';
 
 type NoteFormProps = {
@@ -14,6 +14,7 @@ type NoteFormProps = {
 export const NoteForm = ({ onFinish, onCancel, initialData, parentId }: NoteFormProps) => {
   const [title, setTitle] = useState(initialData?.title ?? '');
   const [uri, setUri] = useState(initialData?.uri);
+  const [parent, setParent] = useState(initialData?.parentId);
 
   const handleFormSubmit = useCallback((event: SyntheticEvent) => {
     event.preventDefault();
@@ -21,9 +22,9 @@ export const NoteForm = ({ onFinish, onCancel, initialData, parentId }: NoteForm
       title,
       uri: uri ? normalizeUri(uri) : '',
       id: initialData?.id ?? cuid(),
-      parentId: parentId,
+      parentId: parentId ?? parent,
     });
-  }, [onFinish, uri, initialData, parentId, title]);
+  }, [onFinish, uri, initialData, parentId, title, parent]);
 
   return <form onSubmit={handleFormSubmit}>
     <div className='grid grid-cols-6 gap-4'>
@@ -44,6 +45,16 @@ export const NoteForm = ({ onFinish, onCancel, initialData, parentId }: NoteForm
           title='URI'
           value={uri}
           onChange={(e) => setUri(e.target.value)}
+        />
+      </div>
+      <div className='col-span-6'>
+        <NoteSelector
+          noteId={initialData?.id ?? ''}
+          initialContent={initialData?.id}
+          onChange={(e) => setParent(e.target.value)}
+          isAddButtonActive={false}
+          parentId={initialData?.parentId ?? parentId}
+          title='Parent'
         />
       </div>
       <div className='col-start-2 col-end-3'>

@@ -22,7 +22,7 @@ export const BlockEdit: FC<BlockEditProps> = ({ block, noteId, type }) => {
   }, [dispatch]);
 
   const handleFinish = useCallback((content: string) => {
-    if(content) {
+    if (content) {
       if (block?.id) {
         dispatch(updateBlock({
           ...block,
@@ -35,5 +35,6 @@ export const BlockEdit: FC<BlockEditProps> = ({ block, noteId, type }) => {
     handleClear();
   }, [block, dispatch, type, noteId, handleClear]);
 
-  return <BlockForm type={(block?.type ?? type) as Exclude<MediaType, 'LINK'>} onFinish={handleFinish} initialData={block} />;
+  return <BlockForm type={(block?.type ?? type) as MediaType} onFinish={handleFinish}
+                    initialData={block} />;
 };
