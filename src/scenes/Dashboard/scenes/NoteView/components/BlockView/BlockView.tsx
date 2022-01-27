@@ -7,7 +7,6 @@ import { Content } from '../Content';
 import { BlockControls } from '../BlockControls';
 import { BlockEdit } from '../BlockEdit';
 import { activateFlow, setCurrentBlock } from 'store/actions';
-import styles from './BlockView.module.scss';
 
 type BlockProps = {
   block: Block;
@@ -42,7 +41,7 @@ export const BlockView: FC<BlockProps> = ({
 
   return (
     <div
-      className={`${styles.block} flex flex-row `}
+      className="flex flex-row"
       onMouseEnter={showControls}
       onMouseLeave={hideControls}
       onDoubleClick={handleEdit}

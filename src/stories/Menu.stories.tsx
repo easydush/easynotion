@@ -1,16 +1,11 @@
-import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-
-import { Icon, Menu, NoteLink } from 'components';
-import { TreeItem } from '../types';
+import { Menu } from 'components';
+import { TreeItem } from 'types';
 
 export default {
   title: 'Example/Menu',
   component: Menu,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-    outlined: { control: 'boolean' },
-  },
+  argTypes: {},
 } as ComponentMeta<typeof Menu>;
 
 const Template: ComponentStory<typeof Menu> = (args) => (

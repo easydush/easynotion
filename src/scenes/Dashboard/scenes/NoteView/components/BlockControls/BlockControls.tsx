@@ -2,15 +2,12 @@ import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Block } from 'types';
 import { Button, Icon } from 'components';
-import { FLOWS } from 'constants/flows';
 import {
   removeNote,
   moveBlock,
   removeBlock,
   removeAllBlocksByNoteId,
   reorderBlocks,
-  activateFlow,
-  setCurrentBlock,
 } from 'store/actions';
 
 type ControlsProps = {
@@ -51,7 +48,7 @@ export const BlockControls: FC<ControlsProps> = ({
   }, [handleMove]);
 
   return (
-    <div className={`grid grid-cols-3 ${!isVisible && 'invisible'}`}>
+    <div className={`grid grid-cols-3 ml-1 ${!isVisible && 'invisible'}`}>
       <Button onClick={handleDelete} title="Delete">
         {<Icon type="DELETE" />}
       </Button>{' '}

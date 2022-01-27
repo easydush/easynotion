@@ -72,10 +72,7 @@ export const NoteView: FC = () => {
         {isControlsActive && (
           <div className="max-w-7xl md:max-w-5xl">
             <div className="flex flex-row">
-              <TypeSwitcher
-                onChange={handleChangeType}
-                isFirst={blocksLength === 0}
-              />
+              <TypeSwitcher onChange={handleChangeType} />
               {isActiveBlockAdd && (
                 <BlockEdit type={type as MediaType} noteId={note?.id ?? ''} />
               )}
