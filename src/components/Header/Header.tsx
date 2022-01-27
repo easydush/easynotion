@@ -1,7 +1,8 @@
 import { FC, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Note, RootState } from 'types';
-import { Button, Icon } from 'components';
+import { Button, Icon, ToggleSwitch } from 'components';
 import { FLOWS } from 'constants/flows';
 import {
   activateFlow,
@@ -12,7 +13,6 @@ import {
   clearCurrentNote,
 } from 'store/actions';
 import { noteSelectors, uiSelectors } from 'store/selectors';
-import { ToggleSwitch } from '../ToggleSwitch';
 
 interface HeaderProps {
   title?: string;
@@ -21,6 +21,8 @@ interface HeaderProps {
 export const Header: FC<HeaderProps> = ({ title }) => {
   const note = useSelector<RootState, Note | null>(noteSelectors.current);
   const notes = useSelector<RootState, Note[]>(noteSelectors.all);
+
+  const navigate = useNavigate();
 
   const activeFlows = useSelector<RootState, FLOWS[]>(uiSelectors.all);
 
@@ -42,6 +44,7 @@ export const Header: FC<HeaderProps> = ({ title }) => {
       dispatch(removeAllBlocksByNoteId(note.id));
       dispatch(removeNote(note.id));
       dispatch(clearCurrentNote());
+      navigate('');
     }
   }, [dispatch, note]);
 
