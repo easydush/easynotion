@@ -40,10 +40,12 @@ export const NoteSelector: FC<NoteSelectorProps> = ({
         {notes.length > 0 ? (
           <select
             onChange={onChange}
-            defaultValue={parentId ?? initialContent}
+            defaultValue={''}
+            value={parentId ?? initialContent}
             disabled={!!parentId && !initialContent}
             className={`col-span-4 border-2 border-cyan-100 max-w-xl`}
           >
+            <option key="None" value={undefined} />
             {notes.map((note) => (
               <option key={note.id} value={note.id}>
                 {note.title}

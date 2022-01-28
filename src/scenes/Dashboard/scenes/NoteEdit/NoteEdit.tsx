@@ -12,6 +12,7 @@ import {
   createBlock,
   createNote,
   updateNote,
+  setCurrentNote,
 } from 'store/actions';
 import { noteSelectors, uiSelectors } from 'store/selectors';
 
@@ -57,6 +58,7 @@ export const NoteEdit: FC = () => {
       }
       handleClose();
       navigate(getNoteUrl(note));
+      dispatch(setCurrentNote(note.id));
     },
     [dispatch, handleClose, isSubNoteFlow, isEdit, navigate, parentId],
   );

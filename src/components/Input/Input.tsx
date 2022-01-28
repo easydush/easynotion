@@ -24,6 +24,7 @@ export const Input: FC<InputProps> = ({
         className={`col-span-4 border-2 border-cyan-100 max-w-xl ${
           checked ? 'checked' : ''
         }`}
+        required={required}
         {...props}
       />
     </div>

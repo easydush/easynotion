@@ -46,7 +46,7 @@ export const Header: FC<HeaderProps> = ({ title }) => {
       dispatch(clearCurrentNote());
       navigate('');
     }
-  }, [dispatch, note]);
+  }, [dispatch, note, navigate]);
 
   const handleToggle = useCallback(() => {
     isControlsActive
@@ -59,7 +59,7 @@ export const Header: FC<HeaderProps> = ({ title }) => {
       {!!title ? (
         <>
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <h1 className="text-3xl text-gray">{title}</h1>
+            <h1 className="text-3xl text-gray truncate">{title}</h1>
           </div>
           {isControlsActive && (
             <>
