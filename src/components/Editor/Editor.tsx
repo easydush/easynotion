@@ -29,11 +29,12 @@ export const ContentEditor: FC<EditorProps> = ({
 
   const handleInit = useCallback((evt, editor) => {
     editorRef.current = editor;
+    editor.focus();
     setLoading(false);
   }, []);
 
   return (
-    <div className="border-2 border-gray-100 w-96">
+    <>
       {loading && <Loading />}
       <Editor
         inline={true}
@@ -44,6 +45,6 @@ export const ContentEditor: FC<EditorProps> = ({
         onMouseLeave={handleChange}
         {...(type === MediaType.TEXT ? textConfig : tableConfig)}
       />
-    </div>
+    </>
   );
 };

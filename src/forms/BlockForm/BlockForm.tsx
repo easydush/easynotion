@@ -1,10 +1,4 @@
-import React, {
-  SyntheticEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { MediaType, Block, VoidFn } from 'types';
 import { Switcher } from './components';
 
@@ -70,20 +64,16 @@ export const BlockForm = ({ type, onFinish, initialData }: BlockFormProps) => {
     setContent(undefined);
   }, [content, onFinish]);
 
-  const handleFormSubmit = useCallback(
-    (e: SyntheticEvent) => {
-      e.preventDefault();
-      handleFinish();
-    },
-    [handleFinish],
-  );
-
   useOutsideHandler(wrapperRef, handleFinish);
   useKeyboardHandler(handleFinish);
 
   return (
-    <form onSubmit={handleFormSubmit} ref={wrapperRef} id={formId}>
+    <div
+      ref={wrapperRef}
+      id={formId}
+      className="border-2 border-gray-100 w-full"
+    >
       <Switcher type={type} onChange={setContent} initialContent={content} />
-    </form>
+    </div>
   );
 };
