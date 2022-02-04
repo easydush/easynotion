@@ -6,7 +6,7 @@ export const Home: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setCurrentNote(undefined));
+    dispatch(setCurrentNote(''));
   }, [dispatch]);
 
   return <div />;

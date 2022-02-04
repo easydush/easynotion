@@ -53,7 +53,7 @@ export const NoteSelector: FC<NoteSelectorProps> = ({
             ))}
           </select>
         ) : (
-          <span className={`col-span-4 max-w-xl`}>No notes available.</span>
+          <span className={`col-span-4 max-w-xl`}>No notes available</span>
         )}
       </div>
       {isAddButtonActive && (

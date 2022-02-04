@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Block, MediaType, Note, RootState } from 'types';
 import { FLOWS } from 'constants/flows';
-import { activateFlow, deactivateFlow, setCurrentNote } from 'store/actions';
+import { activateFlow, setCurrentNote } from 'store/actions';
 import { blockSelectors, noteSelectors, uiSelectors } from 'store/selectors';
 import { BlockView, TypeSwitcher } from './components';
 import { BlockEdit } from './components/BlockEdit';
@@ -33,17 +33,13 @@ export const NoteView: FC = () => {
     () => dispatch(activateFlow(FLOWS.ADD_BLOCK)),
     [dispatch],
   );
-  const hideBlockForm = useCallback(
-    () => dispatch(deactivateFlow(FLOWS.ADD_BLOCK)),
-    [dispatch],
-  );
 
   const handleChangeType = useCallback(
     (value: MediaType) => {
       setType(value);
       showBlockForm();
     },
-    [dispatch, showBlockForm, hideBlockForm],
+    [showBlockForm],
   );
 
   useEffect(() => {

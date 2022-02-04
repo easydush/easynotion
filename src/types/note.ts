@@ -10,7 +10,7 @@ export interface Note {
   id: string;
   title: string;
   parentId: Note['id'];
-  uri?: string;
+  uri: string;
 }
 
 export interface Block {
