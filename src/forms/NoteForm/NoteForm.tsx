@@ -27,8 +27,8 @@ export const NoteForm = ({
 
   const uris = useSelector<RootState, Note[]>(noteSelectors.all).map(note => note.uri);
 
-  useEffect(() => setValid(!uris.includes(uri ?? '')),
-    [uri, uris],
+  useEffect(() => setValid(uri === initialData?.uri || !uris.includes(normalizeUri(uri ?? ''))),
+    [initialData?.uri, uri, uris],
   );
 
   const handleFormSubmit = useCallback(

@@ -15,10 +15,10 @@ type BlockProps = {
 };
 
 export const BlockView: FC<BlockProps> = ({
-  block,
-  isCurrent,
-  blocksLength,
-}) => {
+                                            block,
+                                            isCurrent,
+                                            blocksLength,
+                                          }) => {
   const dispatch = useDispatch();
   const activeFlows = useSelector<RootState, FLOWS[]>(uiSelectors.all);
   const isControlsActive = activeFlows.includes(FLOWS.SHOW_CONTROLS);
@@ -41,10 +41,11 @@ export const BlockView: FC<BlockProps> = ({
 
   return (
     <div
-      className="flex flex-row"
+      className='flex flex-row'
       onMouseEnter={showControls}
       onMouseLeave={hideControls}
       onDoubleClick={handleEdit}
+      onClick={handleEdit}
     >
       <BlockControls
         block={block}

@@ -56,7 +56,7 @@ export const NoteView: FC = () => {
   return (
     <div className='grid grid-cols-1 py-2'>
       <>
-        {blocks.map((block) => (
+        {blocks.length > 0 ? blocks.map((block) => (
           <div className='max-w-7xl md:max-w-5xl' key={block.id}>
             <BlockView
               block={block}
@@ -64,7 +64,12 @@ export const NoteView: FC = () => {
               blocksLength={blocksLength}
             />
           </div>
-        ))}
+        )) :
+          !isControlsActive &&
+          <div className='ml-8'>
+            No blocks. Switch to edit mode to create
+          </div>
+        }
         {isControlsActive && (
           <div className='max-w-7xl md:max-w-5xl'>
             <div className='flex flex-row'>
