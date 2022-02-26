@@ -54,10 +54,10 @@ export const NoteView: FC = () => {
   }, [blocksLength, dispatch]);
 
   return (
-    <div className="grid grid-cols-1 py-2">
+    <div className='grid grid-cols-1 py-2'>
       <>
         {blocks.map((block) => (
-          <div className="max-w-7xl md:max-w-5xl" key={block.id}>
+          <div className='max-w-7xl md:max-w-5xl' key={block.id}>
             <BlockView
               block={block}
               isCurrent={currentBlock?.id === block.id}
@@ -66,8 +66,8 @@ export const NoteView: FC = () => {
           </div>
         ))}
         {isControlsActive && (
-          <div className="max-w-7xl md:max-w-5xl">
-            <div className="flex flex-row">
+          <div className='max-w-7xl md:max-w-5xl'>
+            <div className='flex flex-row'>
               <TypeSwitcher onChange={handleChangeType} />
               {isActiveBlockAdd && (
                 <BlockEdit type={type as MediaType} noteId={note?.id ?? ''} />

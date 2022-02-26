@@ -30,6 +30,7 @@ const useOutsideHandler = (
         handle();
       }
     }
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -71,7 +72,7 @@ export const BlockForm = ({ type, onFinish, initialData }: BlockFormProps) => {
     <div
       ref={wrapperRef}
       id={formId}
-      className="border-2 border-gray-100 w-full"
+      className='border-2 border-gray-100 w-full'
     >
       <Switcher type={type} onChange={setContent} initialContent={content} />
     </div>

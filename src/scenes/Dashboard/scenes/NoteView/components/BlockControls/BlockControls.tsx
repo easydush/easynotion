@@ -49,17 +49,17 @@ export const BlockControls: FC<ControlsProps> = ({
 
   return (
     <div className={`grid grid-cols-3 ml-1 ${!isVisible && 'invisible'}`}>
-      <Button onClick={handleDelete} title="Delete">
-        {<Icon type="DELETE" />}
-      </Button>{' '}
+      <Button onClick={handleDelete} title='Delete'>
+        {<Icon type='DELETE' color='grey' />}
+      </Button>
       {!(block.order === 0) && (
-        <Button onClick={handleMoveUp} title="Move up">
-          {<Icon type="UP" />}
+        <Button onClick={handleMoveUp} title='Move up'>
+          {<Icon type='UP' color='grey' />}
         </Button>
       )}
       {!(block.order === blocksLength - 1) && (
-        <Button onClick={handleMoveDown} title="Move down">
-          {<Icon type="DOWN" />}
+        <Button onClick={handleMoveDown} title='Move down'>
+          {<Icon type='DOWN' color='grey' />}
         </Button>
       )}
     </div>

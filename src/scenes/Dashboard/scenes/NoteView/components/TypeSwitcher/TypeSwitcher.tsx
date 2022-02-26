@@ -24,8 +24,8 @@ export const TypeSwitcher: FC<TypeInputProps> = ({ onChange }) => {
 
   return (
     <>
-      <div className="pl-2 pr-14">
-        <Popover controller={<Icon type="ADD" />}>
+      <div className='pl-2 pr-14'>
+        <Popover controller={<Icon type='ADD' color='gray' />}>
           <>
             {options.map((option) => (
               <Button

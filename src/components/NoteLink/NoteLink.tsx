@@ -45,10 +45,10 @@ export const NoteLink: FC<NoteLinkProps> = ({ note, isNode = false }) => {
       }`}
       onClick={handleMenuItemClick}
     >
-      <span className="truncate">{note.title}</span>
+      <span className='truncate'>{note.title}</span>
       {isNode && (
-        <div onClick={handleAdd} title="Add note">
-          <Icon type="ADD_SUBNOTE" />
+        <div onClick={handleAdd} title='Add note'>
+          <Icon type='ADD' color='darkcyan' />
         </div>
       )}
     </div>
