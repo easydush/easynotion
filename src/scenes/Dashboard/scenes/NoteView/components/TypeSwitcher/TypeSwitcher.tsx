@@ -1,4 +1,4 @@
-import React, { FC, SyntheticEvent, useCallback } from 'react';
+import React, { FC, useCallback } from 'react';
 import { MediaType, VoidFn } from 'types';
 import { Button, Popover, Icon } from 'components';
 
@@ -19,24 +19,15 @@ export const TypeSwitcher: FC<TypeInputProps> = ({ onChange }) => {
   return (
     <div className="pl-2 pr-14">
       <Popover controller={<Icon type="ADD" color="gray" />}>
-        <div
-          onClick={(event: SyntheticEvent) =>
-            handleChange(
-              ((event.target as HTMLElement).parentNode as HTMLElement)
-                .className,
-            )
-          }
-        >
-          {options.map((option) => (
-            <Button key={option}>
-              {
-                <div className={option}>
-                  <Icon type={option as MediaType} />
-                </div>
-              }
-            </Button>
-          ))}
-        </div>
+        {options.map((option) => (
+          <Button key={option} onClick={() => handleChange(option)}>
+            {
+              <div className={option}>
+                <Icon type={option as MediaType} />
+              </div>
+            }
+          </Button>
+        ))}
       </Popover>
     </div>
   );
