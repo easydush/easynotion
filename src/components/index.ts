@@ -2,6 +2,7 @@ export * from './Layout';
 export * from './Menu';
 export * from './Header';
 export * from './Button';
+export * from './Confirm';
 export * from './Image';
 export * from './Link';
 export * from './Loading';

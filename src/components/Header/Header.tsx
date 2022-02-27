@@ -1,8 +1,8 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Note, RootState } from 'types';
-import { Button, Icon, ToggleSwitch } from 'components';
+import { Button, Confirm, Icon, ToggleSwitch } from 'components';
 import { FLOWS } from 'constants/flows';
 import {
   activateFlow,
@@ -19,6 +19,7 @@ interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = ({ title }) => {
+  const [isConfirmVisible, setVisible] = useState(false);
   const note = useSelector<RootState, Note | null>(noteSelectors.current);
   const notes = useSelector<RootState, Note[]>(noteSelectors.all);
 
@@ -34,6 +35,9 @@ export const Header: FC<HeaderProps> = ({ title }) => {
 
   const dispatch = useDispatch();
 
+  const showConfirm = () => setVisible(true);
+  const hideConfirm = () => setVisible(false);
+
   const handleEdit = useCallback(() => {
     dispatch(activateFlow(FLOWS.EDIT_NOTE));
   }, [dispatch]);
@@ -44,6 +48,7 @@ export const Header: FC<HeaderProps> = ({ title }) => {
       dispatch(removeAllBlocksByNoteId(note.id));
       dispatch(removeNote(note.id));
       dispatch(clearCurrentNote());
+      hideConfirm();
       navigate('');
     }
   }, [dispatch, note, navigate]);
@@ -55,38 +60,40 @@ export const Header: FC<HeaderProps> = ({ title }) => {
   }, [dispatch, isControlsActive]);
 
   return (
-    <div className="flex justify-between items-center py-4 pl-24 border-b-2 border-gray-100">
+    <div className='flex justify-between items-center py-4 pl-24 border-b-2 border-gray-100'>
       {!!title ? (
         <>
-          <div className="flex justify-start lg:w-0 lg:flex-1">
-            <h1 className="text-3xl text-gray truncate">{title}</h1>
+          <div className='flex justify-start lg:w-0 lg:flex-1'>
+            <h1 className='text-3xl text-gray truncate'>{title}</h1>
           </div>
           {isControlsActive && (
             <>
-              <div className="px-2">
-                <Button onClick={handleEdit} title="Edit note">
-                  <Icon type="EDIT" />
+              <div className='px-2'>
+                <Button onClick={handleEdit} title='Edit note'>
+                  <Icon type='EDIT' />
                 </Button>
               </div>
-              <div className="px-2">
-                <Button onClick={handleDelete} title="Delete note">
-                  <Icon type="DELETE" />
+              <div className='px-2'>
+                <Button onClick={showConfirm} title='Delete note'>
+                  <Icon type='DELETE' />
                 </Button>
               </div>
             </>
           )}
-          <div className="px-2">Switch mode</div>
-          <div className="px-2">
+          <div className='px-2'>Switch mode</div>
+          <div className='px-2'>
             <ToggleSwitch value={isControlsActive} onToggle={handleToggle} />
           </div>
         </>
       ) : (
-        <h1 className="text-3xl text-gray-700">
+        <h1 className='text-3xl text-gray-700'>
           {notes.length === 0
             ? 'Create a note to start'
             : 'Select a note from menu'}
         </h1>
       )}
+      <Confirm isVisible={isConfirmVisible} onConfirm={handleDelete} onCancel={hideConfirm}
+               title={'Are you sure to delete this note?'} />
     </div>
   );
 };
